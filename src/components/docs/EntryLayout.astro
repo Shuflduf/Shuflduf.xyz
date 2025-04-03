@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@components/base/BaseLayout.astro";
 import type { DocsEntry, MenuItem } from "@/types";
-import DocBrowser from "@components/docs/Browser.astro";
+import Browser from "@components/docs/Browser.astro";
 import TableOfContents from "@components/common/TableOfContents.astro";
 import config from "@/config/config.json";
 
@@ -28,10 +28,10 @@ const { title, description, hideNav, hideToc, image } = entry.data;
     >
       {
         !config.settings.hide_doc_browser && !hideNav && (
-          <DocBrowser
+          <Browser
             menu={browserMenu}
             currentPage={entry.id.replace("/-index", "")}
-            title={browserTitle}
+            collection={collection}
           />
         )
       }
