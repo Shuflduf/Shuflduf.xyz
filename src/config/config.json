@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "Astrogon",
-    "base_url": "https://janedoe.com",
+    "title": "Shuflduf.xyz",
+    "base_url": "https://shuflduf.xyz",
     "base_path": "/"
   },
 
@@ -10,7 +10,17 @@
     "theme_switcher": true,
     "default_theme": "system",
     "search_enabled": true,
-    "searchable_collections": ["about", "authors", "blog", "docs", "poetry", "recipes", "terms"],
+    "_all_collections": [
+      "about",
+      "authors",
+      "blog",
+      "docs",
+      "poetry",
+      "projects",
+      "recipes",
+      "terms"
+    ],
+    "searchable_collections": ["about", "projects", "terms"],
     "blog_pagination": 4,
     "blog_description_length": 200,
     "search_description_length": 200,
@@ -21,7 +31,7 @@
   },
 
   "metadata": {
-    "meta_author": "Jane Doe",
+    "meta_author": "Shuflduf",
     "meta_image": "@assets/og-image.png",
     "meta_description": "Template website"
   }

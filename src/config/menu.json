@@ -1,5 +1,5 @@
 {
-  "main": [
+  "_all": [
     {
       "name": "Home",
       "url": "/"
@@ -7,6 +7,10 @@
     {
       "name": "About",
       "url": "/about"
+    },
+    {
+      "name": "Docs",
+      "url": "/docs"
     },
     {
       "name": "Projects",
@@ -32,5 +36,19 @@
       "name": "Authors",
       "url": "/authors"
     }
+  ],
+  "main": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "About",
+      "url": "/about"
+    },
+    {
+      "name": "Projects",
+      "url": "/projects"
+    },
   ]
 }
