@@ -3,9 +3,11 @@ import CollectionLayout from "@components/docs/CollectionLayout.astro";
 import { getIndex, getGroups } from "@lib/contentParser";
 import type { ProjectsEntry } from "@/types";
 import { sortByTitle } from "@lib/sortFunctions";
+import getNotionContent from "@lib/getNotionContent";
 
 const collectionIndex = (await getIndex("projects")) as ProjectsEntry;
 const groupIndices = (await getGroups("projects", sortByTitle)) as ProjectsEntry[];
+const asd = getNotionContent("projects");
 ---
 
 <CollectionLayout entries={groupIndices} collectionIndex={collectionIndex} collection="projects" />
