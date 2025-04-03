@@ -1,0 +1,62 @@
+---
+interface Props {
+  href: string;
+  bgImage?: string;
+  title: string;
+}
+
+const { href, bgImage, title } = Astro.props;
+---
+
+<div class="h-full m-2 bg-gradient-to-br gradient rounded-lg mt-2">
+  <div class="glass h-full rounded-lg overflow-hidden">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="link-button group hover:opacity-100"
+    >
+      <div class="relative h-20 overflow-hidden">
+        <div 
+          class="bg-image group-hover:scale-[105%]" 
+          style={bgImage ? `background-image: url(${bgImage});` : ''}
+        ></div>
+        <div class="glass-t absolute text-center rounded-lg px-1.5 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+          <h4>{title}</h4>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<style>
+  .link-button {
+    width: 100%;
+    display: block;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Remove the hover style since we're using Tailwind group-hover */
+  /* .link-button:hover .bg-image {
+    transform: scale(1.05);
+  } */
+
+  .link-button span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+  }
+</style>

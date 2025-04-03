@@ -1,12 +1,13 @@
 ---
-import type { DocsEntry } from "@/types";
+import type { GenericEntry } from "@/types";
 import { Image } from "astro:assets";
 
 interface Props {
-  entry: DocsEntry;
+  entry: GenericEntry;
+  collection?: string;
 }
 
-const { entry } = Astro.props;
+const { entry, collection = "docs" } = Astro.props;
 const { title, image, imageAlt } = entry.data;
 ---
 
@@ -16,7 +17,7 @@ const { title, image, imageAlt } = entry.data;
   <div class="glass h-full rounded-lg">
     <a
       class="group hover:opacity-100"
-      href={`/docs/${entry.id.replace("/-index", "")}`}
+      href={`/${collection}/${entry.id.replace("/-index", "")}`}
     >
       <div class="relative rounded-lg pb-9/16 overflow-hidden">
         {

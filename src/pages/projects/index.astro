@@ -1,0 +1,11 @@
+---
+import CollectionLayout from "@components/docs/CollectionLayout.astro";
+import { getIndex, getGroups } from "@lib/contentParser";
+import type { ProjectsEntry } from "@/types";
+import { sortByTitle } from "@lib/sortFunctions";
+
+const collectionIndex = (await getIndex("projects")) as ProjectsEntry;
+const groupIndices = (await getGroups("projects", sortByTitle)) as ProjectsEntry[];
+---
+
+<CollectionLayout entries={groupIndices} collectionIndex={collectionIndex} collection="projects" />
