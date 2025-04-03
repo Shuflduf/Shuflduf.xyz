@@ -1,5 +1,5 @@
 ---
 title: Projects
-description: This is the docs
+description: Projects made by Shuflduf, including games and tools
 draft: false
 ---
