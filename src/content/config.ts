@@ -144,6 +144,19 @@ const terms = defineCollection({
   schema: searchable,
 });
 
+const projects = defineCollection({
+  loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/projects" }),
+  schema: ({ image }) =>
+    searchable.extend({
+      pubDate: z.date().optional(),
+      modDate: z.date().optional(),
+      image: image().optional(),
+      imageAlt: z.string().default("image"),
+      hideToc: z.boolean().default(false),
+      hideNav: z.boolean().default(false),
+    }),
+});
+
 // Export collections
 export const collections = {
   about,
@@ -153,6 +166,7 @@ export const collections = {
   home,
   indexCards,
   poetry,
+  projects,
   recipes,
   terms,
 };

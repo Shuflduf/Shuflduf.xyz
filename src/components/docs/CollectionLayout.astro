@@ -2,14 +2,15 @@
 import BaseLayout from "@components/base/BaseLayout.astro";
 import DocCard from "@components/docs/Card.astro";
 import PageHeader from "@components/common/PageHeader.astro";
-import type { DocsEntry } from "@/types";
+import type { GenericEntry } from "@/types";
 
 interface Props {
-  collectionIndex: DocsEntry;
-  entries: DocsEntry[]; // this could either be the set of entries in a doc group, or the set of indices of the doc groups
+  collectionIndex: GenericEntry;
+  entries: GenericEntry[];
+  collection?: string;
 }
 
-const { collectionIndex, entries } = Astro.props;
+const { collectionIndex, entries, collection = "docs" } = Astro.props;
 ---
 
 <BaseLayout
@@ -24,7 +25,7 @@ const { collectionIndex, entries } = Astro.props;
         {
           entries.map((entry) => (
             <div class="md:col-6 lg:col-4 h-min p-2">
-              <DocCard entry={entry} />
+              <DocCard entry={entry} collection={collection} />
             </div>
           ))
         }

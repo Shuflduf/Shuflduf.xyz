@@ -10,9 +10,11 @@ import EntryHeader from "@components/common/EntryHeader.astro";
 interface Props {
   entry: DocsEntry;
   browserMenu: MenuItem[];
+  collection?: string;
 }
 
-const { entry, browserMenu } = Astro.props;
+const { entry, browserMenu, collection = "docs" } = Astro.props;
+const browserTitle = collection === "docs" ? "Documents" : "Projects";
 
 const { Content, headings } = await render(entry);
 const { title, description, hideNav, hideToc, image } = entry.data;
@@ -29,6 +31,7 @@ const { title, description, hideNav, hideToc, image } = entry.data;
           <DocBrowser
             menu={browserMenu}
             currentPage={entry.id.replace("/-index", "")}
+            title={browserTitle}
           />
         )
       }
