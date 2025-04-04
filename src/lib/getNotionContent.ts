@@ -4,7 +4,8 @@ import { DefaultExporter } from "notion-to-md/plugins/exporter";
 
 type NotionPage = {
   name: string;
-  content: string;
+  description: string;
+  pageContent: string;
   lastModified: string;
   createdAt: string;
 }
@@ -29,6 +30,7 @@ const getNotionContent = async (pagePath: string): Promise<NotionPage> => {
   const pageName = firstPage.properties.Name.title[0].plain_text;
   const pageLastModified = firstPage.last_edited_time;
   const pageCreatedAt = firstPage.created_time;
+  const pageDescription = firstPage.properties.Description.rich_text[0].plain_text;
   const pageId = response.results[0].id;
 
   console.log("Converting Notion page to Markdown...");
@@ -44,10 +46,12 @@ const getNotionContent = async (pagePath: string): Promise<NotionPage> => {
 
   return {
     name: pageName,
-    content: buffer.toString(),
+    description: pageDescription,
+    pageContent: (buffer as any)[pageId],
     lastModified: pageLastModified,
     createdAt: pageCreatedAt,
   };
 };
 
 export default getNotionContent;
+export type { NotionPage };

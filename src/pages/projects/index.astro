@@ -4,10 +4,13 @@ import { getIndex, getGroups } from "@lib/contentParser";
 import type { ProjectsEntry } from "@/types";
 import { sortByTitle } from "@lib/sortFunctions";
 import getNotionContent from "@lib/getNotionContent";
+import formatNotionContent from "@lib/formatNotionContent";
 
 const collectionIndex = (await getIndex("projects")) as ProjectsEntry;
 const groupIndices = (await getGroups("projects", sortByTitle)) as ProjectsEntry[];
-const asd = getNotionContent("/projects/games/tetrgo");
+const asd = await getNotionContent("/projects/games/tetrgo");
+const youhekjf = formatNotionContent(asd);
+console.log(youhekjf)
 ---
 
 <CollectionLayout entries={groupIndices} collectionIndex={collectionIndex} collection="projects" />
