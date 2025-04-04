@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "index": [
+      "tetrrs"
+    ],
+    "games": [
+      "tetrgo",
+      "tetrgd"
+    ]
+  }
+}
+
+/projects/games/tetrrs
+/projects/games/tetrgo
+/projects/tetrrs
