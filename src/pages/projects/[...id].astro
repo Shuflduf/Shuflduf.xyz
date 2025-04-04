@@ -4,6 +4,8 @@ import EntryLayout from "@components/docs/EntryLayout.astro";
 import CollectionLayout from "@components/docs/CollectionLayout.astro";
 import { getEntries, getEntriesInGroup, getGroups } from "@lib/contentParser";
 import { sortByTitle } from "@lib/sortFunctions";
+import getNotionContent from "@lib/getNotionContent";
+import formatNotionContent from "@lib/formatNotionContent";
 
 export async function getStaticPaths() {
   const entries = (await getEntries("projects", sortByTitle)) as ProjectsEntry[];
@@ -28,10 +30,27 @@ export async function getStaticPaths() {
 }
 
 const { entry, isGroup } = Astro.props;
-const groupName = entry.id.replace("/-index", "");
+const id = entry.id;
+const groupName = id.replace("/-index", "");
 const groupEntries = isGroup
   ? ((await getEntriesInGroup("projects", groupName, sortByTitle)) as ProjectsEntry[])
   : [];
+
+const content = await getNotionContent(`/projects/${id}`);
+console.log("Content: " + JSON.stringify(content, null, 2))
+console.log("Before: " + JSON.stringify(entry, null, 2))
+const pageEntry = {
+  ...entry,  // Keep the original entry properties
+  body: content.pageContent,
+  data: {
+    ...entry.data,
+    title: content.name,
+    description: content.description,
+    pubDate: content.createdAt,
+    modDate: content.lastModified,
+  },
+};
+console.log("After: " + JSON.stringify(pageEntry, null, 2))
 
 // Construct Doc Browser menu
 const browserMenu: MenuItem[] = [];
@@ -60,6 +79,6 @@ await Promise.all(
   isGroup ? (
     <CollectionLayout collectionIndex={entry} entries={groupEntries} collection="projects" />
   ) : (
-    <EntryLayout entry={entry} browserMenu={browserMenu} collection="projects" />
+    <EntryLayout entry={pageEntry} browserMenu={browserMenu} collection="projects" />
   )
 }

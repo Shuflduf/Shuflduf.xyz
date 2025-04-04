@@ -4,9 +4,10 @@ import type { DocsEntry, MenuItem } from "@/types";
 import Browser from "@components/docs/Browser.astro";
 import TableOfContents from "@components/common/TableOfContents.astro";
 import config from "@/config/config.json";
-
-import { render } from "astro:content";
 import EntryHeader from "@components/common/EntryHeader.astro";
+import { marked } from 'marked';
+import type { MarkdownHeading } from 'astro';
+
 interface Props {
   entry: DocsEntry;
   browserMenu: MenuItem[];
@@ -14,10 +15,20 @@ interface Props {
 }
 
 const { entry, browserMenu, collection = "docs" } = Astro.props;
-const browserTitle = collection === "docs" ? "Documents" : "Projects";
-
-const { Content, headings } = await render(entry);
 const { title, description, hideNav, hideToc, image } = entry.data;
+
+// Parse the markdown content
+const tokens = marked.lexer(entry.body);
+const html = marked.parser(tokens);
+
+// Extract headings from tokens
+const headings: MarkdownHeading[] = tokens
+  .filter(token => token.type === 'heading')
+  .map(token => ({
+    depth: (token as marked.Tokens.Heading).depth,
+    text: (token as marked.Tokens.Heading).text,
+    slug: (token as marked.Tokens.Heading).text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  }));
 ---
 
 <BaseLayout title={title} image={image?.src} description={description}>
@@ -42,7 +53,7 @@ const { title, description, hideNav, hideToc, image } = entry.data;
           <EntryHeader entry={entry} showImage showPubDate />
         </section>
         <section class="content mb-4 glass px-4 rounded-lg">
-          <Content />
+          <div set:html={html} />
         </section>
       </article>
     </div>
