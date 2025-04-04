@@ -13,21 +13,23 @@ const pathsToTree = (paths: string[]): TreeNode => {
       const part = parts[i];
 
       if (i === parts.length - 1) {
-        if (!current[parts[i - 1]]) {
-          current[parts[i - 1]] = [];
+        const key = parts[i - 1] ?? "index"; // Use "index" if parts[i - 1] is undefined
+        if (!current[key]) {
+          current[key] = [];
         }
-        (current[parts[i - 1]] as string[]).push(part);
+        (current[key] as string[]).push(part);
       } else {
-        if (!current[part]) {
-          current[part] = {};
+        const key = part ?? "index"; // Use "index" if part is undefined
+        if (!current[key]) {
+          current[key] = {};
         }
-        current = current[part] as TreeNode;
+        current = current[key] as TreeNode;
       }
     }
   });
 
   return root;
-
-}
+};
 
 export default pathsToTree;
+export type { TreeNode };

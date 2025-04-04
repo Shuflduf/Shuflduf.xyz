@@ -2,7 +2,8 @@ import { Client } from "@notionhq/client";
 import { DATABASE_ID } from "./notionData";
 import path from "path";
 
-const getNotionPaths = async (root: string): Promise<string[]> => {
+const getNotionPaths = async (root: string = "/"): Promise<string[]> => {
+  console.log(root)
   const notion = new Client({
     auth: import.meta.env.NOTION_TOKEN,
   });
@@ -18,7 +19,7 @@ const getNotionPaths = async (root: string): Promise<string[]> => {
     },
   });
   const paths = response.results.map((element: any) => {
-    return element.properties.Path.rich_text[0].plain_text;
+    return (element.properties.Path.rich_text[0].plain_text as string).replace(root, "");
   });
   console.log("Paths: ", paths);
   return paths

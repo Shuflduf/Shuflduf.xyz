@@ -4,7 +4,7 @@ import { getIndex, getGroups } from "@lib/contentParser";
 import type { ProjectsEntry } from "@/types";
 import { sortByTitle } from "@lib/sortFunctions";
 import getNotionContent from "@lib/notion/getNotionContent";
-import formatNotionContent from "@lib/formatNotionContent";
+import formatNotionContent from "@lib/notion/formatNotionContent";
 
 const collectionIndex = (await getIndex("projects")) as ProjectsEntry;
 const groupIndices = (await getGroups(

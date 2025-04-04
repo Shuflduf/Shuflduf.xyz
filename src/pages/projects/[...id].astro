@@ -2,99 +2,97 @@
 import type { ProjectsEntry, MenuItem } from "@/types";
 import EntryLayout from "@components/docs/EntryLayout.astro";
 import CollectionLayout from "@components/docs/CollectionLayout.astro";
-import { getEntries, getEntriesInGroup, getGroups } from "@lib/contentParser";
-import { sortByTitle } from "@lib/sortFunctions";
 import getNotionContent from "@lib/notion/getNotionContent";
-import formatNotionContent from "@lib/notion/formatNotionContent";
 import getNotionPaths from "@lib/notion/getNotionPaths";
 import pathsToTree from "@lib/pathToTree";
-import console from "console";
+import type { TreeNode } from "@lib/pathToTree";
 
 export async function getStaticPaths() {
-  const entries = (await getEntries(
-    "projects",
-    sortByTitle,
-  )) as ProjectsEntry[];
-
-  const paths = entries.map((entry) => {
-    const segments = entry.id.replace("/-index", "").split("/");
-
-    if (segments.length === 1) {
-      return {
-        params: { id: segments[0] },
-        props: { entry, isGroup: true },
-      };
-    } else if (segments.length === 2) {
-      return {
-        params: { id: entry.id },
-        props: { entry, isGroup: false },
-      };
-    }
-  });
-
-  return paths;
+  const paths = await getNotionPaths("/projects");
+  return paths.map((path) => ({
+    params: { id: path },
+  }));
 }
 
-const { entry, isGroup } = Astro.props;
-const id = entry.id;
-const groupName = id.replace("/-index", "");
-const groupEntries = isGroup
-  ? ((await getEntriesInGroup(
-      "projects",
-      groupName,
-      sortByTitle,
-    )) as ProjectsEntry[])
-  : [];
+const { id = "" } = Astro.params;
+const rawPaths = await getNotionPaths("/projects");
+const tree = pathsToTree(rawPaths);
+console.log(tree);
 
-const content = await getNotionContent(`/projects/${id}`);
-const pageEntry = {
-  ...entry, // Keep the original entry properties
-  body: content.pageContent,
-  data: {
-    ...entry.data,
-    title: content.name,
-    description: content.description,
-    pubDate: content.createdAt,
-    modDate: content.lastModified,
-  },
+// Navigate to current node in tree
+const segments = id.split("/");
+let currentNode: TreeNode | string[] = tree;
+let isLeaf = segments.length > 0 && rawPaths.includes(id);
+let isGroup = !isLeaf;
+
+for (const segment of segments.filter(Boolean)) {
+  if (
+    typeof currentNode === "object" &&
+    !Array.isArray(currentNode) &&
+    currentNode[segment]
+  ) {
+    currentNode = currentNode[segment];
+  }
+}
+
+// Get page content or group entries
+const content = isLeaf ? await getNotionContent(`/projects/${id}`) : null;
+const groupEntries =
+  isGroup && typeof currentNode === "object"
+    ? Array.isArray(currentNode)
+      ? currentNode.map((entry) => ({
+          id: id ? `${id}/${entry}` : entry,
+          data: { title: entry },
+        }))
+      : Object.entries(currentNode).map(([key, value]) => ({
+          id: id ? `${id}/${key}` : key,
+          data: { title: key },
+        }))
+    : [];
+
+// Build browser menu from tree
+const buildMenu = (node: TreeNode, parentPath: string = ""): MenuItem[] => {
+  return Object.entries(node).map(([key, value]) => ({
+    title: key,
+    id: parentPath ? `${parentPath}/${key}` : key,
+    children: Array.isArray(value)
+      ? value.map((child) => ({
+          title: child,
+          id: `${parentPath}/${key}/${child}`,
+          children: [],
+        }))
+      : buildMenu(value as TreeNode, key),
+  }));
 };
 
-// Construct Doc Browser menu
-const browserMenu: MenuItem[] = [];
-const groups = (await getGroups("projects", sortByTitle)) as ProjectsEntry[];
-await Promise.all(
-  groups.map(async (group) => {
-    const groupEntries = (await getEntriesInGroup(
-      "projects",
-      group.id.replace("/-index", ""),
-      sortByTitle,
-    )) as ProjectsEntry[];
-    browserMenu.push({
-      title: group.data.title,
-      id: group.id.replace("/-index", ""),
-      children: groupEntries.map((groupEntry) => ({
-        title: groupEntry.data.title,
-        id: groupEntry.id,
-        children: [],
-      })),
-    });
-  }),
-);
-const paths = await getNotionPaths("/");
-const tree = pathsToTree(paths);
-console.log(JSON.stringify(tree, null, 2));
+const browserMenu = buildMenu(tree);
 ---
 
 {
   isGroup ? (
     <CollectionLayout
-      collectionIndex={entry}
+      collectionIndex={{
+        id: id || "projects",
+        data: { title: id || "Projects" },
+      }}
       entries={groupEntries}
       collection="projects"
     />
   ) : (
     <EntryLayout
-      entry={pageEntry}
+      entry={{
+        id,
+        data: {
+          title: content?.name || "Untitled",
+          description: content?.description || "",
+          autodescription: false,
+          draft: false,
+          imageAlt: "",
+          hideToc: false,
+          hideNav: false,
+        },
+        body: content?.pageContent || "",
+      }}
       browserMenu={browserMenu}
       collection="projects"
     />
