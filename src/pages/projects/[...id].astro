@@ -4,11 +4,17 @@ import EntryLayout from "@components/docs/EntryLayout.astro";
 import CollectionLayout from "@components/docs/CollectionLayout.astro";
 import { getEntries, getEntriesInGroup, getGroups } from "@lib/contentParser";
 import { sortByTitle } from "@lib/sortFunctions";
-import getNotionContent from "@lib/getNotionContent";
-import formatNotionContent from "@lib/formatNotionContent";
+import getNotionContent from "@lib/notion/getNotionContent";
+import formatNotionContent from "@lib/notion/formatNotionContent";
+import getNotionPaths from "@lib/notion/getNotionPaths";
+import pathsToTree from "@lib/pathToTree";
+import console from "console";
 
 export async function getStaticPaths() {
-  const entries = (await getEntries("projects", sortByTitle)) as ProjectsEntry[];
+  const entries = (await getEntries(
+    "projects",
+    sortByTitle,
+  )) as ProjectsEntry[];
 
   const paths = entries.map((entry) => {
     const segments = entry.id.replace("/-index", "").split("/");
@@ -33,14 +39,16 @@ const { entry, isGroup } = Astro.props;
 const id = entry.id;
 const groupName = id.replace("/-index", "");
 const groupEntries = isGroup
-  ? ((await getEntriesInGroup("projects", groupName, sortByTitle)) as ProjectsEntry[])
+  ? ((await getEntriesInGroup(
+      "projects",
+      groupName,
+      sortByTitle,
+    )) as ProjectsEntry[])
   : [];
 
 const content = await getNotionContent(`/projects/${id}`);
-console.log("Content: " + JSON.stringify(content, null, 2))
-console.log("Before: " + JSON.stringify(entry, null, 2))
 const pageEntry = {
-  ...entry,  // Keep the original entry properties
+  ...entry, // Keep the original entry properties
   body: content.pageContent,
   data: {
     ...entry.data,
@@ -50,7 +58,6 @@ const pageEntry = {
     modDate: content.lastModified,
   },
 };
-console.log("After: " + JSON.stringify(pageEntry, null, 2))
 
 // Construct Doc Browser menu
 const browserMenu: MenuItem[] = [];
@@ -60,7 +67,7 @@ await Promise.all(
     const groupEntries = (await getEntriesInGroup(
       "projects",
       group.id.replace("/-index", ""),
-      sortByTitle
+      sortByTitle,
     )) as ProjectsEntry[];
     browserMenu.push({
       title: group.data.title,
@@ -71,14 +78,25 @@ await Promise.all(
         children: [],
       })),
     });
-  })
+  }),
 );
+const paths = await getNotionPaths("/");
+const tree = pathsToTree(paths);
+console.log(JSON.stringify(tree, null, 2));
 ---
 
 {
   isGroup ? (
-    <CollectionLayout collectionIndex={entry} entries={groupEntries} collection="projects" />
+    <CollectionLayout
+      collectionIndex={entry}
+      entries={groupEntries}
+      collection="projects"
+    />
   ) : (
-    <EntryLayout entry={pageEntry} browserMenu={browserMenu} collection="projects" />
+    <EntryLayout
+      entry={pageEntry}
+      browserMenu={browserMenu}
+      collection="projects"
+    />
   )
 }

@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client";
 import { NotionConverter } from "notion-to-md";
 import { DefaultExporter } from "notion-to-md/plugins/exporter";
+import { DATABASE_ID } from "./notionData";
 
 type NotionPage = {
   name: string;
@@ -16,9 +17,8 @@ const getNotionContent = async (pagePath: string): Promise<NotionPage> => {
   });
 
   console.log("Querying Notion...");
-  const databaseId = "1caea13be4d480ae8492f352fcf5466e";
   const response = await notion.databases.query({
-    database_id: databaseId,
+    database_id: DATABASE_ID,
     filter: {
       property: "Path",
       rich_text: {

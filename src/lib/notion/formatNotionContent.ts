@@ -1,4 +1,4 @@
-import type { NotionPage } from "./getNotionContent";
+import type { NotionPage } from "./notion/getNotionContent";
 
 const formatNotionContent = (content: NotionPage): string => {
   return content.pageContent;
