@@ -11,7 +11,7 @@ import type { TreeNode } from "@lib/pathToTree";
 export async function getStaticPaths() {
   const rawPaths = await getNotionPaths("/projects");
   const paths = rawPaths.map((path) => ({
-    params: { id: path },
+    params: { id: path.path },
   }));
   return paths;
 }
@@ -20,11 +20,9 @@ const { id = "" } = Astro.params;
 const rawPaths = await getNotionPaths("/projects");
 const tree = pathsToTree(rawPaths);
 
-let currentNode: TreeNode | string[] = tree;
-// lmao this wont work for the index approach i wanted in notion
-let isLeaf = rawPaths.includes(`/${id}`)
+let isLeaf = rawPaths.map((v) => (v as any).path).includes(`/${id}`)
 console.log("VALID PATH: ", isLeaf);
-let isGroup = !isLeaf;
+// let isGroup = !isLeaf;
 
 let content: ProjectsEntry | null = null;
 if (isLeaf) {
@@ -59,23 +57,39 @@ if (isLeaf) {
 //     : [];
 
 // Build browser menu from tree
-// const buildMenu = (node: TreeNode, parentPath: string = ""): MenuItem[] => {
-//   return Object.entries(node).map(([key, value]) => ({
-//     title: key,
-//     id: parentPath ? `${parentPath}/${key}` : key,
-//     children: Array.isArray(value)
-//       ? value.map((child) => ({
-//           title: child,
-//           id: `${parentPath}/${key}/${child}`,
-//           children: [],
-//         }))
-//       : buildMenu(value as TreeNode, key),
-//   }));
-// };
+const buildMenu = (node: TreeNode, parentPath: string = ""): MenuItem[] => {
+  if (typeof node === "string") {
+    const fullPath = parentPath ? `${parentPath}/${node}` : node;
+    return [{
+      title: node,
+      path: fullPath,
+      children: []
+    }];
+  }
 
-// const browserMenu = buildMenu(tree);
+  return Object.entries(node).flatMap(([key, value]) => {
+    const fullPath = parentPath ? `${parentPath}/${key}` : key;
+    return [{
+      title: (value as any)["name"],
+      path: fullPath,
+      children: buildMenu(value, fullPath)
+    }];
+  });
+};
+
+const browserMenu = buildMenu(tree);
 ---
 
+{
+isLeaf ? (
+<EntryLayout
+  entry={content}
+  browserMenu={browserMenu}
+/>
+  ) : (
+  <h1>adpoakjd</h1>
+  )
+}
 
 <!-- { -->
 <!--   isGroup ? ( -->
