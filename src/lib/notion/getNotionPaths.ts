@@ -24,13 +24,11 @@ const getNotionPaths = async (root: string = "/"): Promise<NotionPath[]> => {
     },
   });
   const paths = response.results.map((element: any) => {
-    // return (element.properties.Path.rich_text[0].plain_text as string).replace(root, "");
     return {
       path: (element.properties.Path.rich_text[0].plain_text as string).replace(root, ""),
       name: (element.properties.Name.title[0].plain_text as string),
     } as NotionPath;
   });
-  console.log("Paths: ", paths);
   return paths
 }
 

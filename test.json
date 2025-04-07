@@ -1,11 +1,15 @@
 {
   "projects": {
-    "index": [
-      "tetrrs"
-    ],
-    "games": [
-      "tetrgo",
-      "tetrgd"
-    ]
+    "games": {
+      "tetrgo": {
+        "name": "tetr.go",
+      },
+      "tetrgd": {
+        "name": "tetr.gd",
+      }
+    },
+    "tetrrs": {
+      "name": "tetr.rs",
+    }
   }
 }
