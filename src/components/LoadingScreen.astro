@@ -35,7 +35,7 @@
 </div>
 
 <script>
-  let loadingTimeout: number | null = null;
+  let loadingTimeout: ReturnType<typeof setTimeout> | null = null;
 
   function showLoadingScreen() {
     const loadingScreen = document.getElementById("loading-screen");
@@ -51,6 +51,8 @@
   });
 
   document.addEventListener("astro:after-preparation", () => {
-    clearTimeout(loadingTimeout);
+    if (loadingTimeout !== null) {
+      clearTimeout(loadingTimeout);
+    }
   });
 </script>
