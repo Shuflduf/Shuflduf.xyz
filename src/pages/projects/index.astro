@@ -1,19 +1,40 @@
 ---
 import CollectionLayout from "@components/docs/CollectionLayout.astro";
-import { getIndex, getGroups } from "@lib/contentParser";
 import type { ProjectsEntry } from "@/types";
-import { sortByTitle } from "@lib/sortFunctions";
-import getNotionContent from "@lib/notion/getNotionContent";
-import formatNotionContent from "@lib/notion/formatNotionContent";
+import getNotionPaths from "@lib/notion/getNotionPaths";
+import pathsToTree from "@lib/pathToTree";
 
-const collectionIndex = (await getIndex("projects")) as ProjectsEntry;
-const groupIndices = (await getGroups(
-  "projects",
-  sortByTitle,
-)) as ProjectsEntry[];
-const asd = await getNotionContent("/projects/games/tetrgo");
-const youhekjf = formatNotionContent(asd);
-console.log(youhekjf);
+const notionPaths = await getNotionPaths("/projects");
+const tree = pathsToTree(notionPaths);
+
+// Create collection index
+const collectionIndex: ProjectsEntry = {
+  id: "projects",
+  data: {
+    title: "Projects",
+    description: "My programming projects",
+    autodescription: false,
+    draft: false,
+    imageAlt: "Projects overview",
+    hideToc: false,
+    hideNav: false,
+  },
+  collection: "projects"
+};
+
+const groupIndices = Object.entries(tree).map(([key, value]) => ({
+  id: key,
+  data: {
+    title: key.charAt(0).toUpperCase() + key.slice(1),
+    description: `Group: ${key}`,
+    autodescription: false,
+    draft: false,
+    imageAlt: `${key} overview`,
+    hideToc: false,
+    hideNav: false,
+  },
+  collection: "projects"
+}));
 ---
 
 <CollectionLayout
