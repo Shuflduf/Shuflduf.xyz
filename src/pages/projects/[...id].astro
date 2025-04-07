@@ -7,94 +7,103 @@ import getNotionPaths from "@lib/notion/getNotionPaths";
 import pathsToTree from "@lib/pathToTree";
 import type { TreeNode } from "@lib/pathToTree";
 
+
 export async function getStaticPaths() {
-  const paths = await getNotionPaths("/projects");
-  return paths.map((path) => ({
+  const rawPaths = await getNotionPaths("/projects");
+  const paths = rawPaths.map((path) => ({
     params: { id: path },
   }));
+  return paths;
 }
 
 const { id = "" } = Astro.params;
 const rawPaths = await getNotionPaths("/projects");
 const tree = pathsToTree(rawPaths);
-console.log(tree);
 
-// Navigate to current node in tree
-const segments = id.split("/");
 let currentNode: TreeNode | string[] = tree;
-let isLeaf = segments.length > 0 && rawPaths.includes(id);
+// lmao this wont work for the index approach i wanted in notion
+let isLeaf = rawPaths.includes(`/${id}`)
+console.log("VALID PATH: ", isLeaf);
 let isGroup = !isLeaf;
 
-for (const segment of segments.filter(Boolean)) {
-  if (
-    typeof currentNode === "object" &&
-    !Array.isArray(currentNode) &&
-    currentNode[segment]
-  ) {
-    currentNode = currentNode[segment];
-  }
+let content: ProjectsEntry | null = null;
+if (isLeaf) {
+  const pagePath = `/projects/${id}`;
+  const pageContent = await getNotionContent(pagePath);
+  content = {
+    id,
+    data: {
+      title: pageContent.name || "Untitled",
+      description: pageContent.description || "",
+      autodescription: false,
+      draft: false,
+      imageAlt: "",
+      hideToc: false,
+      hideNav: false,
+    },
+    body: pageContent.pageContent || "",
+    collection: "projects",
+  };
 }
-
-// Get page content or group entries
-const content = isLeaf ? await getNotionContent(`/projects/${id}`) : null;
-const groupEntries =
-  isGroup && typeof currentNode === "object"
-    ? Array.isArray(currentNode)
-      ? currentNode.map((entry) => ({
-          id: id ? `${id}/${entry}` : entry,
-          data: { title: entry },
-        }))
-      : Object.entries(currentNode).map(([key, value]) => ({
-          id: id ? `${id}/${key}` : key,
-          data: { title: key },
-        }))
-    : [];
+// const groupEntries =
+//   isGroup && typeof currentNode === "object"
+//     ? Array.isArray(currentNode)
+//       ? currentNode.map((entry) => ({
+//           id: id ? `${id}/${entry}` : entry,
+//           data: { title: entry },
+//         }))
+//       : Object.entries(currentNode).map(([key, value]) => ({
+//           id: id ? `${id}/${key}` : key,
+//           data: { title: key },
+//         }))
+//     : [];
 
 // Build browser menu from tree
-const buildMenu = (node: TreeNode, parentPath: string = ""): MenuItem[] => {
-  return Object.entries(node).map(([key, value]) => ({
-    title: key,
-    id: parentPath ? `${parentPath}/${key}` : key,
-    children: Array.isArray(value)
-      ? value.map((child) => ({
-          title: child,
-          id: `${parentPath}/${key}/${child}`,
-          children: [],
-        }))
-      : buildMenu(value as TreeNode, key),
-  }));
-};
+// const buildMenu = (node: TreeNode, parentPath: string = ""): MenuItem[] => {
+//   return Object.entries(node).map(([key, value]) => ({
+//     title: key,
+//     id: parentPath ? `${parentPath}/${key}` : key,
+//     children: Array.isArray(value)
+//       ? value.map((child) => ({
+//           title: child,
+//           id: `${parentPath}/${key}/${child}`,
+//           children: [],
+//         }))
+//       : buildMenu(value as TreeNode, key),
+//   }));
+// };
 
-const browserMenu = buildMenu(tree);
+// const browserMenu = buildMenu(tree);
 ---
 
-{
-  isGroup ? (
-    <CollectionLayout
-      collectionIndex={{
-        id: id || "projects",
-        data: { title: id || "Projects" },
-      }}
-      entries={groupEntries}
-      collection="projects"
-    />
-  ) : (
-    <EntryLayout
-      entry={{
-        id,
-        data: {
-          title: content?.name || "Untitled",
-          description: content?.description || "",
-          autodescription: false,
-          draft: false,
-          imageAlt: "",
-          hideToc: false,
-          hideNav: false,
-        },
-        body: content?.pageContent || "",
-      }}
-      browserMenu={browserMenu}
-      collection="projects"
-    />
-  )
-}
+
+<!-- { -->
+<!--   isGroup ? ( -->
+<!--     <CollectionLayout -->
+<!--       collectionIndex={{ -->
+<!--         id: id || "projects", -->
+<!--         data: { title: id || "Projects" }, -->
+<!--       }} -->
+<!--       entries={groupEntries} -->
+<!--       collection="projects" -->
+<!--     /> -->
+<!--   ) : ( -->
+<!--     <EntryLayout -->
+<!--       entry={{ -->
+<!--         id, -->
+<!--         data: { -->
+<!--           title: content?.name || "Untitled", -->
+<!--           description: content?.description || "", -->
+<!--           autodescription: false, -->
+<!--           draft: false, -->
+<!--           imageAlt: "", -->
+<!--           hideToc: false, -->
+<!--           hideNav: false, -->
+<!--         }, -->
+<!--         body: content?.pageContent || "", -->
+<!--       }} -->
+<!--       browserMenu={browserMenu} -->
+<!--       collection="projects" -->
+<!--     /> -->
+<!--   ) -->
+<!-- } -->
