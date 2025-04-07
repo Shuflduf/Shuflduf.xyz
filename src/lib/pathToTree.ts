@@ -1,32 +1,32 @@
+import type { NotionPath } from "./notion/getNotionPaths";
+
 interface TreeNode {
-  [key: string]: TreeNode | string[];
+  [key: string]: TreeNode | string;
 }
 
-const pathsToTree = (paths: string[]): TreeNode => {
+const pathsToTree = (paths: NotionPath[]): TreeNode => {
   const root: TreeNode = {};
+  console.log("Input: ", paths);
 
   paths.forEach(path => {
-    const parts = path.replace(/^\//, '').split('/');
+    const parts = path.path.replace(/^\//, '').split('/');
     let current = root;
 
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
+      if (!current[part]) {
+        current[part] = {};
+      }
+      // ignore the error its fine
+      current = current[part];
 
-      if (i === parts.length - 1) {
-        const key = parts[i - 1] ?? "index";
-        if (!current[key]) {
-          current[key] = [];
-        }
-        (current[key] as string[]).push(part);
-      } else {
-        const key = part ?? "index";
-        if (!current[key]) {
-          current[key] = {};
-        }
-        current = current[key] as TreeNode;
+      if (i == parts.length - 1) {
+        current.name = path.name
       }
     }
   });
+
+  console.log("Output: ", JSON.stringify(root, null, 2));
 
   return root;
 };
