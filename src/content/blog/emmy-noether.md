@@ -59,11 +59,11 @@ Emmy Noether’s influence can be seen across mathematics and physics. Today, sh
 
 ### Her Impact in Numbers
 
-| Field                | Contribution                                   | Modern Importance                          |
-|----------------------|-----------------------------------------------|--------------------------------------------|
-| **Algebra**          | Noetherian rings, ideals                      | Core concepts in modern algebra             |
-| **Physics**          | Symmetry and conservation laws (Noether's theorem) | Central to theoretical physics              |
-| **Education**        | Mentored many leading mathematicians           | Her students carried forward her ideas      |
+| Field         | Contribution                                       | Modern Importance                      |
+| ------------- | -------------------------------------------------- | -------------------------------------- |
+| **Algebra**   | Noetherian rings, ideals                           | Core concepts in modern algebra        |
+| **Physics**   | Symmetry and conservation laws (Noether's theorem) | Central to theoretical physics         |
+| **Education** | Mentored many leading mathematicians               | Her students carried forward her ideas |
 
 ## Why Noether Matters Today
 
@@ -73,6 +73,6 @@ Her story is a call to action for all of us to challenge barriers, embrace creat
 
 ### Further Reading
 
-- *Emmy Noether: The Mother of Modern Algebra* by M. L. Teicher
-- *Noether's Theorem and the Symmetries of Nature* by L. H. Ryder
-- Biographical sketches in *Women in Mathematics: The Legacy of Noether* edited by Laurie M. Adams
+- _Emmy Noether: The Mother of Modern Algebra_ by M. L. Teicher
+- _Noether's Theorem and the Symmetries of Nature_ by L. H. Ryder
+- Biographical sketches in _Women in Mathematics: The Legacy of Noether_ edited by Laurie M. Adams

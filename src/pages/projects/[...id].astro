@@ -7,7 +7,6 @@ import getNotionPaths from "@lib/notion/getNotionPaths";
 import pathsToTree from "@lib/pathToTree";
 import type { TreeNode } from "@lib/pathToTree";
 
-
 export async function getStaticPaths() {
   const rawPaths = await getNotionPaths("/projects");
   const paths = rawPaths.map((path) => ({
@@ -18,11 +17,11 @@ export async function getStaticPaths() {
 
 const { id = "" } = Astro.params;
 const rawPaths = await getNotionPaths("/projects");
+const routePaths = await getNotionPaths(`/projects/${id}`);
+const routeTree = pathsToTree(routePaths);
 const tree = pathsToTree(rawPaths);
 
-let isLeaf = rawPaths.map((v) => (v as any).path).includes(`/${id}`)
-console.log("VALID PATH: ", isLeaf);
-// let isGroup = !isLeaf;
+let isLeaf = Object.keys(routeTree).length == 1;
 
 let content: ProjectsEntry | null = null;
 if (isLeaf) {
@@ -33,11 +32,11 @@ if (isLeaf) {
     data: {
       title: pageContent.name || "Untitled",
       description: pageContent.description || "",
-      autodescription: false,
-      draft: false,
       imageAlt: "",
-      hideToc: false,
-      hideNav: false,
+      // @ts-ignore
+      modDate: pageContent.lastModified,
+      // @ts-ignore
+      pubDate: pageContent.createdAt,
     },
     body: pageContent.pageContent || "",
     collection: "projects",
@@ -56,38 +55,77 @@ if (isLeaf) {
 //         }))
 //     : [];
 
-// Build browser menu from tree
 const buildMenu = (node: TreeNode, parentPath: string = ""): MenuItem[] => {
   if (typeof node === "string") {
     const fullPath = parentPath ? `${parentPath}/${node}` : node;
-    return [{
-      title: node,
-      path: fullPath,
-      children: []
-    }];
+    return [
+      {
+        title: node,
+        id: fullPath,
+        children: [],
+      },
+    ];
   }
 
   return Object.entries(node).flatMap(([key, value]) => {
     const fullPath = parentPath ? `${parentPath}/${key}` : key;
-    return [{
-      title: (value as any)["name"],
-      path: fullPath,
-      children: buildMenu(value, fullPath)
-    }];
+    return [
+      {
+        title: (value as any)["name"],
+        id: fullPath,
+        children: buildMenu(value, fullPath),
+      },
+    ];
+  });
+};
+
+const treeToEntries = (tree: TreeNode, parentPath: string = ""): any[] => {
+  if (typeof tree === "string") {
+    return [
+      {
+        id: parentPath ? `${parentPath}/${tree}` : tree,
+        data: { title: tree },
+      },
+    ];
+  }
+
+  return Object.entries(tree).flatMap(([key, value]) => {
+    if (key == "") {
+      return [];
+    }
+    const fullPath = parentPath ? `${parentPath}/${key}` : key;
+    return [
+      {
+        id: fullPath,
+        data: {
+          title: (value as any)["name"] || key,
+        },
+      },
+    ];
   });
 };
 
 const browserMenu = buildMenu(tree);
+const entries = treeToEntries(routeTree, id);
 ---
 
 {
-isLeaf ? (
-<EntryLayout
-  entry={content}
-  browserMenu={browserMenu}
-/>
+  isLeaf ? (
+    <EntryLayout
+      entry={content}
+      browserMenu={browserMenu}
+      collection="projects"
+    />
   ) : (
-  <h1>adpoakjd</h1>
+    <CollectionLayout
+      collectionIndex={{
+        id: id || "projects",
+        // @ts-ignore
+        data: { title: id || "Projects" },
+      }}
+      entries={entries}
+      collection="projects"
+    />
   )
 }
 

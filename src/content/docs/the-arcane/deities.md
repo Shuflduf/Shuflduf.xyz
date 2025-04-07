@@ -2,7 +2,7 @@
 title: Deities
 description: A guide to the deities of the arcane, their domains, and blessings bestowed upon followers.
 image: "@assets/docs/the-arcane/deities/cover.jpg"
-imageAlt: Painting of an important looking woman 
+imageAlt: Painting of an important looking woman
 pubDate: 2024-12-02
 modDate: 2024-12-02
 ---
@@ -78,7 +78,7 @@ These deities, though distinct, are believed to work in harmony, their domains i
 
 ### Example Ritual for Vaelthar
 
-``` txt
+```txt
 - Prepare a silver bowl filled with pure water under the night sky.
 - Speak the incantation: *"Vaelthar, guide my thoughts beyond the veil."*
 - Drop a shard of obsidian into the water and gaze at the reflections to receive a vision.

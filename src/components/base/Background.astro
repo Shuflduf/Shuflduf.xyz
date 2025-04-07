@@ -1,14 +1,15 @@
 ---
-// Twinkling Star Background 
+// Twinkling Star Background
 const numStars = 1600;
 const stars = Array.from({ length: numStars }).map(() => ({
   left: `${Math.random() * 100}%`,
   top: `${Math.random() * 100}%`,
   size: `${Math.random() * 2 + 1}px`,
   delay: `${7 * Math.random()}s`,
-  // hsl: `hsl(${Math.random() * 360}, 100%, 50%)`, // background: ${hsl}; 
+  // hsl: `hsl(${Math.random() * 360}, 100%, 50%)`, // background: ${hsl};
 }));
 ---
+
 <div
   class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
 >

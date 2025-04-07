@@ -145,7 +145,10 @@ const terms = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/projects" }),
+  loader: glob({
+    pattern: "**\/[^_]*.{md,mdx}",
+    base: "./src/content/projects",
+  }),
   schema: ({ image }) =>
     searchable.extend({
       pubDate: z.date().optional(),

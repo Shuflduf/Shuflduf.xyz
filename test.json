@@ -2,14 +2,14 @@
   "projects": {
     "games": {
       "tetrgo": {
-        "name": "tetr.go",
+        "name": "tetr.go"
       },
       "tetrgd": {
-        "name": "tetr.gd",
+        "name": "tetr.gd"
       }
     },
     "tetrrs": {
-      "name": "tetr.rs",
+      "name": "tetr.rs"
     }
   }
 }

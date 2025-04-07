@@ -5,7 +5,7 @@ import Footer from "@components/base/Footer.astro";
 import Header from "@components/base/Header.astro";
 import ObserverScript from "@components/base/ObserverScript.astro";
 import "@/styles/main.scss";
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 import Background from "@/components/base/Background.astro";
 import { Tooltips } from "astro-tooltips";
 
@@ -25,9 +25,23 @@ const { title, description, image, noindex, canonical } = Astro.props;
 <html lang="en">
   <head>
     <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- theme meta -->
@@ -77,9 +91,7 @@ const { title, description, image, noindex, canonical } = Astro.props;
     <!-- og-title -->
     <meta
       property="og:title"
-      content={plainify(
-        title ? title : config.site.title,
-      )}
+      content={plainify(title ? title : config.site.title)}
     />
 
     <!-- og-description -->
@@ -98,9 +110,7 @@ const { title, description, image, noindex, canonical } = Astro.props;
     <!-- twitter-title -->
     <meta
       name="twitter:title"
-      content={plainify(
-        title ? title : config.site.title,
-      )}
+      content={plainify(title ? title : config.site.title)}
     />
 
     <!-- twitter-description -->
@@ -153,12 +163,12 @@ const { title, description, image, noindex, canonical } = Astro.props;
      https://5-0-0-beta.docs.astro.build/en/guides/view-transitions/#_top
      -->
 
-     <Tooltips interactive={false} delay={[333, 0]} />
+    <Tooltips interactive={false} delay={[333, 0]} />
   </head>
   <body>
     <Background />
-    <Header/>
-    <main id="main-content" class="flex-1" >
+    <Header />
+    <main id="main-content" class="flex-1">
       <slot />
     </main>
     <Footer />

@@ -37,7 +37,7 @@ const entryDescription =
   description ||
   (autodescription
     ? plainify(
-        entry.body!.slice(0, Number(config.settings.blog_description_length))
+        entry.body!.slice(0, Number(config.settings.blog_description_length)),
       )
     : null);
 ---
@@ -96,4 +96,3 @@ const entryDescription =
     </p>
   </div>
 </div>
-

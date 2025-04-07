@@ -8,8 +8,6 @@ The written content in the template's collections was AI generated. The images a
 
 ### The Mechanics
 
-
-
 For a higher-level overview of how the content collections work, see the [docs/project-structure.md](docs/project-structure.md) page.
 
 ## Theme Colors

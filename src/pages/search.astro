@@ -9,7 +9,7 @@ const collectionList = settings.searchable_collections as CollectionKey[];
 const searchList = (await getEntriesBatch(
   collectionList,
   undefined,
-  false
+  false,
 )) as SearchableEntry[];
 ---
 

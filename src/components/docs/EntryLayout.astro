@@ -5,8 +5,8 @@ import Browser from "@components/docs/Browser.astro";
 import TableOfContents from "@components/common/TableOfContents.astro";
 import config from "@/config/config.json";
 import EntryHeader from "@components/common/EntryHeader.astro";
-import { marked } from 'marked';
-import type { MarkdownHeading } from 'astro';
+import { marked } from "marked";
+import type { MarkdownHeading } from "astro";
 
 interface Props {
   entry: DocsEntry;
@@ -23,11 +23,13 @@ const html = marked.parser(tokens);
 
 // Extract headings from tokens
 const headings: MarkdownHeading[] = tokens
-  .filter(token => token.type === 'heading')
-  .map(token => ({
+  .filter((token) => token.type === "heading")
+  .map((token) => ({
     depth: (token as marked.Tokens.Heading).depth,
     text: (token as marked.Tokens.Heading).text,
-    slug: (token as marked.Tokens.Heading).text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+    slug: (token as marked.Tokens.Heading).text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-"),
   }));
 ---
 

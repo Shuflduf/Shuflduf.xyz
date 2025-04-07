@@ -8,7 +8,6 @@ interface NotionPath {
 }
 
 const getNotionPaths = async (root: string = "/"): Promise<NotionPath[]> => {
-  console.log(root)
   const notion = new Client({
     auth: import.meta.env.NOTION_TOKEN,
   });
@@ -25,12 +24,15 @@ const getNotionPaths = async (root: string = "/"): Promise<NotionPath[]> => {
   });
   const paths = response.results.map((element: any) => {
     return {
-      path: (element.properties.Path.rich_text[0].plain_text as string).replace(root, ""),
-      name: (element.properties.Name.title[0].plain_text as string),
+      path: (element.properties.Path.rich_text[0].plain_text as string).replace(
+        root,
+        "",
+      ),
+      name: element.properties.Name.title[0].plain_text as string,
     } as NotionPath;
   });
-  return paths
-}
+  return paths;
+};
 
 export default getNotionPaths;
 export type { NotionPath };

@@ -14,11 +14,11 @@ Aristotle, one of the most influential philosophers in history, developed a fram
 
 Central to Aristotle's virtue ethics is the concept of the **Golden Mean**, the idea that virtue lies between two extremes:
 
-| Virtue           | Deficiency (Vice)   | Excess (Vice)        |
-|------------------|---------------------|----------------------|
-| Courage          | Cowardice           | Recklessness         |
-| Generosity       | Stinginess          | Extravagance         |
-| Humility         | Arrogance           | Self-deprecation     |
+| Virtue     | Deficiency (Vice) | Excess (Vice)    |
+| ---------- | ----------------- | ---------------- |
+| Courage    | Cowardice         | Recklessness     |
+| Generosity | Stinginess        | Extravagance     |
+| Humility   | Arrogance         | Self-deprecation |
 
 For instance, consider **courage**: it is neither the absence of fear (cowardice) nor reckless bravery, but the balance that enables wise action.
 

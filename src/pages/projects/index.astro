@@ -19,11 +19,9 @@ const collectionIndex: ProjectsEntry = {
     hideToc: false,
     hideNav: false,
   },
-  collection: "projects"
+  collection: "projects",
 };
 
-console.log("LKJADFLK " + Object.entries(tree))
-console.log("IUKJEHOI " + JSON.stringify(Object.entries(tree), null, 2))
 const groupIndices = Object.entries(tree).map(([key, value]) => ({
   id: key,
   data: {
@@ -35,7 +33,7 @@ const groupIndices = Object.entries(tree).map(([key, value]) => ({
     hideToc: false,
     hideNav: false,
   },
-  collection: "projects"
+  collection: "projects",
 }));
 ---
 

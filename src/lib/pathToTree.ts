@@ -6,10 +6,9 @@ interface TreeNode {
 
 const pathsToTree = (paths: NotionPath[]): TreeNode => {
   const root: TreeNode = {};
-  console.log("Input: ", paths);
 
-  paths.forEach(path => {
-    const parts = path.path.replace(/^\//, '').split('/');
+  paths.forEach((path) => {
+    const parts = path.path.replace(/^\//, "").split("/");
     let current = root;
 
     for (let i = 0; i < parts.length; i++) {
@@ -21,12 +20,10 @@ const pathsToTree = (paths: NotionPath[]): TreeNode => {
       current = current[part];
 
       if (i == parts.length - 1) {
-        current.name = path.name
+        current.name = path.name;
       }
     }
   });
-
-  console.log("Output: ", JSON.stringify(root, null, 2));
 
   return root;
 };

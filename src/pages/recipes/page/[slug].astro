@@ -7,7 +7,9 @@ import CollectionLayout from "@components/recipes/CollectionLayout.astro";
 
 export async function getStaticPaths() {
   const entries = (await getEntries("recipes", sortByDate)) as RecipesEntry[];
-  const pageCount = Math.ceil(entries.length / config.settings.recipe_pagination);
+  const pageCount = Math.ceil(
+    entries.length / config.settings.recipe_pagination,
+  );
   const paths = [];
 
   for (let i = 1; i < pageCount; i++) {

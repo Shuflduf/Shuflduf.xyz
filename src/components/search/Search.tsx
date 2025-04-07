@@ -1,4 +1,4 @@
-import type { SearchableEntry } from "@/types"
+import type { SearchableEntry } from "@/types";
 import Fuse from "fuse.js";
 import React, { useEffect, useRef, useState } from "react";
 import config from "@/config/config.json";
@@ -93,16 +93,23 @@ const SearchPage = ({ searchList }: Props) => {
               <div className="py-2 px-0" key={`search-${index}`}>
                 <div className="h-full glass col-10 lg:col-8 mx-auto rounded-lg p-4 intersect:animate-fade opacity-0">
                   <h4 className="mb-2">
-                    <a href={getPath(item)}>
-                      {item.data.title}
-                    </a>
+                    <a href={getPath(item)}>{item.data.title}</a>
                   </h4>
-                  { item.data.description && (
+                  {item.data.description && (
                     <p className="">{item.data.description}</p>
                   )}
-                  {  !item.data.description && item.data.autodescription && item.body && (
-                    <p className="">{plainify(item.body.slice(0, Number(config.settings.search_description_length)))}</p>
-                  )}
+                  {!item.data.description &&
+                    item.data.autodescription &&
+                    item.body && (
+                      <p className="">
+                        {plainify(
+                          item.body.slice(
+                            0,
+                            Number(config.settings.search_description_length),
+                          ),
+                        )}
+                      </p>
+                    )}
                 </div>
               </div>
             ))

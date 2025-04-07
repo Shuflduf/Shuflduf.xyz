@@ -41,7 +41,7 @@ await Promise.all(
     const groupEntries = (await getEntriesInGroup(
       "docs",
       group.id.replace("/-index", ""),
-      sortByTitle
+      sortByTitle,
     )) as DocsEntry[];
     browserMenu.push({
       title: group.data.title,
@@ -52,13 +52,17 @@ await Promise.all(
         children: [],
       })),
     });
-  })
+  }),
 );
 ---
 
 {
   isGroup ? (
-    <CollectionLayout collectionIndex={entry} entries={groupEntries} collection="docs" />
+    <CollectionLayout
+      collectionIndex={entry}
+      entries={groupEntries}
+      collection="docs"
+    />
   ) : (
     <EntryLayout entry={entry} browserMenu={browserMenu} collection="docs" />
   )

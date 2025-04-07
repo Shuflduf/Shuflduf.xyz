@@ -19,9 +19,12 @@ const { href, bgImage, title } = Astro.props;
       <div class="relative h-20 overflow-hidden">
         <div
           class="bg-image group-hover:scale-[105%]"
-          style={bgImage ? `background-image: url(${bgImage});` : ''}
-        ></div>
-        <div class="glass-t absolute text-center rounded-lg px-1.5 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+          style={bgImage ? `background-image: url(${bgImage});` : ""}
+        >
+        </div>
+        <div
+          class="glass-t absolute text-center rounded-lg px-1.5 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]"
+        >
           <h4>{title}</h4>
         </div>
       </div>

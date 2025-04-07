@@ -9,7 +9,7 @@ import config from "@/config/config.json";
 const { slug } = Astro.params;
 const currentPageIndex = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
 
-const entryIndex = await getIndex("blog") as BlogEntry;
+const entryIndex = (await getIndex("blog")) as BlogEntry;
 const entries = (await getEntries("blog", sortByDate)) as BlogEntry[];
 
 const allCategories = await getTaxaMultiset("blog", "categories");
@@ -21,7 +21,7 @@ const indexOfFirstEntry = indexOfLastEntry - config.settings.blog_pagination;
 const currentEntries = entries.slice(indexOfFirstEntry, indexOfLastEntry);
 
 const pageCount: number = Math.ceil(
-  entries.length / config.settings.blog_pagination
+  entries.length / config.settings.blog_pagination,
 );
 ---
 
