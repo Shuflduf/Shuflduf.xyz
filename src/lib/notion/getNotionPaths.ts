@@ -7,7 +7,13 @@ interface NotionPath {
   name: string;
 }
 
-const getNotionPaths = async (root: string = "/"): Promise<NotionPath[]> => {
+const pathCache: Record<string, any[]> = {};
+
+const getNotionPaths = async (basePath: string = "/"): Promise<NotionPath[]> => {
+  if (pathCache[basePath]) {
+    return pathCache[basePath];
+  }
+
   const notion = new Client({
     auth: import.meta.env.NOTION_TOKEN,
   });
@@ -18,19 +24,21 @@ const getNotionPaths = async (root: string = "/"): Promise<NotionPath[]> => {
     filter: {
       property: "Path",
       rich_text: {
-        starts_with: root,
+        starts_with: basePath,
       },
     },
   });
   const paths = response.results.map((element: any) => {
     return {
       path: (element.properties.Path.rich_text[0].plain_text as string).replace(
-        root,
+        basePath,
         "",
       ),
       name: element.properties.Name.title[0].plain_text as string,
     } as NotionPath;
   });
+
+  pathCache[basePath] = paths;
   return paths;
 };
 

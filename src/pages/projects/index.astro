@@ -3,6 +3,7 @@ import CollectionLayout from "@components/docs/CollectionLayout.astro";
 import type { ProjectsEntry } from "@/types";
 import getNotionPaths from "@lib/notion/getNotionPaths";
 import pathsToTree from "@lib/pathToTree";
+import LoadingScreen from "@components/LoadingScreen.astro";
 
 const notionPaths = await getNotionPaths("/projects");
 const tree = pathsToTree(notionPaths);
@@ -37,6 +38,7 @@ const groupIndices = Object.entries(tree).map(([key, value]) => ({
 }));
 ---
 
+<LoadingScreen />
 <CollectionLayout
   entries={groupIndices}
   collectionIndex={collectionIndex}

@@ -1,0 +1,50 @@
+<div
+  id="loading-screen"
+  class="fixed bg-black inset-0 z-50 flex flex-col gap-4 items-center justify-center opacity-0 pointer-events-none transition-all duration-300"
+>
+  <div class="flex gap-4">
+    <picture class="inline-block">
+      <source
+        srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f438/512.webp"
+        type="image/webp"
+      />
+      <img
+        src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f438/512.gif"
+        alt="🐸"
+        width="128"
+        height="128"
+        class="rendering-pixelated image-rendering-crisp-edges"
+        style="image-rendering: -webkit-optimize-contrast; -ms-interpolation-mode: nearest-neighbor;"
+      />
+    </picture>
+    <picture class="inline-block">
+      <source
+        srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.webp"
+        type="image/webp"
+      />
+      <img
+        src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.gif"
+        alt="🚀"
+        width="128"
+        height="128"
+        class="rendering-pixelated image-rendering-crisp-edges"
+        style="image-rendering: -webkit-optimize-contrast; -ms-interpolation-mode: nearest-neighbor;"
+      />
+    </picture>
+  </div>
+
+  <p class="text-2xl font-bold text-white tracking-widest animate-pulse">
+    LOADING
+  </p>
+</div>
+
+<script>
+  document.addEventListener("astro:before-preparation", () => {
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+      loadingScreen.classList.remove("opacity-0");
+      loadingScreen.classList.add("opacity-90");
+      loadingScreen.classList.remove("pointer-events-none");
+    }
+  });
+</script>

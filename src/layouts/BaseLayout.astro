@@ -1,4 +1,5 @@
 ---
+import LoadingScreen from "@components/LoadingScreen.astro";
 import type { ProjectsEntry, MenuItem } from "@/types";
 import EntryLayout from "@components/docs/EntryLayout.astro";
 import CollectionLayout from "@components/docs/CollectionLayout.astro";
@@ -6,7 +7,6 @@ import getNotionContent from "@lib/notion/getNotionContent";
 import getNotionPaths from "@lib/notion/getNotionPaths";
 import pathsToTree from "@lib/pathToTree";
 import type { TreeNode } from "@lib/pathToTree";
-import LoadingScreen from "@components/LoadingScreen.astro";
 
 export async function getStaticPaths() {
   const rawPaths = await getNotionPaths("/projects");
@@ -110,28 +110,37 @@ const browserMenu = buildMenu(tree);
 const entries = treeToEntries(routeTree, id);
 ---
 
-<LoadingScreen />
-{
-  isLeaf ? (
-    <EntryLayout
-      entry={content}
-      browserMenu={browserMenu}
-      collection="projects"
-    />
-  ) : (
-    <CollectionLayout
-      collectionIndex={{
-        id: id || "projects",
-        // @ts-ignore
-        data: { title: id || "Projects" },
-      }}
-      entries={entries}
-      collection="projects"
-    />
-  )
-}
-<!--
-  {-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head><view-transitions-style></view-transitions-style>
+  <view-transitions-style></view-transitions-style>
+
+  <body>
+    <LoadingScreen />
+    {
+      isLeaf ? (
+        <EntryLayout
+          entry={content}
+          browserMenu={browserMenu}
+          collection="projects"
+        />
+      ) : (
+        <CollectionLayout
+          collectionIndex={{
+            id: id || "projects",
+            // @ts-ignore
+            data: { title: id || "Projects" },
+          }}
+          entries={entries}
+          collection="projects"
+        />
+      )
+    }
+  </body>
+</html>
+
+<!-- { -->
 <!--   isGroup ? ( -->
 <!--     <CollectionLayout -->
 <!--       collectionIndex={{ -->
@@ -160,7 +169,4 @@ const entries = treeToEntries(routeTree, id);
 <!--       collection="projects" -->
 <!--     /> -->
 <!--   ) -->
-<!--}
-  --
-/>
--->
+<!-- } -->

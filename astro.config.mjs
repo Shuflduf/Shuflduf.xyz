@@ -19,7 +19,9 @@ export default defineConfig({
     prefetchAll: true,
   },
   integrations: [
-    react(),
+    react({
+      strict: false
+    }),
     sitemap(),
     tailwind({
       config: {

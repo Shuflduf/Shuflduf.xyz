@@ -7,6 +7,7 @@ import config from "@/config/config.json";
 import EntryHeader from "@components/common/EntryHeader.astro";
 import { marked } from "marked";
 import type { MarkdownHeading } from "astro";
+import LoadingScreen from "@components/LoadingScreen.astro";
 
 interface Props {
   entry: DocsEntry;
@@ -34,6 +35,7 @@ const headings: MarkdownHeading[] = tokens
 ---
 
 <BaseLayout title={title} image={image?.src} description={description}>
+  <LoadingScreen />
   <section class="flex flex-1 flex-col md:flex-row container p-4 lg:p-0">
     <div
       class=`hidden md:flex max-h-static_sidemenu sticky top-[5rem]

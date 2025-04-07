@@ -3,6 +3,13 @@ import { NotionConverter } from "notion-to-md";
 import { DefaultExporter } from "notion-to-md/plugins/exporter";
 import { DATABASE_ID } from "./notionData";
 
+// Add cache interface and cache object
+interface CacheEntry extends NotionPage {
+  lastModified: string;
+}
+
+const pageCache: Record<string, CacheEntry> = {};
+
 type NotionPage = {
   name: string;
   description: string;
@@ -26,8 +33,15 @@ const getNotionContent = async (pagePath: string): Promise<NotionPage> => {
     },
   });
   const firstPage = response.results[0] as any;
-  const pageName = firstPage.properties.Name.title[0].plain_text;
   const pageLastModified = firstPage.last_edited_time;
+
+  // Check cache
+  const cachedPage = pageCache[pagePath];
+  if (cachedPage && cachedPage.lastModified === pageLastModified) {
+    return cachedPage;
+  }
+
+  const pageName = firstPage.properties.Name.title[0].plain_text;
   const pageCreatedAt = firstPage.created_time;
   const pageDescription =
     firstPage.properties.Description.rich_text[0].plain_text;
@@ -41,13 +55,18 @@ const getNotionContent = async (pagePath: string): Promise<NotionPage> => {
   const n2m = new NotionConverter(notion).withExporter(exporter);
   await n2m.convert(pageId);
 
-  return {
+  const page = {
     name: pageName,
     description: pageDescription,
     pageContent: (buffer as any)[pageId],
     lastModified: pageLastModified,
     createdAt: pageCreatedAt,
   };
+
+  // Update cache
+  pageCache[pagePath] = page;
+
+  return page;
 };
 
 export default getNotionContent;
