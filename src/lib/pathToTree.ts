@@ -13,13 +13,13 @@ const pathsToTree = (paths: string[]): TreeNode => {
       const part = parts[i];
 
       if (i === parts.length - 1) {
-        const key = parts[i - 1] ?? "index"; // Use "index" if parts[i - 1] is undefined
+        const key = parts[i - 1] ?? "index";
         if (!current[key]) {
           current[key] = [];
         }
         (current[key] as string[]).push(part);
       } else {
-        const key = part ?? "index"; // Use "index" if part is undefined
+        const key = part ?? "index";
         if (!current[key]) {
           current[key] = {};
         }

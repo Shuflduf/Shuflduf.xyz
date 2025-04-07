@@ -16,7 +16,7 @@ const getNotionContent = async (pagePath: string): Promise<NotionPage> => {
     auth: import.meta.env.NOTION_TOKEN,
   });
 
-  console.log("Querying Notion...");
+  console.log("Querying Notion page " + pagePath);
   const response = await notion.databases.query({
     database_id: DATABASE_ID,
     filter: {
