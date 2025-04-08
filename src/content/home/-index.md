@@ -1,9 +1,9 @@
 ---
 image: "@assets/astrogon-star.svg"
-imageAlt: Astrogon logo
-title: Astrogon
-content: A rapidly-customizable template for a blog, documentation, and more.
+imageAlt: Shuflduf logo
+title: Shuflduf
+content: My website for sharing my projects and ideas.
 button:
-  label: See the Code
-  link: https://github.com/astrogon/astrogon
+  label: About Me
+  link: https://shuflduf.xyz/about
 ---
