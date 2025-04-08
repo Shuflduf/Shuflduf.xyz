@@ -19,7 +19,7 @@ const { entry, browserMenu, collection = "docs" } = Astro.props;
 const { title, description, hideNav, hideToc, image } = entry.data;
 
 // Parse the markdown content
-const tokens = marked.lexer(entry.body);
+const tokens = marked.lexer(entry.body ?? "");
 const html = marked.parser(tokens);
 
 // Extract headings from tokens
