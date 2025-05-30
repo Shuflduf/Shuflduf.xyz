@@ -20,7 +20,7 @@
 	<NavBar />
 	<div class="flex flex-1 flex-row gap-4 overflow-hidden">
 		<Box class="w-3xl overflow-y-auto">
-			<h1 class="mb-4 text-3xl font-[Arvo] font-bold">Shuflduf.xyz</h1>
+			<h1 class="mb-4 font-[Arvo] text-3xl font-bold">Shuflduf.xyz</h1>
 			{#each Array.from({ length: 20 })}
 				<p class="mb-2">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus magnam ipsum repudiandae
@@ -38,27 +38,38 @@
 			</Box>
 			<Box class="flex-1" scroll="false">
 				<h2 class="mb-2 font-[Arvo] text-xl">Featured Project</h2>
-				<div class="flex flex-row gap-4 items-center">
+				<div class="flex flex-row items-center gap-4">
 					<img
 						src="/assets/ror2.jpg"
 						alt="Risk of Rain 2"
-						class="max-h-48 w-auto object-contain rounded-md shadow-md"
+						class="max-h-48 w-auto rounded-md object-contain shadow-md transition hover:scale-105 hover:rotate-z-1"
 					/>
-					<div class="min-h-0 flex-1 w-md">
+					<div class="min-h-0 w-md flex-1">
 						<h3 class="text-lg font-bold">Risk of Rain 2</h3>
-						<p class="line-clamp-2 break-all">
-							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat eos provident adipisci consequatur eius, eligendi quidem dolor architecto aut nam laudantium, incidunt, magni ipsum molestiae voluptatum atque! Quaerat, corrupti veritatis.
+						<p class="line-clamp-2 break-all mb-2">
+							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat eos provident
+							adipisci consequatur eius, eligendi quidem dolor architecto aut nam laudantium,
+							incidunt, magni ipsum molestiae voluptatum atque! Quaerat, corrupti veritatis.
 						</p>
-            <a href="/">
-            <button class="mt-2 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 cursor-pointer">
-              Read More
-            </button>
-              </a>
-            <a href="/">
-            <button class="mt-2 ml-2 rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400 cursor-pointer">
-              Explore Project
-            </button>
-              </a>
+            <ul class="flex flex-row gap-2 mb-8">
+              <li class="bg-stone-300 rounded-sm px-2">Game</li>
+              <li class="bg-stone-300 rounded-sm px-2">Unity</li>
+              <li class="bg-stone-300 rounded-sm px-2">Hopoo</li>
+            </ul>
+						<a href="/">
+							<button
+								class="mt-2 cursor-pointer rounded-md bg-blue-500 px-4 py-2 text-white transition hover:scale-105 hover:bg-blue-600"
+							>
+								Read More
+							</button>
+						</a>
+						<a href="/">
+							<button
+								class="mt-2 ml-2 cursor-pointer rounded-md bg-gray-300 px-4 py-2 text-gray-700 transition hover:scale-105 hover:bg-gray-400"
+							>
+								Explore Project
+							</button>
+						</a>
 					</div>
 				</div>
 			</Box>

@@ -1,4 +1,8 @@
-<div class="bg-stone-100 p-6 rounded-md border-stone-500 border shadow-md">
+<script>
+	import Box from "./Box.svelte";
+
+</script>
+<Box class="p-6">
   <ul class="flex gap-4">
     <li>
       <a href="/home" class="font-[Arvo]">Home</a>
@@ -10,4 +14,4 @@
       <a href="/projects" class="font-[Arvo]">Projects</a>
     </li>
   </ul>
-</div>
+</Box>
