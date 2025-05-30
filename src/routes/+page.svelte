@@ -42,7 +42,7 @@
 					<img
 						src="/assets/ror2.jpg"
 						alt="Risk of Rain 2"
-						class="max-h-48 w-auto rounded-md object-contain shadow-md transition hover:scale-105 hover:rotate-z-1"
+						class="max-h-48 w-auto rounded-md object-contain shadow-md transition hover:scale-105 hover:rotate-z-[0.5deg]"
 					/>
 					<div class="min-h-0 w-md flex-1">
 						<h3 class="text-lg font-bold">Risk of Rain 2</h3>
