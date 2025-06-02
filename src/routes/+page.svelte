@@ -3,8 +3,7 @@
 	import NavBar from '$lib/components/NavBar.svelte';
 
 	const news = [
-		{ date: 'May 23, 2025', title: 'Introducing Macintosh' },
-		{ date: 'May 16, 2025', title: 'Abandoned Microsoftf' },
+    { date: 'May 16, 2025', title: 'Game Update Released' },
 		{ date: 'May 9, 2025', title: 'New Game Release' },
 		{ date: 'May 2, 2025', title: 'Community Event' },
 		{ date: 'April 25, 2025', title: 'Update on Project X' },
@@ -12,7 +11,18 @@
 		{ date: 'April 11, 2025', title: 'Developer Interview' },
 		{ date: 'April 4, 2025', title: 'Game Mechanics Explained' },
 		{ date: 'March 28, 2025', title: 'Art Style Showcase' },
-		{ date: 'March 21, 2025', title: 'Soundtrack Preview' }
+		{ date: 'March 21, 2025', title: 'Soundtrack Preview' },
+    { date: 'March 14, 2025', title: 'Beta Testing Begins' },
+    { date: 'March 7, 2025', title: 'Community Feedback' },
+    { date: 'February 28, 2025', title: 'New Feature Announcement' },
+    { date: 'February 21, 2025', title: 'Game Lore Deep Dive' },
+    { date: 'February 14, 2025', title: 'Valentine’s Day Special' },
+    { date: 'February 7, 2025', title: 'Developer Q&A' },
+    { date: 'January 31, 2025', title: 'Game Trailer Release' },
+    { date: 'January 24, 2025', title: 'Community Spotlight' },
+    { date: 'January 17, 2025', title: 'New Character Reveal' },
+    { date: 'January 10, 2025', title: 'Gameplay Mechanics Overview' },
+    { date: 'January 3, 2025', title: 'Holiday Update' }
 	];
 </script>
 
@@ -42,7 +52,7 @@
 					<img
 						src="/assets/ror2.jpg"
 						alt="Risk of Rain 2"
-						class="max-h-48 w-auto rounded-md object-contain shadow-md transition hover:scale-105 hover:rotate-z-[0.5deg]"
+						class="max-h-48 w-auto rounded-md object-contain shadow-md transition hover:scale-105 hover:rotate-z-[0.5deg] hover:shadow-2xl"
 					/>
 					<div class="min-h-0 w-md flex-1">
 						<h3 class="text-lg font-bold">Risk of Rain 2</h3>
