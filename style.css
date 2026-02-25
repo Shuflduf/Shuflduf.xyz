@@ -25,7 +25,8 @@
   --text-item: light-dark(#c27d33, #8b7b6d);
 
   --accent: light-dark(#d73c3c, #978159);
-  --accent-bg: light-dark(#eef2d7, #243123);
+  --accent-hover: light-dark(#d73c3c, #b0986c);
+  --accent-bg: light-dark(#eb5656, #b0986c);
   --bold: light-dark(#b36b29, #7b9cac);
   --italic: light-dark(#d88405, #a07f6c);
   --heading-formatting-color: light-dark(#d97a64, #8e3131);
@@ -66,7 +67,13 @@ b {
 }
 
 a {
-  color: var(--accent)
+  transition: color 300ms;
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  color: var(--accent-hover)
 }
 
 a[href^="http"]::after {
