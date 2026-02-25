@@ -1,20 +1,80 @@
+@font-face {
+  font-family: "CMU Typewriter";
+  src: url("assets/cmunbtl.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CMU Typewriter";
+  src: url("assets/cmuntb.ttf") format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
   color-scheme: light dark;
   --bg-primary: light-dark(#fff3e6, #1d1d1d);
   --bg-secondary: light-dark(#fae6d1, #202020);
-  /* --bg-30: light-dark(#292929); */
-  /* --bg-40: light-dark(#373738); */
-  /* --bg-50: light-dark(#8c7c6d); */
   --bg-focus: light-dark(#e8d7c3, #2d2d2d);
 
   --text: light-dark(#97653c, #c0bcb5);
   --text-muted: light-dark(#cf8a3a, #9e9184);
-  --text-10: light-dark(#ca8c4a, #7a6e61);
+  --text-secondary: light-dark(#ca8c4a, #7a6e61);
   --title: light-dark(#caab90, #6b6966);
+  --text-item: light-dark(#c27d33, #8b7b6d);
 
   --accent: light-dark(#d73c3c, #978159);
   --accent-bg: light-dark(#eef2d7, #243123);
   --bold: light-dark(#b36b29, #7b9cac);
   --italic: light-dark(#d88405, #a07f6c);
   --heading-formatting-color: light-dark(#d97a64, #8e3131);
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text);
+  font-family: "CMU Typewriter";
+}
+
+body {
+  margin: auto;
+  max-width: 700px;
+}
+
+p,
+li {
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+}
+
+li::marker {
+  color: var(--text-item);
+}
+
+i {
+  color: var(--italic);
+}
+
+b {
+  color: var(--bold);
+}
+
+a {
+  color: var(--accent)
+}
+
+a[href^="http"]::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.2rem;
+  vertical-align: middle;
+  background: url('assets/link.svg') no-repeat center center;
+  background-size: contain;
+}
+
+.page-title {
+  font-size: 3rem;
 }

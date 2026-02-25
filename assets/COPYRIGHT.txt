@@ -1,0 +1,1 @@
+Converted by Andrey V. Panov from TeX fonts. Some glyphs are copied from Blue Sky fonts released by AMS.
