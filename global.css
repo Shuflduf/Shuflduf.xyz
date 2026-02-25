@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 @font-face {
   font-family: "CMU Typewriter";
   src: url("assets/cmunbtl.ttf") format('truetype');
@@ -12,27 +14,11 @@
   font-style: normal;
 }
 
-:root {
-  color-scheme: light dark;
-  --bg-primary: light-dark(#fff3e6, #1d1d1d);
-  --bg-secondary: light-dark(#fae6d1, #202020);
-  --bg-focus: light-dark(#e8d7c3, #2d2d2d);
-
-  --text: light-dark(#97653c, #c0bcb5);
-  --text-muted: light-dark(#cf8a3a, #9e9184);
-  --text-secondary: light-dark(#ca8c4a, #7a6e61);
-  --title: light-dark(#caab90, #6b6966);
-  --text-item: light-dark(#c27d33, #8b7b6d);
-
-  --accent: light-dark(#d73c3c, #978159);
-  --accent-hover: light-dark(#d73c3c, #b0986c);
-  --accent-bg: light-dark(#eb5656, #b0986c);
-  --bold: light-dark(#b36b29, #7b9cac);
-  --italic: light-dark(#d88405, #a07f6c);
-  --heading-formatting-color: light-dark(#d97a64, #8e3131);
-
-  --callout-info-accent: light-dark(#095fc7, #0979ff);
-  --callout-info-bg: light-dark(#e4e3e2, #1c2633);
+@font-face {
+  font-family: "CMU Typewriter";
+  src: url("assets/cmunvt.ttf") format('truetype');
+  font-weight: lighter;
+  font-style: normal;
 }
 
 html {
@@ -41,11 +27,6 @@ html {
   font-family: "CMU Typewriter";
   display: flex;
   justify-content: center;
-}
-
-body {
-  max-width: 700px;
-  margin: 0 24px;
 }
 
 p,
@@ -64,6 +45,11 @@ i {
 
 b {
   color: var(--bold);
+}
+
+ul,
+ol {
+  padding-left: 18px;
 }
 
 a {
@@ -120,6 +106,11 @@ blockquote.callout-info {
   }
 }
 
-.page-title {
-  font-size: 3rem;
+code {
+  display: block;
+  font-family: "JetBrains Mono";
+  background-color: var(--bg-tertiary);
+  font-size: 0.8rem;
+  padding: 8px;
+  padding-left: 18px;
 }
