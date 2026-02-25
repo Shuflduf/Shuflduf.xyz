@@ -1,0 +1,15 @@
+:root {
+  --bg-00: #1d1d1d;
+  --bg-10: #202020;
+  --bg-30: #292929;
+  --bg-40: #373738;
+  --bg-50: #8c7c6d;
+  --bg-focus: #2d2d2d;
+  --text: #c0bcb5;
+  --text-muted: #9e9184;
+  --accent: #978159;
+  --accent-bg: #243123;
+  --bold: #7b9cac;
+  --italic: #a07f6c;
+  --heading-formatting-color: #8f2d2d;
+}
