@@ -1,15 +1,20 @@
 :root {
-  --bg-00: #1d1d1d;
-  --bg-10: #202020;
-  --bg-30: #292929;
-  --bg-40: #373738;
-  --bg-50: #8c7c6d;
-  --bg-focus: #2d2d2d;
-  --text: #c0bcb5;
-  --text-muted: #9e9184;
-  --accent: #978159;
-  --accent-bg: #243123;
-  --bold: #7b9cac;
-  --italic: #a07f6c;
-  --heading-formatting-color: #8f2d2d;
+  color-scheme: light dark;
+  --bg-primary: light-dark(#fff3e6, #1d1d1d);
+  --bg-secondary: light-dark(#fae6d1, #202020);
+  /* --bg-30: light-dark(#292929); */
+  /* --bg-40: light-dark(#373738); */
+  /* --bg-50: light-dark(#8c7c6d); */
+  --bg-focus: light-dark(#e8d7c3, #2d2d2d);
+
+  --text: light-dark(#97653c, #c0bcb5);
+  --text-muted: light-dark(#cf8a3a, #9e9184);
+  --text-10: light-dark(#ca8c4a, #7a6e61);
+  --title: light-dark(#caab90, #6b6966);
+
+  --accent: light-dark(#d73c3c, #978159);
+  --accent-bg: light-dark(#eef2d7, #243123);
+  --bold: light-dark(#b36b29, #7b9cac);
+  --italic: light-dark(#d88405, #a07f6c);
+  --heading-formatting-color: light-dark(#d97a64, #8e3131);
 }
