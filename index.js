@@ -68,6 +68,6 @@ $(function () {
 
   $("ul.language-chips li").each(function () {
     const icon = tools[$(this).text().trim()];
-    if (icon) $(this).prepend(`<i class="${icon}"></i>`);
+    if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
 });
