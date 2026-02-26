@@ -5,5 +5,13 @@ $(function () {
     `<div class="callout-info-header">${infoIcon}<span>Info</span></div>`,
   );
 
-  const tools = [{ name: "Rust" }];
+  const tools = {
+    RUST: "devicon-rust-original",
+    GO: "devicon-go-plain",
+  };
+
+  $("ul.language-chips li").each(function () {
+    const icon = tools[$(this).text().trim()];
+    if (icon) $(this).prepend(`<i class="${icon}"></i>`);
+  });
 });

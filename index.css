@@ -7,13 +7,14 @@ body {
   margin: 0 24px;
 }
 
-ul.chips {
+ul.language-chips {
+  margin: 0;
   display: flex;
   list-style: none;
   gap: 8px;
 }
 
-ul.chips li {
+ul.language-chips li {
   background-color: var(--accent-bg);
   padding: 4px 8px;
   color: var(--accent);
