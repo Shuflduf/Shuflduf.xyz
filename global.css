@@ -62,6 +62,7 @@ a:hover {
   color: var(--accent-hover)
 }
 
+h1,
 h2 {
   margin-bottom: 8px;
 }
@@ -78,7 +79,10 @@ a[href^="http"]::after {
 }
 
 blockquote {
+  /* width: 100%; */
   border-left: 2px solid var(--accent);
+  margin-right: 0;
+  /* padding-right: 0; */
   padding: 4px;
   padding-left: 16px;
   margin-left: 0;
@@ -96,7 +100,7 @@ blockquote.callout-info {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: calc(100% - 16px);
   height: 2rem;
   background-color: var(--callout-info-bg);
   color: var(--callout-info-accent);
