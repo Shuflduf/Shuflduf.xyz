@@ -12,6 +12,8 @@ ul.language-chips {
   display: flex;
   list-style: none;
   gap: 8px;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 ul.language-chips li {
