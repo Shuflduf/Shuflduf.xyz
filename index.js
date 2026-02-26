@@ -41,8 +41,6 @@ $(function () {
     BLENDER: "devicon-blender-original",
     UNITY: "devicon-unity-plain",
     // Shells
-    FISH: "devicon-fish-plain",
-    NUSHELL: "devicon-nushell-plain",
     ZSH: "devicon-zsh-plain",
     BASH: "devicon-bash-plain",
     POWERSHELL: "devicon-powershell-plain",
@@ -55,7 +53,6 @@ $(function () {
     WINDOWS: "devicon-windows8-original",
     OSX: "devicon-apple-original",
     // Editors
-    HELIX: "devicon-helix-plain",
     NEOVIM: "devicon-neovim-plain",
     VIM: "devicon-vim-plain",
     VSCODE: "devicon-vscode-plain",
