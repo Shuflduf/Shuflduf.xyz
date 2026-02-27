@@ -1,0 +1,16 @@
+@keyframes bg-scroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 24px 0px;
+  }
+}
+
+html {
+  background-size: 24px;
+  background-image: url(assets/background_tile.png);
+  image-rendering: pixelated;
+  animation: bg-scroll 1s linear infinite;
+}
