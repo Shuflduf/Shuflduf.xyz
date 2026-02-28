@@ -35,7 +35,8 @@ h1.page-title {
 h1,
 h2,
 h3 {
-  margin-bottom: 4px;
+  margin: 0;
+  /* margin-bottom: 4px; */
 }
 
 .navbar {
@@ -107,5 +108,14 @@ h3 {
   padding-left: 30px;
   text-decoration: underline 2px dotted #CFCFCF;
   font-style: italic;
+}
 
+ul.updates {
+  padding-left: 0;
+  margin: 0;
+}
+
+ul.updates sub {
+  color: #8196B1;
+  margin-right: 12px;
 }

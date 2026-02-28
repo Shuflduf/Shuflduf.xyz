@@ -1,0 +1,17 @@
+$(document).ready(function () {
+  $.getJSON(
+    "https://api.github.com/repos/Shuflduf/Shuflduf.xyz/commits?per_page=5",
+    function (commits) {
+      const $list = $(".updates").empty();
+      commits.forEach(function (c) {
+        const date = new Date(c.commit.author.date);
+        const d = String(date.getDate()).padStart(2, "0");
+        const m = String(date.getMonth() + 1).padStart(2, "0");
+        const y = String(date.getFullYear()).slice(-2);
+        const label = `${d}.${m}.${y}`;
+        const msg = c.commit.message.split("\n")[0];
+        $list.append(`<li><sub>${label}</sub>${msg}</li>`);
+      });
+    },
+  );
+});
