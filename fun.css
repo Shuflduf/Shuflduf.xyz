@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 h1.page-title {
@@ -43,10 +43,11 @@ h3 {
   display: flex;
   justify-content: space-evenly;
   background-color: #CFCFCF;
-  outline: 4px solid #2F3B4C;
+  /* outline: 4px solid #2F3B4C; */
   border-radius: 30px;
   padding-bottom: 8px;
   box-shadow: 0 0 12px #fff9, 0 -1px 4px inset #2F3B4C;
+  margin-bottom: 16px;
 }
 
 .navbar a {
@@ -55,4 +56,37 @@ h3 {
   letter-spacing: 2px;
   text-decoration: underline 2px dotted #4EC79E;
   font-style: italic;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  background-color: #CFCFCF;
+  padding: 4px;
+  width: 100%;
+  border-radius: 30px;
+  border: 2px solid #41536b;
+  color: #41536b;
+  overflow: hidden;
+  gap: 16px;
+}
+
+
+.navlinks h2 {
+  background-color: #4EC79E;
+  color: #CFCFCF;
+  font-size: 1.3rem;
+  margin: 0;
+  padding-bottom: 4px;
+  border-left: 2px solid #FFF5;
+  border-top: 2px solid #FFF5;
+  border-right: 2px solid #0005;
+  border-bottom: 2px solid #0005;
+  text-shadow: 0 0 2px black;
+  padding-left: 30px;
+  /* -webkit-text-stroke: 3px #CFCFCF; */
+}
+
+.navlinks h2:first-child {
+  border-top-left-radius: 28px;
 }
