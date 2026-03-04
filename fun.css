@@ -72,9 +72,8 @@ h3 {
   border: 2px solid #41536b;
   color: #41536b;
   overflow: hidden;
-  gap: 16px;
+  gap: 8px;
 }
-
 
 
 .navlinks h2 {
@@ -117,6 +116,7 @@ h3 {
 }
 
 .updates {
+  border-top-right-radius: 28px;
   border-left: 4px solid #FFF5;
   border-top: 4px solid #FFF5;
   border-right: 4px solid #0005;
@@ -131,6 +131,7 @@ h3 {
 }
 
 .updates h1 {
+  border-top-right-radius: 28px;
   border-left: 4px solid #FFF5;
   border-top: 4px solid #FFF5;
   border-right: 4px solid #0005;
@@ -145,11 +146,67 @@ h3 {
   letter-spacing: 1px;
 }
 
+.updates::after {
+  content: "";
+  display: block;
+  background-color: #4EC79E;
+  margin: -12px;
+  border-left: 4px solid #FFF5;
+  border-top: 4px solid #FFF5;
+  border-right: 4px solid #0005;
+  border-bottom: 4px solid #0005;
+  /* box-shadow: 0 -1px 4px #0005; */
+  margin-top: 4px;
+}
+
+.gifs {
+  margin-top: 8px;
+  border-left: 4px solid #FFF5;
+  border-top: 4px solid #FFF5;
+  border-right: 4px solid #0005;
+  border-bottom: 4px solid #0005;
+  padding: 8px;
+  box-shadow: 0 5px 5px #0005;
+}
+
+.gifs h1 {
+  border-left: 4px solid #FFF5;
+  border-top: 4px solid #FFF5;
+  border-right: 4px solid #0005;
+  border-bottom: 4px solid #0005;
+  text-align: center;
+  background-color: #4EC79E;
+  text-shadow: 0 0 2px black;
+  font-size: 1.3rem;
+  margin: -12px;
+  margin-bottom: 10px;
+  color: #CFCFCF;
+  letter-spacing: 1px;
+}
+
+.gifs::after {
+  content: "";
+  display: block;
+  background-color: #4EC79E;
+  margin: -12px;
+  border-left: 4px solid #FFF5;
+  border-top: 4px solid #FFF5;
+  border-right: 4px solid #0005;
+  border-bottom: 4px solid #0005;
+  /* box-shadow: 0 -1px 4px #0005; */
+  margin-top: 4px;
+}
+
 .updates ul a {
   color: #8196B1;
   margin-left: 8px;
   font-size: 0.7rem;
 }
+
+.sidebar h1 {
+  font-size: 1.3rem;
+}
+
 
 .main {
   border-left: 4px solid #FFF5;
