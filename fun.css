@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap');
 
 @keyframes bg-scroll {
   from {
@@ -134,6 +134,7 @@ ul.updates sub {
   /* border: 8px outset #4EC79E; */
   padding: 8px;
   box-shadow: 0 5px 5px #0005;
+  text-align: center;
 }
 
 .main h1 {
@@ -162,4 +163,25 @@ ul.updates sub {
   border-bottom: 4px solid #0005;
   /* box-shadow: 0 -1px 4px #0005; */
   margin-top: 0;
+}
+
+.main p {
+  font-weight: bold;
+  font-family: "Comic Relief";
+  font-size: 0.9rem;
+}
+
+.main .gup {
+  height: 200px;
+}
+
+.main .seperator {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.main .part1 {
+  display: flex;
+  align-items: center;
 }
