@@ -4,7 +4,6 @@ $(function () {
     function (commits) {
       const $list = $(".updates ul").empty();
       commits.forEach(function (c) {
-        console.log(c);
         const date = new Date(c.commit.author.date);
         const d = String(date.getDate()).padStart(2, "0");
         const m = String(date.getMonth() + 1).padStart(2, "0");
@@ -18,6 +17,4 @@ $(function () {
       });
     },
   );
-
-  $(".navlinks a").prepend(`<img src="assets/chevron.gif">`);
 });

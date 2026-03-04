@@ -21,6 +21,8 @@
   }
 }
 
+
+
 .updates,
 .gifs,
 .main,
@@ -30,7 +32,8 @@
 .updates::after,
 .gifs::after,
 .main::after,
-.navlinks h2 {
+.navlinks h2,
+.navlinks .pfp {
   border-left: 4px solid var(--bevel-light);
   border-top: 4px solid var(--bevel-light);
   border-right: 4px solid var(--bevel-dark);
@@ -95,6 +98,10 @@ h1,
 h2,
 h3 {
   margin: 0;
+}
+
+#navbar-include {
+  width: 100%;
 }
 
 .navbar {
@@ -175,7 +182,17 @@ h3 {
   height: 24px;
 }
 
+.navlinks .pfp {
+  width: 120px;
+  box-shadow: var(--shadow);
+  margin: auto;
+  display: block;
+  margin-top: 16px;
+  background-color: var(--accent);
+}
+
 .updates {
+  min-height: 200px;
   border-top-right-radius: 28px;
 }
 
