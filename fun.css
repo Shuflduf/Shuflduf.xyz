@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 @keyframes bg-scroll {
   from {
@@ -61,7 +62,7 @@ h3 {
 
 .content {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 200px 1fr 250px;
   background-color: #CFCFCF;
   padding: 4px;
   width: 100%;
@@ -111,11 +112,34 @@ h3 {
 }
 
 ul.updates {
-  padding-left: 0;
+  padding-left: 8px;
   margin: 0;
 }
 
 ul.updates sub {
   color: #8196B1;
   margin-right: 12px;
+}
+
+.main {
+  border-left: 4px solid #FFF5;
+  border-top: 4px solid #FFF5;
+  border-right: 4px solid #0005;
+  border-bottom: 4px solid #0005;
+  /* border: 8px outset #4EC79E; */
+  padding: 8px;
+}
+
+.main h1 {
+  border-left: 4px solid #FFF5;
+  border-top: 4px solid #FFF5;
+  border-right: 4px solid #0005;
+  border-bottom: 4px solid #0005;
+  text-align: center;
+  background-color: #4EC79E;
+  font-size: 1.2rem;
+  margin: -12px;
+  margin-bottom: 10px;
+  color: #CFCFCF;
+  /* margin-top: -8px; */
 }
