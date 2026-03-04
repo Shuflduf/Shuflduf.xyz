@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
   $.getJSON(
     "https://api.github.com/repos/Shuflduf/Shuflduf.xyz/commits?per_page=5",
     function (commits) {
@@ -18,4 +18,6 @@ $(document).ready(function () {
       });
     },
   );
+
+  $(".navlinks a").prepend(`<img src="assets/chevron.gif">`);
 });

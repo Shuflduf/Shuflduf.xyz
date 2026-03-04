@@ -88,9 +88,15 @@ h3 {
   border-right: 4px solid #0005;
   border-bottom: 4px solid #0005;
   text-shadow: 0 0 2px black;
-  padding-left: 30px;
+  display: flex;
+  align-items: center;
+}
 
-  /* -webkit-text-stroke: 3px #CFCFCF; */
+.navlinks h2 img {
+  margin-right: 10px;
+  margin-left: 10px;
+  /* padding-left: 30px; */
+  height: 24px;
 }
 
 .navlinks h2:first-child {
@@ -110,9 +116,18 @@ h3 {
   font-size: 1rem;
   margin: 0;
   padding-bottom: 4px;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   text-decoration: underline 2px dotted #CFCFCF;
   font-style: italic;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.navlinks a img {
+  margin-right: 20px;
+  margin-left: 10px;
+  height: 24px;
 }
 
 .updates {
