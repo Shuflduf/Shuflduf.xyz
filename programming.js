@@ -12,9 +12,8 @@ $(function () {
 
   function getBallAt(x, y) {
     return activeCircles.find((c) => {
-      const dx = c.pos[0] - x,
-        dy = c.pos[1] - y;
-      return dx * dx + dy * dy < c.radius * c.radius;
+      const delta = [c.pos[0] - x, c.pos[1] - y];
+      return delta[0] * delta[0] + delta[1] * delta[1] < c.radius * c.radius;
     });
   }
 
@@ -39,6 +38,23 @@ $(function () {
   });
 
   canvas.addEventListener("mouseleave", () => tooltip.hide());
+
+  // canvas.addEventListener("click", (e) => {
+  //   const rect = canvas.getBoundingClientRect();
+  //   const clickPos = [e.clientX - rect.left, e.clientY - rect.top];
+  //   const IMPULSE_RADIUS = 20;
+  //   const IMPULSE_STRENGTH = 5;
+
+  //   activeCircles.forEach((circ) => {
+  //     const delta = [circ.pos[0] - clickPos[0], circ.pos[1] - clickPos[1]];
+  //     const dist = Math.sqrt(delta[0] * delta[0] + delta[1] + delta[1]);
+  //     if (dist < IMPULSE_RADIUS && dist > 0.0) {
+  //       const force = (1 - dist / IMPULSE_RADIUS) * IMPULSE_STRENGTH;
+  //       circ.vel[0] += (delta[0] / dist) * force;
+  //       circ.vel[1] += (delta[1] / dist) * force;
+  //     }
+  //   });
+  // });
 });
 
 let activeCircles = [];
