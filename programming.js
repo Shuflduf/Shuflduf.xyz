@@ -2,6 +2,8 @@ let canvas = null;
 let ctx = null;
 
 $(function () {
+  $(".hates li, .favourites li").prepend(`<img src="assets/listbullet.gif">`);
+
   canvas = $("#ballpit").get(0);
   ctx = canvas.getContext("2d");
 

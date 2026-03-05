@@ -23,15 +23,18 @@
 
 
 
+.section,
 .updates,
 .gifs,
 .main,
+.section h1,
 .updates h1,
 .gifs h1,
 .main h1,
 .updates::after,
 .gifs::after,
 .main::after,
+.section::after,
 .navlinks h2,
 .navlinks .pfp {
   border-left: 4px solid var(--bevel-light);
@@ -40,6 +43,7 @@
   border-bottom: 4px solid var(--bevel-dark);
 }
 
+.section,
 .updates,
 .gifs,
 .main {
@@ -47,6 +51,7 @@
   box-shadow: var(--shadow);
 }
 
+.section h1,
 .updates h1,
 .gifs h1,
 .main h1 {
@@ -60,6 +65,7 @@
   letter-spacing: 1px;
 }
 
+.section::after,
 .updates::after,
 .gifs::after,
 .main::after {
@@ -191,9 +197,13 @@ h3 {
   background-color: var(--accent);
 }
 
+.top-right,
+.top-right h1 {
+  border-top-right-radius: 28px;
+}
+
 .updates {
   min-height: 200px;
-  border-top-right-radius: 28px;
 }
 
 .updates h1 {
@@ -212,13 +222,18 @@ h3 {
 }
 
 .gifs {
-  margin-top: 8px;
   border-bottom-right-radius: 28px;
 }
 
 .gifs::after {
   border-bottom-right-radius: 6px;
   margin-right: 10px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
 }
 
 .sidebar h1 {

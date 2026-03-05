@@ -1,7 +1,31 @@
 #ballpit {
-  height: 1000px;
+  height: 900px;
   width: 100%;
   margin: 12px 0;
+}
+
+button {
+  margin-top: 8px;
+  padding: 0 16px 8px;
+  border-radius: 0;
+  background-color: var(--accent);
+  color: var(--text-light);
+  border-left: 4px solid var(--bevel-light);
+  border-top: 4px solid var(--bevel-light);
+  border-right: 4px solid var(--bevel-dark);
+  border-bottom: 4px solid var(--bevel-dark);
+  font-family: "Coiny";
+  font-size: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+button:hover {
+  cursor: pointer;
+  border-left: 4px solid var(--bevel-dark);
+  border-top: 4px solid var(--bevel-dark);
+  border-right: 4px solid var(--bevel-light);
+  border-bottom: 4px solid var(--bevel-light);
+  box-shadow: none;
 }
 
 #tooltip {
@@ -18,4 +42,29 @@
   font-family: "Coiny";
   font-size: 1.1rem;
   z-index: 100;
+}
+
+.favourites,
+.hates {
+  ul {
+    list-style: none;
+    padding-left: 8px;
+  }
+
+  img {
+    height: 24px;
+  }
+
+  li {
+    font-style: italic;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+  }
+
+  b {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    font-style: normal;
+  }
 }
