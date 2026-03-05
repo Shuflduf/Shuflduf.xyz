@@ -12,7 +12,7 @@ $(function () {
         const label = `${d}.${m}.${y}`;
         const msg = c.commit.message.split("\n")[0];
         $list.append(
-          `<li>${msg}<sub><a href="${href}"">(${label})</a></sub></li>`,
+          `<li><img src="assets/listbullet.gif">${msg}<sub><a href="${href}"">(${label})</a></sub></li>`,
         );
       });
     },

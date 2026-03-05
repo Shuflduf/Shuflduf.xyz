@@ -24,16 +24,7 @@
 
 
 .section,
-.updates,
-.gifs,
-.main,
 .section h1,
-.updates h1,
-.gifs h1,
-.main h1,
-.updates::after,
-.gifs::after,
-.main::after,
 .section::after,
 .navlinks h2,
 .navlinks .pfp {
@@ -43,18 +34,13 @@
   border-bottom: 4px solid var(--bevel-dark);
 }
 
-.section,
-.updates,
-.gifs,
-.main {
+.section {
+  height: min-content;
   padding: 8px;
   box-shadow: var(--shadow);
 }
 
-.section h1,
-.updates h1,
-.gifs h1,
-.main h1 {
+.section h1 {
   text-align: center;
   background-color: var(--accent);
   text-shadow: 0 0 2px black;
@@ -65,10 +51,7 @@
   letter-spacing: 1px;
 }
 
-.section::after,
-.updates::after,
-.gifs::after,
-.main::after {
+.section::after {
   content: "";
   display: block;
   background-color: var(--accent);
@@ -206,13 +189,15 @@ h3 {
   min-height: 200px;
 }
 
-.updates h1 {
-  border-top-right-radius: 28px;
+.updates ul {
+  padding-left: 8px;
+  margin: 0;
+  list-style: none;
 }
 
-.updates ul {
-  padding-left: 16px;
-  margin: 0;
+li img {
+  vertical-align: bottom;
+  height: 24px;
 }
 
 .updates ul a {
@@ -221,12 +206,11 @@ h3 {
   font-size: 0.7rem;
 }
 
-.gifs {
+.bottom-right {
   border-bottom-right-radius: 28px;
 }
 
-.gifs::after {
-  border-bottom-right-radius: 6px;
+.bottom-right::after {
   margin-right: 10px;
 }
 
@@ -241,16 +225,7 @@ h3 {
 }
 
 .main {
-  height: min-content;
   text-align: center;
-}
-
-.main h1 {
-  font-size: 1.5rem;
-}
-
-.main::after {
-  margin-top: 0;
 }
 
 .main p {
