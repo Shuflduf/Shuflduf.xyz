@@ -44,7 +44,7 @@ button:hover {
   z-index: 100;
 }
 
-.favourites,
+.loves,
 .hates {
   ul {
     list-style: none;

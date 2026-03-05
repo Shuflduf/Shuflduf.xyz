@@ -2,7 +2,7 @@ let canvas = null;
 let ctx = null;
 
 $(function () {
-  $(".hates li, .favourites li").prepend(`<img src="assets/listbullet.gif">`);
+  $(".hates li, .loves li").prepend(`<img src="assets/listbullet.gif">`);
 
   canvas = $("#ballpit").get(0);
   ctx = canvas.getContext("2d");
@@ -69,7 +69,7 @@ function createCircles() {
         Math.random() * canvas.clientWidth,
         Math.random() * -canvas.clientHeight,
       ],
-      vel: [0.0, 0.0],
+      vel: [Math.random() - 0.5, Math.random() - 0.5],
       radius: tool.radius,
       bg: tool.bg,
       name: tool.name,
