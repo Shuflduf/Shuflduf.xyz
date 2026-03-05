@@ -1,0 +1,12 @@
+.images {
+  column-count: 2;
+  column-gap: 4px;
+  margin-top: 8px;
+}
+
+.main img {
+  break-inside: avoid;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: none;
+}
