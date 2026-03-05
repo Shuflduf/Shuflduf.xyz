@@ -7,6 +7,38 @@ $(function () {
 
   requestAnimationFrame(process);
   createCircles();
+
+  const tooltip = $("#tooltip");
+
+  function getBallAt(x, y) {
+    return activeCircles.find((c) => {
+      const dx = c.pos[0] - x,
+        dy = c.pos[1] - y;
+      return dx * dx + dy * dy < c.radius * c.radius;
+    });
+  }
+
+  $("#reset").on("click", () => {
+    activeCircles = [];
+    createCircles();
+  });
+
+  canvas.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const ball = getBallAt(e.clientX - rect.left, e.clientY - rect.top);
+    if (ball) {
+      tooltip
+        .text(ball.name)
+        .css({ left: e.clientX + 14, top: e.clientY + 14 })
+        .show();
+      canvas.style.cursor = "pointer";
+    } else {
+      tooltip.hide();
+      canvas.style.cursor = "default";
+    }
+  });
+
+  canvas.addEventListener("mouseleave", () => tooltip.hide());
 });
 
 let activeCircles = [];
@@ -22,6 +54,7 @@ function createCircles() {
       vel: [0.0, 0.0],
       radius: tool.radius,
       bg: tool.bg,
+      name: tool.name,
     };
     if (tool.icon) {
       circ.img = new Image();
