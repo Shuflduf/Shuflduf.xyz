@@ -4,7 +4,7 @@ $(function () {
   const hearts = ["❤️", "🩷", "🩵", "💜", "💛"];
   let lastSpawn = 0;
 
-  $(".images").on("mousemove", function (e) {
+  $(".images, .pfp").on("mousemove", function (e) {
     const now = Date.now();
     if (now - lastSpawn < 30) return;
     lastSpawn = now;
