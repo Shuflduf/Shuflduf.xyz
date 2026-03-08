@@ -21,7 +21,8 @@
   }
 }
 
-img {
+img,
+video {
   max-width: 100%;
 }
 
@@ -230,7 +231,8 @@ li img {
   text-align: center;
 }
 
-.main p {
+.main p,
+.main ul {
   font-weight: bold;
   font-family: "Comic Relief";
   font-size: 0.9rem;
@@ -254,20 +256,23 @@ li img {
 ul {
   list-style: none;
   padding-left: 8px;
+  font-family: "Comic Relief";
 }
 
 ul img {
   height: 24px;
 }
 
-ul li {
+.sidebar ul li {
+  font-family: "Coiny";
   font-style: italic;
   display: flex;
   flex-wrap: wrap;
   align-items: end;
+  font-size: 1rem;
 }
 
-ul b {
+.sidebar ul b {
   margin-right: 12px;
   font-size: 1.2rem;
   font-style: normal;

@@ -2,21 +2,21 @@
 
 @font-face {
   font-family: "CMU Typewriter";
-  src: url("assets/cmunbtl.ttf") format('truetype');
+  src: url("/assets/cmunbtl.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "CMU Typewriter";
-  src: url("assets/cmuntb.ttf") format('truetype');
+  src: url("/assets/cmuntb.ttf") format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "CMU Typewriter";
-  src: url("assets/cmunvt.ttf") format('truetype');
+  src: url("/assets/cmunvt.ttf") format('truetype');
   font-weight: lighter;
   font-style: normal;
 }
