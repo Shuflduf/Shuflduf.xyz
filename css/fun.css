@@ -266,9 +266,6 @@ ul img {
 .sidebar ul li {
   font-family: "Coiny";
   font-style: italic;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
   font-size: 1rem;
 }
 
