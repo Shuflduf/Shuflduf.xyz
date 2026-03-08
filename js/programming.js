@@ -2,8 +2,6 @@ let canvas = null;
 let ctx = null;
 
 $(function () {
-  $(".hates li, .loves li").prepend(`<img src="assets/listbullet.gif">`);
-
   canvas = $("#ballpit").get(0);
   ctx = canvas.getContext("2d");
 
@@ -77,6 +75,9 @@ function createCircles() {
     if (tool.icon) {
       circ.img = new Image();
       circ.img.src = `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}/${tool.icon}-${tool.variant}.svg`;
+    } else if (tool.url) {
+      circ.img = new Image();
+      circ.img.src = tool.url;
     } else {
       circ.emoji = tool.emoji;
     }
@@ -126,7 +127,6 @@ function process(currentFrame) {
       );
       ctx.filter = "none";
     } else {
-      console.log(circ.emoji);
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.font = `${circ.radius}px Serif`;

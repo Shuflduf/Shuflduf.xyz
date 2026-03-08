@@ -4,11 +4,12 @@
   margin-top: 8px;
 }
 
-.main img {
+.main img,
+.pfp {
   break-inside: avoid;
   box-sizing: border-box;
   width: 100%;
-  cursor: url('assets/catcursor.png'), auto;
+  cursor: url('/assets/catcursor.png'), auto;
 }
 
 .heart-particle {

@@ -21,7 +21,9 @@
   }
 }
 
-
+img {
+  max-width: 100%;
+}
 
 .section,
 .section h1,
@@ -62,7 +64,7 @@
 html {
   background-color: #4e6680;
   background-size: 24px;
-  background-image: url(assets/background_tile.png);
+  background-image: url(/assets/background_tile.png);
   image-rendering: pixelated;
   animation: bg-scroll 1s linear infinite;
   font-family: "Coiny";
@@ -247,4 +249,26 @@ li img {
 .main .part1 {
   display: flex;
   align-items: center;
+}
+
+ul {
+  list-style: none;
+  padding-left: 8px;
+}
+
+ul img {
+  height: 24px;
+}
+
+ul li {
+  font-style: italic;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+ul b {
+  margin-right: 12px;
+  font-size: 1.2rem;
+  font-style: normal;
 }

@@ -1,6 +1,4 @@
 $(function () {
-  $("li").prepend(`<img src="assets/listbullet.gif">`);
-
   const hearts = ["❤️", "🩷", "🩵", "💜", "💛"];
   let lastSpawn = 0;
 

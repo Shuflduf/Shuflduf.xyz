@@ -128,7 +128,12 @@ const tools = [
     radius: 40,
     bg: "#4A2800",
   },
-  { name: "GameMaker", emoji: "🎮️", radius: 40, bg: "#2D4014" },
+  {
+    name: "GameMaker",
+    url: "https://www.svgrepo.com/show/373756/light-gamemaker2.svg",
+    radius: 40,
+    bg: "#6882fb",
+  },
   { name: "Unity", icon: "unity", variant: "plain", radius: 25, bg: "#1A1A1A" },
   // Shells
   { name: "Fish", emoji: "🐟️", radius: 70, bg: "#4A1F16" },
@@ -222,6 +227,20 @@ const tools = [
     variant: "plain",
     radius: 20,
     bg: "#0D0D1A",
+  },
+  // Data Structuring
+  {
+    name: "JSON",
+    icon: "json",
+    variant: "plain",
+    radius: 20,
+    bg: "#131416",
+  },
+  {
+    name: "TOML",
+    url: "https://www.svgrepo.com/show/374133/toml.svg",
+    radius: 70,
+    bg: "#f6f2ea",
   },
   // Other
   { name: "Tauri", icon: "tauri", variant: "plain", radius: 40, bg: "#4A3800" },
