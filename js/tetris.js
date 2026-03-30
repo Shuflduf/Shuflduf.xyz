@@ -92,7 +92,7 @@ function drawActivePiece() {
 }
 
 function handleInputs(event) {
-  if (event.repeat) return;
+  // if (event.repeat) return;
 
   console.log(event.code);
   switch (event.code) {
@@ -105,6 +105,14 @@ function handleInputs(event) {
     case "KeyW":
       tryMove([0, 1]);
       break;
+    case "ArrowLeft":
+      event.preventDefault();
+      tryRotate((activePiece.rot + 3) % 4);
+      break;
+    case "ArrowRight":
+      event.preventDefault();
+      tryRotate((activePiece.rot + 1) % 4);
+      break;
   }
 }
 
@@ -114,7 +122,7 @@ function placePiece() {
     board[blockPos[0]][blockPos[1]] = activePiece.index;
   }
   activePiece = nextPiece();
-  // clearLines();
+  clearLines();
   // for (const pos of SRS.pieces[currentPiece.index][currentPiece.rot]) {
   //   const blockPos = [
   //     currentPiece.pos[0] + pos[0],
@@ -124,6 +132,30 @@ function placePiece() {
   // }
   gravityTimer = 0;
   // justHeld = false;
+}
+
+function clearLines() {
+  const linesToClear = fullLines();
+
+  let removed = 0;
+  for (const line of linesToClear) {
+    for (let y = line; y >= 0; y--) {
+      for (let x = 0; x < BOARD_SIZE[0]; x++) {
+        board[x][y + removed] = board[x][y - 1 + removed];
+      }
+    }
+  }
+}
+
+function fullLines() {
+  let full = [];
+  outer: for (let y = 0; y < BOARD_SIZE[1]; y++) {
+    for (let x = 0; x < BOARD_SIZE[0]; x++) {
+      if (board[x][y] == null) continue outer;
+    }
+    full.push(y);
+  }
+  return full;
 }
 
 function tryMove([dx, dy]) {
@@ -136,6 +168,15 @@ function tryMove([dx, dy]) {
   }
   activePiece.pos[0] += dx;
   activePiece.pos[1] += dy;
+  return true;
+}
+
+function tryRotate(newRot) {
+  for (const pos of SRS.pieces[activePiece.index][newRot]) {
+    const testPos = [activePiece.pos[0] + pos[0], activePiece.pos[1] + pos[1]];
+    if (!safePlace(testPos)) return false;
+  }
+  activePiece.rot = newRot;
   return true;
 }
 
