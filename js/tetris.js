@@ -9,6 +9,7 @@ const COLOURS = [
   "#4455e7",
   "#f64ed8",
 ];
+const I_PIECE_INDEX = 4;
 const NEXT_PIECES = 1;
 const GRAVITY_TIME = 300;
 
@@ -248,7 +249,9 @@ function tryRotate(newRot) {
   }
   if (!rotated) {
     let workingKick = [0, 0];
-    outer: for (const kick of SRS.kicks[
+    let kickTable =
+      activePiece.index == I_PIECE_INDEX ? SRS.kicks_i : SRS.kicks;
+    outer: for (const kick of kickTable[
       getKickIndex(activePiece.rot, newRot)
     ]) {
       rotated = true;
