@@ -23,12 +23,13 @@
       <p>I thought having my own programming language would be cool, but it's actually very hard to make one (who knew).
       </p>
       <p>Named after the 🐸 in 🐸🚀, since I love 🐸🚀.</p>
-      <h2>Phase 1</h2>
+
+      <h2 id="phase1">Phase 1</h2>
       <h3>"Let's make it a fast compiled language."</h3>
       <p>So I tried doing that, but it was far too complicated to make it compiled for all major platforms, especially
         since I also wanted to target web and have frg run in the browser.</p>
 
-      <h2>Phase 2</h2>
+      <h2 id="phase2">Phase 2</h2>
       <h3>"I can just make it an intepreted language."</h3>
       <p>Now I could actually do something.</p>
       <p>First I built the lexer to seperate the raw text into tokens. This was the easy part.</p>
@@ -48,7 +49,7 @@
         with the <code>@input</code> builtin, which would normally mean it would only be able to run in the terminal,
         but I had no idea how to get it to work on web, so I gave up for a while.</p>
 
-      <h2>Phase 3</h2>
+      <h2 id="phase3">Phase 3</h2>
       <h3>"What if it transpiled to Rust"</h3>
       <p>I honestly had no idea what was going through my head at the time. How would having Rust code that I couldn't
         execute in the browser help me at all.</p>
@@ -56,7 +57,7 @@
         had to be a mutable variable, including functions, and everything was just plopped into the main function.</p>
       <p>Eventually, Rust lifetimes got me to give up again.</p>
 
-      <h2>Phase 4</h2>
+      <h2 id="phase4">Phase 4</h2>
       <h3>"What if I used Tree-sitter"</h3>
       <p><a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a> is a cross-platform library used for
         general-purpose parsing of token streams (or something).</p>
@@ -69,13 +70,13 @@
         is basically everything I stand against.</p>
       <p>I gave up again when I realized how hard it would be to get it to run on web.</p>
 
-      <h2>Phase 5 (current)</h2>
+      <h2 id="phase5">Phase 5 (current)</h2>
       <h3>"What if I replace Tree-sitter"</h3>
       <p>This is what <a href="/projects/rcket.html">rcket</a> is, a generaler (more general) purpose parsing library.
         It's also where I'm at right now until I finish rcket.
       </p>
 
-      <img src="https://hackatime.hackclub.com/api/v1/badge/U07950S3GMC/Shuflduf/frg">
+      <img src="https://hackatime.hackclub.com/api/v1/badge/U07950S3GMC/Shuflduf/frg" alt="hackatime badge">
       <p>Hopefully I can update this soon.</p>
     </div>
     <div class="sidebar">
