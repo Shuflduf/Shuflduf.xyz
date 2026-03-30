@@ -285,3 +285,7 @@ blockquote {
   font-weight: normal;
   text-align: left;
 }
+
+canvas {
+  width: 100%;
+}
