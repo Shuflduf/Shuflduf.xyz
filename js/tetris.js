@@ -12,6 +12,26 @@ const COLOURS = [
 const I_PIECE_INDEX = 4;
 const NEXT_PIECES = 1;
 const GRAVITY_TIME = 300;
+const KEYBINDS = {
+  WASD: {
+    left: "KeyA",
+    right: "KeyD",
+    clockwise: "ArrowRight",
+    counterclockwise: "ArrowLeft",
+    softdrop: "KeyW",
+    harddrop: "KeyS",
+    hold: "ShiftLeft",
+  },
+  ArrowKeys: {
+    left: "ArrowLeft",
+    right: "ArrowRight",
+    clockwise: "KeyX",
+    counterclockwise: "KeyZ",
+    softdrop: "ArrowDown",
+    harddrop: "Space",
+    hold: "ShiftLeft",
+  },
+};
 
 let canvas = null;
 let ctx = null;
