@@ -33,6 +33,7 @@ const KEYBINDS = {
   },
 };
 
+let activeKeybinds = KEYBINDS.WASD;
 let canvas = null;
 let ctx = null;
 let nextCanvas = null;
@@ -66,6 +67,13 @@ $(function () {
   highScoreLabel = $("#highscore");
 
   $("#reset").click(resetGame);
+  $("#keybinds")
+    .val("WASD")
+    .on("change", function () {
+      let selected = $(this).val();
+      activeKeybinds = KEYBINDS[selected];
+      $(this).blur();
+    });
 
   console.log(ctx);
   resetGame();
@@ -182,30 +190,35 @@ function drawHeld() {
 function handleInputs(event) {
   // if (event.repeat) return;
 
-  console.log(event.code);
+  console.log(event.code, activeKeybinds.harddrop);
   switch (event.code) {
-    case "KeyA":
+    case activeKeybinds.left:
+      event.preventDefault();
       tryMove([-1, 0]);
       break;
-    case "KeyD":
+    case activeKeybinds.right:
+      event.preventDefault();
       tryMove([1, 0]);
       break;
-    case "KeyW":
+    case activeKeybinds.softdrop:
+      event.preventDefault();
       tryMove([0, 1]);
       break;
-    case "KeyS":
+    case activeKeybinds.harddrop:
+      event.preventDefault();
       while (tryMove([0, 1])) {}
       placePiece();
       break;
-    case "ArrowLeft":
+    case activeKeybinds.counterclockwise:
       event.preventDefault();
       tryRotate((activePiece.rot + 3) % 4);
       break;
-    case "ArrowRight":
+    case activeKeybinds.clockwise:
       event.preventDefault();
       tryRotate((activePiece.rot + 1) % 4);
       break;
-    case "ShiftLeft":
+    case activeKeybinds.hold:
+      event.preventDefault();
       hold();
       break;
   }
