@@ -1,5 +1,5 @@
 const BOARD_SIZE = [10, 20];
-const BOARD_COLOUR = "#282728";
+const BOARD_COLOUR = "#666";
 const COLOURS = [
   "#fa3434",
   "#fb8535",
