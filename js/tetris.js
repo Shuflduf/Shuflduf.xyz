@@ -32,6 +32,19 @@ const KEYBINDS = {
     hold: "ShiftLeft",
   },
 };
+const KEY_NAMES = {
+  KeyA: "A",
+  KeyD: "D",
+  KeyW: "W",
+  KeyS: "S",
+  KeyX: "X",
+  KeyZ: "Z",
+  ArrowRight: "→",
+  ArrowLeft: "←",
+  ArrowDown: "↓",
+  ShiftLeft: "LShift",
+  Space: "Space",
+};
 
 let activeKeybinds = KEYBINDS.WASD;
 let canvas = null;
@@ -72,6 +85,7 @@ $(function () {
     .on("change", function () {
       let selected = $(this).val();
       activeKeybinds = KEYBINDS[selected];
+      updateKeybindText();
       $(this).blur();
     });
 
@@ -109,6 +123,24 @@ function process(currentFrame) {
   drawHeld();
 
   requestAnimationFrame(process);
+}
+
+function updateKeybindText() {
+  $("#c-left span").text(`Left: ${KEY_NAMES[activeKeybinds.left]}`);
+  $("#c-right span").text(`Right: ${KEY_NAMES[activeKeybinds.right]}`);
+  $("#c-clockwise span").text(
+    `Clockwise: ${KEY_NAMES[activeKeybinds.clockwise]}`,
+  );
+  $("#c-counterclockwise span").text(
+    `Counter-Clockwise: ${KEY_NAMES[activeKeybinds.counterclockwise]}`,
+  );
+  $("#c-softdrop span").text(
+    `Soft Drop: ${KEY_NAMES[activeKeybinds.softdrop]}`,
+  );
+  $("#c-harddrop span").text(
+    `Hard Drop: ${KEY_NAMES[activeKeybinds.harddrop]}`,
+  );
+  $("#c-hold span").text(`Hold: ${KEY_NAMES[activeKeybinds.hold]}`);
 }
 
 function drawTile([x, y]) {
