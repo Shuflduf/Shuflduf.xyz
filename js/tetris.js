@@ -207,7 +207,8 @@ function drawBoard() {
 }
 
 function drawActivePiece() {
-  ctx.fillStyle = COLOURS[activePiece.index];
+  const brightness = 1.0 - (0.4 * lockDelayTimer) / LOCK_DELAY;
+  ctx.fillStyle = `hsl(from ${COLOURS[activePiece.index]} h calc(s * ${brightness}) calc(l * ${brightness}))`;
   for (const pos of SRS.pieces[activePiece.index][activePiece.rot]) {
     drawTile([pos[0] + activePiece.pos[0], pos[1] + activePiece.pos[1]]);
   }
@@ -281,6 +282,7 @@ function keyDown(event) {
       event.preventDefault();
       tryMove([0, 1]);
       rawInputs.softDrop = true;
+      gravityTimer = 0;
       break;
     case activeKeybinds.harddrop:
       event.preventDefault();
@@ -376,6 +378,7 @@ function tryMove([dx, dy]) {
   }
   activePiece.pos[0] += dx;
   activePiece.pos[1] += dy;
+  lockDelayTimer = 0;
   return true;
 }
 
