@@ -52,6 +52,7 @@ function process(currentFrame) {
   }
 
   drawBoard();
+  drawGhost();
   drawActivePiece();
 
   requestAnimationFrame(process);
@@ -91,6 +92,30 @@ function drawActivePiece() {
   }
 }
 
+function drawGhost() {
+  let depth = 0;
+  outer: for (let i = 0; i < BOARD_SIZE[1]; i++) {
+    for (const pos of SRS.pieces[activePiece.index][activePiece.rot]) {
+      const testPos = [
+        activePiece.pos[0] + pos[0],
+        activePiece.pos[1] + pos[1] + i,
+      ];
+      if (!safePlace(testPos)) {
+        depth = i - 1;
+        break outer;
+      }
+    }
+  }
+  ctx.fillStyle = "#bbb";
+  for (const pos of SRS.pieces[activePiece.index][activePiece.rot]) {
+    const blockPos = [
+      activePiece.pos[0] + pos[0],
+      activePiece.pos[1] + pos[1] + depth,
+    ];
+    drawTile(blockPos);
+  }
+}
+
 function handleInputs(event) {
   // if (event.repeat) return;
 
@@ -104,6 +129,10 @@ function handleInputs(event) {
       break;
     case "KeyW":
       tryMove([0, 1]);
+      break;
+    case "KeyS":
+      while (tryMove([0, 1])) {}
+      placePiece();
       break;
     case "ArrowLeft":
       event.preventDefault();
