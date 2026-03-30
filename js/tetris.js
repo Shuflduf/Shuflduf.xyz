@@ -23,6 +23,8 @@ let bag = [];
 let next = [];
 let activePiece = null;
 let gravityTimer = 0;
+let held = null;
+let justHeld = false;
 
 $(function () {
   canvas = $("#game").get(0);
@@ -142,6 +144,9 @@ function handleInputs(event) {
       event.preventDefault();
       tryRotate((activePiece.rot + 1) % 4);
       break;
+    case "ShiftLeft":
+      hold();
+      break;
   }
 }
 
@@ -160,7 +165,7 @@ function placePiece() {
   //   if (!safePlace(blockPos[0], blockPos[1])) resetGame();
   // }
   gravityTimer = 0;
-  // justHeld = false;
+  justHeld = false;
 }
 
 function clearLines() {
@@ -238,6 +243,23 @@ function nextBagIndex() {
     shuffle(bag);
   }
   return bag.pop();
+}
+
+function hold() {
+  if (justHeld) return;
+  if (held != null) {
+    let t = activePiece.index;
+    activePiece = {
+      index: held,
+      pos: [3, 0],
+      rot: 0,
+    };
+    held = t;
+  } else {
+    held = activePiece.index;
+    activePiece = nextPiece();
+  }
+  justHeld = true;
 }
 
 function safePlace([x, y]) {
