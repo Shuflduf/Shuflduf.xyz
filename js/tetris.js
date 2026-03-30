@@ -14,6 +14,10 @@ const GRAVITY_TIME = 300;
 
 let canvas = null;
 let ctx = null;
+let nextCanvas = null;
+let nextCtx = null;
+let heldCanvas = null;
+let heldCtx = null;
 let tileSize = 0;
 
 let board = Array.from(Array(BOARD_SIZE[0]), () =>
@@ -29,6 +33,10 @@ let justHeld = false;
 $(function () {
   canvas = $("#game").get(0);
   ctx = canvas.getContext("2d");
+  nextCanvas = $("#next").get(0);
+  nextCtx = nextCanvas.getContext("2d");
+  heldCanvas = $("#held").get(0);
+  heldCtx = heldCanvas.getContext("2d");
 
   console.log(ctx);
   resetGame();
@@ -41,9 +49,13 @@ function process(currentFrame) {
   const delta = currentFrame - lastFrame;
   lastFrame = currentFrame;
 
-  canvas.width = canvas.clientWidth;
-  tileSize = Math.ceil(canvas.width / (BOARD_SIZE[0] + 2));
+  tileSize = Math.ceil(canvas.clientWidth / (BOARD_SIZE[0] + 2));
+  canvas.width = tileSize * (BOARD_SIZE[0] + 2);
   canvas.height = tileSize * (BOARD_SIZE[1] + 1);
+  nextCanvas.width = nextCanvas.clientWidth;
+  nextCanvas.height = nextCanvas.width / 2.0;
+  heldCanvas.width = heldCanvas.clientWidth;
+  heldCanvas.height = heldCanvas.width / 2.0;
 
   gravityTimer += delta;
   if (gravityTimer > GRAVITY_TIME) {
@@ -56,6 +68,8 @@ function process(currentFrame) {
   drawBoard();
   drawGhost();
   drawActivePiece();
+  drawNext();
+  drawHeld();
 
   requestAnimationFrame(process);
 }
@@ -81,8 +95,6 @@ function drawBoard() {
 
       ctx.fillStyle = COLOURS[blockIndex];
       drawTile([x, y]);
-      // fill(color(COLOURS[blockIndex]));
-      // tileAt(x, y);
     }
   }
 }
@@ -115,6 +127,26 @@ function drawGhost() {
       activePiece.pos[1] + pos[1] + depth,
     ];
     drawTile(blockPos);
+  }
+}
+
+function drawNext() {
+  let size = nextCanvas.width / 4.0;
+  for (const piece of next) {
+    nextCtx.fillStyle = COLOURS[piece];
+    for (const pos of SRS.pieces[piece][0]) {
+      nextCtx.fillRect(size * pos[0], size * pos[1], size, size);
+    }
+  }
+}
+
+function drawHeld() {
+  let size = heldCanvas.width / 4.0;
+  if (held != null) {
+    heldCtx.fillStyle = justHeld ? "#bbb" : COLOURS[held];
+    for (const pos of SRS.pieces[held][0]) {
+      heldCtx.fillRect(size * pos[0], size * pos[1], size, size);
+    }
   }
 }
 
