@@ -14,6 +14,7 @@ const ARR = 33;
 const I_PIECE_INDEX = 4;
 const NEXT_PIECES = 1;
 const GRAVITY_TIME = 300;
+const LOCK_DELAY = 500;
 const KEYBINDS = {
   WASD: {
     left: "KeyA",
@@ -68,6 +69,7 @@ let bag = [];
 let next = [];
 let activePiece = null;
 let gravityTimer = 0;
+let lockDelayTimer = 0;
 let held = null;
 let justHeld = false;
 let rawInputs = {
@@ -101,7 +103,6 @@ $(function () {
       $(this).blur();
     });
 
-  console.log(ctx);
   resetGame();
   addEventListener("keydown", keyDown);
   addEventListener("keyup", keyUp);
@@ -123,10 +124,17 @@ function process(currentFrame) {
 
   gravityTimer += rawInputs.softDrop ? delta * 4 : delta;
   if (gravityTimer > GRAVITY_TIME) {
-    if (!tryMove([0, 1])) {
-      placePiece();
-    }
+    tryMove([0, 1]);
     gravityTimer = 0;
+  }
+
+  if (grounded()) {
+    lockDelayTimer += delta;
+  } else {
+    lockDelayTimer = 0;
+  }
+  if (lockDelayTimer > LOCK_DELAY) {
+    placePiece();
   }
 
   updateArr(delta);
@@ -252,7 +260,6 @@ function drawHeld() {
 function keyDown(event) {
   if (event.repeat) return;
 
-  console.log(event.code);
   switch (event.code) {
     case activeKeybinds.left:
       event.preventDefault();
@@ -467,6 +474,19 @@ function hold() {
     activePiece = nextPiece();
   }
   justHeld = true;
+}
+
+function grounded() {
+  for (const pos of SRS.pieces[activePiece.index][activePiece.rot]) {
+    const testPos = [
+      activePiece.pos[0] + pos[0],
+      activePiece.pos[1] + pos[1] + 1,
+    ];
+    if (!safePlace(testPos)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function safePlace([x, y]) {
