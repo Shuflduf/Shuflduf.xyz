@@ -19,8 +19,12 @@ let nextCanvas = null;
 let nextCtx = null;
 let heldCanvas = null;
 let heldCtx = null;
+let scoreLabel = null;
+let highScoreLabel = null;
 let tileSize = 0;
 
+let score = 0;
+let highScore = 0;
 let board = Array.from(Array(BOARD_SIZE[0]), () =>
   new Array(BOARD_SIZE[1]).fill(null),
 );
@@ -38,6 +42,8 @@ $(function () {
   nextCtx = nextCanvas.getContext("2d");
   heldCanvas = $("#held").get(0);
   heldCtx = heldCanvas.getContext("2d");
+  scoreLabel = $("#score");
+  highScoreLabel = $("#highscore");
 
   console.log(ctx);
   resetGame();
@@ -132,7 +138,7 @@ function drawGhost() {
 }
 
 function drawNext() {
-  let size = nextCanvas.width / 4.0;
+  let size = Math.ceil(nextCanvas.width / 4.0);
   for (const piece of next) {
     nextCtx.fillStyle = COLOURS[piece];
     for (const pos of SRS.pieces[piece][0]) {
@@ -142,7 +148,7 @@ function drawNext() {
 }
 
 function drawHeld() {
-  let size = heldCanvas.width / 4.0;
+  let size = Math.ceil(heldCanvas.width / 4.0);
   if (held != null) {
     heldCtx.fillStyle = justHeld ? "#bbb" : COLOURS[held];
     for (const pos of SRS.pieces[held][0]) {
@@ -190,19 +196,20 @@ function placePiece() {
   }
   activePiece = nextPiece();
   clearLines();
-  // for (const pos of SRS.pieces[currentPiece.index][currentPiece.rot]) {
-  //   const blockPos = [
-  //     currentPiece.pos[0] + pos[0],
-  //     currentPiece.pos[1] + pos[1],
-  //   ];
-  //   if (!safePlace(blockPos[0], blockPos[1])) resetGame();
-  // }
+  for (const pos of SRS.pieces[activePiece.index][activePiece.rot]) {
+    const blockPos = [activePiece.pos[0] + pos[0], activePiece.pos[1] + pos[1]];
+    if (!safePlace(blockPos)) resetGame();
+  }
   gravityTimer = 0;
   justHeld = false;
 }
 
 function clearLines() {
   const linesToClear = fullLines();
+  if (linesToClear.length > 0) {
+    score += SRS.scoring_lines[linesToClear.length - 1];
+    scoreLabel.text(`Score: ${score}`);
+  }
 
   let removed = 0;
   for (const line of linesToClear) {
@@ -292,6 +299,12 @@ function resetGame() {
   for (let i = 0; i < NEXT_PIECES; i++) {
     next.push(nextBagIndex());
   }
+  if (score > highScore) {
+    highScore = score;
+  }
+  score = 0;
+  scoreLabel.text(`Score: ${score}`);
+  highScoreLabel.text(`High Score: ${highScore}`);
   activePiece = nextPiece();
 }
 
