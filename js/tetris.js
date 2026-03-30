@@ -45,6 +45,8 @@ $(function () {
   scoreLabel = $("#score");
   highScoreLabel = $("#highscore");
 
+  $("#reset").click(resetGame);
+
   console.log(ctx);
   resetGame();
   addEventListener("keydown", handleInputs);
