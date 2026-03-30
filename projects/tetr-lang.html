@@ -17,10 +17,91 @@
     <div id="navlinks-include"></div>
     <div class="section main">
       <h1>Tetris Remakes</h1>
-      <h2>tetr.gd</h2>
+
+      <h2 id="tetrgd">tetr.gd</h2>
       <h3>(Godot)</h3>
       <p>The first Tetris remake I made was in Godot, originally it was meant to be made using tilemaps, but I realized
         that gridmaps would be cooler since they're effectively the same things but in 3D.</p>
+      <img src="/assets/tetr.gd.png" alt="tetr.gd screenshot">
+      <p>It was kind of ass to be honest, at one point all the code was in a single 1000+ line file, but in the end I
+        seperated every single gameplay mechanic into it's own component.</p>
+
+      <h2 id="tetrbevy">tetr.rs.bevy</h2>
+      <h3>(Rust + Bevy)</h3>
+      <p>I learned about <a href="https://bevy.org/">Bevy</a> and thought it was quite cool, so I thought I could use my
+        singular previous experience to
+        make a better version of Tetris using an ECS achitecture.</p>
+      <p>This was also the time where I was really
+        getting
+        into Rust, but I didn't know it nearly as well as I do now.</p>
+      <img src="/assets/bevy.gif" alt="tetr.rs.bevy gif">
+      <p>Yeah so it didn't go too well. The way it's structured is that each block of the piece is a seperate entity,
+        which holds its piece index, instead of a single piece entity holding each block position.</p>
+      <p>This <i>technically</i> makes the system better, as you can for example remove one of the blocks and have the
+        rest of
+        the piece function as if it's still there, but when would anyone ever want to do that.</p>
+      <p>Also I couldn't figure out how to export it for WASM (I was still learning), so this GIF is the last gameplay
+        that was ever played.</p>
+
+      <h2 id="tetrgo">tetr.go</h2>
+      <h3>(Golang)</h3>
+      <p>Started learning Go, wanted to get better at it, decided to make Tetris again (this becomes a common pattern).
+      </p>
+      <img src="/assets/tetr.go.gif" alt="tetr.go gif">
+      <p>This was the first Tetris clone I was actually proud of. The code is well-structured, the gameplay is smooth,
+        and it loads in the web almost instantly.</p>
+      <p>It uses <a href="https://ebitengine.org/">Ebitengine</a> (it was called Ebiten when I used it for this), and
+        honestly it was so nice to use, and exporting to web was like a single step. Honestly this project still holds
+        up today.</p>
+
+      <h2 id="tetrrs">tetr.rs</h2>
+      <h3>(Rust)</h3>
+      <p>Since the disaster that was <a href="#tetrbevy">tetr.rs.bevy</a>, I got a lot better at Rust, and I thought I
+        would give Tetris another try, this time using <a href="https://macroquad.rs/">Macroquad</a>, a simpler
+        framework that I could get to work how I wanted to.</p>
+      <img src="/assets/tetr.rs.png" alt="tetr.rs screenshot">
+      <p>While it was significantly better, it still kinda sucked ass. One of the main goals was to replicate the exact
+        look and feel of <a href="#tetrgo">tetr.go</a> (you can tell by just looking at their demos), so I didn't do
+        some things that would've made the code better for the sake of parity.</p>
+      <p>Still much better than using Bevy though.</p>
+
+      <h2 id="tetrrb">tetr.rb</h2>
+      <h3>(Ruby)</h3>
+      <p>Wanted to learn Ruby, so I made Tetris using it.</p>
+      <img src="/assets/tetr.rb.png" alt="tetr.rb screenshot">
+      <p>It's by far my most recent project, I only finished it yesterday.</p>
+      <p>There weren't any WASM-compatible game frameworks for Ruby, so I settled with just using <a
+          href="https://github.com/ruby/ruby.wasm">ruby.wasm</a> and an HTML canvas.</p>
+      <p>The code was messy, since it has to be partially Javascript to interact with the canvas, so I had to setup the
+        draw loop and input handling and stuff myself. I made it easier for myself by trying less hard to replicate the
+        exact look and feel of <a href="#tetrgo">tetr.go</a></p>
+      <p>At this point I'd say I'm pretty good at making Tetris clones.</p>
+
+      <h2>srs.json</h2>
+      <h3>(JSON)</h3>
+      <p>Not really a Tetris clone, but it definetly helped in their creations. For <a href="#tetrgd">tetr.gd</a> and
+        <a href="#tetrbevy">tetr.rs.bevy</a>, I had all the piece information manually copied from the <a
+          href="https://tetris.wiki/Super_Rotation_System">Tetris Wiki</a>, but doing this was very slow and boring, so
+        I decided to do it just once and never have to think about it again.
+      </p>
+      <p>I'd be lying if I said it wasn't just a bunch of numbers.</p>
+      <img src="/assets/srs.json.png" alt="srs.json">
+      <p><i>A necessary evil.</i></p>
+
+
+      <h2 id="tetrp5">tetr.js.p5</h2>
+      <h3>(Javascript + p5)</h3>
+      <blockquote>
+        [...], oh and by the way, do NOT try to make Tetris for this assignment. A previous student of mine tried to
+        and they failed badly. </blockquote>
+      <p>We had a computer science assignment for arrays and objects, and my teacher said that knowing <i>I</i> was in
+        the room.</p>
+      <img src="/assets/tetr.p5.png" alt="tetr.js.p5 screenshot">
+      <p>Made in like 2 hours. I'm far too good at this and half the reason this was made was to stroke my <a
+          href="https://riskofrain2.wiki.gg/wiki/Egocentrism">ego</a>.</p>
+      <p>It does suck and it doesn't have any cool features since it was made in just 2 hours, but honestly I was too
+        busy with <a href="remixed.html">Remixed</a> at the time to put more effort into it.</p>
+
     </div>
     <div class="sidebar">
       <div class="section top-right">
