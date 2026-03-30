@@ -238,12 +238,44 @@ function tryMove([dx, dy]) {
 }
 
 function tryRotate(newRot) {
+  let rotated = true;
   for (const pos of SRS.pieces[activePiece.index][newRot]) {
     const testPos = [activePiece.pos[0] + pos[0], activePiece.pos[1] + pos[1]];
-    if (!safePlace(testPos)) return false;
+    if (!safePlace(testPos)) {
+      rotated = false;
+      break;
+    }
   }
-  activePiece.rot = newRot;
-  return true;
+  if (!rotated) {
+    let workingKick = [0, 0];
+    outer: for (const kick of SRS.kicks[
+      getKickIndex(activePiece.rot, newRot)
+    ]) {
+      rotated = true;
+      for (const pos of SRS.pieces[activePiece.index][newRot]) {
+        const testPos = [
+          activePiece.pos[0] + pos[0] + kick[0],
+          activePiece.pos[1] + pos[1] + kick[1],
+        ];
+        if (!safePlace(testPos)) {
+          rotated = false;
+          continue outer;
+        }
+      }
+      if (rotated) {
+        workingKick = kick;
+        break outer;
+      }
+    }
+    if (rotated) {
+      activePiece.pos[0] += workingKick[0];
+      activePiece.pos[1] += workingKick[1];
+    }
+  }
+  if (rotated) {
+    activePiece.rot = newRot;
+  }
+  return rotated;
 }
 
 function resetGame() {
@@ -317,4 +349,12 @@ function shuffle(array) {
   }
 
   return array;
+}
+
+function getKickIndex(before, after) {
+  if (after == (before + 1) % 4) {
+    return before * 2;
+  } else {
+    return (before * 2 + 7) % 8;
+  }
 }
