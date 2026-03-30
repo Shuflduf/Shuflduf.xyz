@@ -17,137 +17,79 @@
     <div id="navlinks-include"></div>
     <div class="section main">
       <h1>frg</h1>
-
-      <h2 id="tetrgd">tetr.gd</h2>
-      <h3>(Godot)</h3>
-      <p>The first Tetris remake I made was in Godot, originally it was meant to be made using tilemaps, but I realized
-        that gridmaps would be cooler since they're effectively the same things but in 3D.</p>
-      <img src="/assets/tetr.gd.png" alt="tetr.gd screenshot">
-      <p>It was kind of ass to be honest, at one point all the code was in a single 1000+ line file, but in the end I
-        seperated every single gameplay mechanic into it's own component.</p>
-      <p>It was originally called Trism but it didn't fit in with the naming scheme so I changed it after :)</p>
-
-      <h2 id="tetrbevy">tetr.rs.bevy</h2>
-      <h3>(Rust + Bevy)</h3>
-      <p>I learned about <a href="https://bevy.org/">Bevy</a> and thought it was quite cool, so I thought I could use my
-        singular previous experience to
-        make a better version of Tetris using an ECS achitecture.</p>
-      <p>This was also the time where I was really
-        getting
-        into Rust, but I didn't know it nearly as well as I do now.</p>
-      <img src="/assets/bevy.gif" alt="tetr.rs.bevy gif">
-      <p>Yeah so it didn't go too well. The way it's structured is that each block of the piece is a seperate entity,
-        which holds its piece index, instead of a single piece entity holding each block position.</p>
-      <p>This <i>technically</i> makes the system better, as you can for example remove one of the blocks and have the
-        rest of
-        the piece function as if it's still there, but when would anyone ever want to do that.</p>
-      <p>Also I couldn't figure out how to export it for WASM (I was still learning), so this GIF is the last gameplay
-        that was ever played.</p>
-
-      <h2 id="tetrgo">tetr.go</h2>
-      <h3>(Golang)</h3>
-      <p>Started learning Go, wanted to get better at it, decided to make Tetris again (this becomes a common pattern).
+      <h4>Possibly the worst programming language imaginable. But like in a good way.</h4>
+      <p>I started this project in October 2025, and as of writing this in late March 2026, I'm still not even close to
+        done. More info if you keep reading.</p>
+      <p>I thought having my own programming language would be cool, but it's actually very hard to make one (who knew).
       </p>
-      <img src="/assets/tetr.go.gif" alt="tetr.go gif">
-      <p>This was the first Tetris clone I was actually proud of. The code is well-structured, the gameplay is smooth,
-        and it loads in the web almost instantly.</p>
-      <p>It uses <a href="https://ebitengine.org/">Ebitengine</a> (it was called Ebiten when I used it for this), and
-        honestly it was so nice to use, and exporting to web was like a single step. Honestly this project still holds
-        up today.</p>
+      <p>Named after the 🐸 in 🐸🚀, since I love 🐸🚀.</p>
+      <h2>Phase 1</h2>
+      <h3>"Let's make it a fast compiled language."</h3>
+      <p>So I tried doing that, but it was far too complicated to make it compiled for all major platforms, especially
+        since I also wanted to target web and have frg run in the browser.</p>
 
-      <h2 id="tetrrs">tetr.rs</h2>
-      <h3>(Rust)</h3>
-      <p>Since the disaster that was <a href="#tetrbevy">tetr.rs.bevy</a>, I got a lot better at Rust, and I thought I
-        would give Tetris another try, this time using <a href="https://macroquad.rs/">Macroquad</a>, a simpler
-        framework that I could get to work how I wanted to.</p>
-      <img src="/assets/tetr.rs.png" alt="tetr.rs screenshot">
-      <p>While it was significantly better, it still kinda sucked ass. One of the main goals was to replicate the exact
-        look and feel of <a href="#tetrgo">tetr.go</a> (you can tell by just looking at their demos), so I didn't do
-        some things that would've made the code better for the sake of parity.</p>
-      <p>Still much better than using Bevy though.</p>
+      <h2>Phase 2</h2>
+      <h3>"I can just make it an intepreted language."</h3>
+      <p>Now I could actually do something.</p>
+      <p>First I built the lexer to seperate the raw text into tokens. This was the easy part.</p>
+      <p>Next I had to turn those tokens into an abstract syntax tree (AST). This was the hard part.</p>
+      <p>Each possible statement and expression had to be accounted for, and there were so many edge cases to figure
+        out.</p>
+      <p>For example, you should be able to have <code>my_function()</code> as a standalone statement, as well as part
+        of a larger expression.</p>
+      <p>Eventually I made so many parsing rules with so much copy pasted code, that I fell into a sort of trance and my
+        mind started doing it automatically. I would be thinking "hmm, today I will implement the parser for
+        dereferencing
+        expressions" and then not having any memory of doing so.</p>
+      <p>The last step was making the actual interpreter, which was actually surprisingly easy considering the hardest
+        part was just function execution contexts. The worst part was having an implementation that was not at all
+        efficient, it had so much cloned date.</p>
+      <p>Eventually it was done with zero dependencies, allowing me to be able to run it on web. The problem came
+        with the <code>@input</code> builtin, which would normally mean it would only be able to run in the terminal,
+        but I had no idea how to get it to work on web, so I gave up for a while.</p>
 
-      <h2 id="tetrrb">tetr.rb</h2>
-      <h3>(Ruby)</h3>
-      <p>Wanted to learn Ruby, so I made Tetris using it.</p>
-      <img src="/assets/tetr.rb.png" alt="tetr.rb screenshot">
-      <p>It's by far my most recent project, I only finished it yesterday.</p>
-      <p>There weren't any WASM-compatible game frameworks for Ruby, so I settled with just using <a
-          href="https://github.com/ruby/ruby.wasm">ruby.wasm</a> and an HTML canvas.</p>
-      <p>The code was messy, since it has to be partially Javascript to interact with the canvas, so I had to setup the
-        draw loop and input handling and stuff myself. I made it easier for myself by trying less hard to replicate the
-        exact look and feel of <a href="#tetrgo">tetr.go</a></p>
-      <p>At this point I'd say I'm pretty good at making Tetris clones.</p>
+      <h2>Phase 3</h2>
+      <h3>"What if it transpiled to Rust"</h3>
+      <p>I honestly had no idea what was going through my head at the time. How would having Rust code that I couldn't
+        execute in the browser help me at all.</p>
+      <p>But I implemented it anyway, and it was simple for the most part, with a few exceptions. Notably, everything
+        had to be a mutable variable, including functions, and everything was just plopped into the main function.</p>
+      <p>Eventually, Rust lifetimes got me to give up again.</p>
 
-      <h2>srs.json</h2>
-      <h3>(JSON)</h3>
-      <p>Not really a Tetris clone, but it definetly helped in their creations. For <a href="#tetrgd">tetr.gd</a> and
-        <a href="#tetrbevy">tetr.rs.bevy</a>, I had all the piece information manually copied from the <a
-          href="https://tetris.wiki/Super_Rotation_System">Tetris Wiki</a>, but doing this was very slow and boring, so
-        I decided to do it just once and never have to think about it again.
+      <h2>Phase 4</h2>
+      <h3>"What if I used Tree-sitter"</h3>
+      <p><a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a> is a cross-platform library used for
+        general-purpose parsing of token streams (or something).</p>
+      <p>Basically you define a schema for your code, and Tree-sitter makes a parser that turns text into an AST. It
+        sounds like the perfect solution, but it sucks actually.</p>
+      <p>The way you're meant to use the resulting AST is stupid, you basically have to create an object which walks
+        through the elements, going up and down parent-children hierarchies, and constantly referring to the original
+        source code to get actual values. Tree-sitter just tells you where the code is, now what it is. </p>
+      <p>It was still much easier to use than hardcoding everything, but having to conform to someone else's standards
+        is basically everything I stand against.</p>
+      <p>I gave up again when I realized how hard it would be to get it to run on web.</p>
+
+      <h2>Phase 5 (current)</h2>
+      <h3>"What if I replace Tree-sitter"</h3>
+      <p>This is what <a href="/projects/rcket.html">rcket</a> is, a generaler (more general) purpose parsing library.
+        It's also where I'm at right now until I finish rcket.
       </p>
-      <p>I'd be lying if I said it wasn't just a bunch of numbers.</p>
-      <img src="/assets/srs.json.png" alt="srs.json">
-      <p><i>A necessary evil.</i></p>
 
-
-      <h2 id="tetrp5">tetr.js.p5</h2>
-      <h3>(Javascript + p5)</h3>
-      <blockquote>
-        [...], oh and by the way, do NOT try to make Tetris for this assignment. A previous student of mine tried to
-        and they failed badly. </blockquote>
-      <p>We had a computer science assignment for arrays and objects, and my teacher said that knowing <i>I</i> was in
-        the room.</p>
-      <img src="/assets/tetr.p5.png" alt="tetr.js.p5 screenshot">
-      <p>Made in like 2 hours. I'm far too good at this and half the reason this was made was to stroke my <a
-          href="https://riskofrain2.wiki.gg/wiki/Egocentrism">ego</a>.</p>
-      <p>It does suck and it doesn't have any cool features since it was made in just 2 hours, but honestly I was too
-        busy with <a href="remixed.html">Remixed</a> at the time to put more effort into it.</p>
-
-      <h2>Planned</h2>
-      <ul>
-        <li>
-          <b>tetr.js</b>, with nothing but an HTML canvas and Javascript (<a href="#tetrp5">tetr.js.p5</a> doesn't
-          really count)
-        </li>
-        <li>
-          <b>tetr.c</b>, using <a href="https://www.raylib.com/">Raylib</a> probably.
-        </li>
-        <li>
-          <b>tetr.zig</b>, also using Raylib probably.
-        </li>
-        <li>
-          <b>tetr.frg</b>. If I ever develop <a href="/projects/frg.html">frg</a> enough, I might make a Tetris clone
-          with it.
-        </li>
-      </ul>
-
+      <img src="https://hackatime.hackclub.com/api/v1/badge/U07950S3GMC/Shuflduf/frg">
+      <p>Hopefully I can update this soon.</p>
     </div>
     <div class="sidebar">
       <div class="section top-right">
-        <h1>Demos</h1>
+        <h1>Stack</h1>
         <ul>
-          <li><a href="https://shuflduf.itch.io/tetrgd">tetr.gd</a></li>
-          <li><a href="http://shuflduf.github.io/tetr.go/">tetr.go</a></li>
-          <li><a href="http://shuflduf.github.io/tetr.rs/">tetr.rs</a></li>
-          <li><a href="http://shuflduf.github.io/tetr.rb/">tetr.rb</a></li>
-          <li><a href="http://shuflduf.github.io/tetr.js.p5/">tetr.js.p5</a></li>
+          <li>Rust</li>
         </ul>
       </div>
       <div class="section">
-        <h1>Repos</h1>
+        <h1>Links</h1>
         <ul>
-          <li><a href="https://github.com/Shuflduf/tetr.gd">tetr.gd</a></li>
-          <li><a href="https://github.com/Shuflduf/tetr.rs.bevy">tetr.rs.bevy</a></li>
-          <li><a href="https://github.com/Shuflduf/tetr.go">tetr.go</a></li>
-          <li><a href="https://github.com/Shuflduf/tetr.rs">tetr.rs</a></li>
-          <li><a href="https://github.com/Shuflduf/tetr.rb">tetr.rb</a></li>
-          <li><a href="https://github.com/Shuflduf/tetr.js.p5">tetr.js.p5</a></li>
-        </ul>
-      </div>
-      <div class="section">
-        <h1>Other</h1>
-        <ul>
-          <li><a href="https://gist.github.com/Shuflduf/e5186328dce8ab7d38a16d73971abcee">srs.json</a></li>
+          <li><a href="https://github.com/Shuflduf/frg">Github</a></li>
+          <li><a href="https://flavortown.hackclub.com/projects/95">Flavortown</a></li>
         </ul>
       </div>
     </div>
