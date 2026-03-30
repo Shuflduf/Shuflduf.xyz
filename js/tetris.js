@@ -9,6 +9,8 @@ const COLOURS = [
   "#4455e7",
   "#f64ed8",
 ];
+const DAS = 168;
+const ARR = 33;
 const I_PIECE_INDEX = 4;
 const NEXT_PIECES = 1;
 const GRAVITY_TIME = 300;
@@ -68,6 +70,16 @@ let activePiece = null;
 let gravityTimer = 0;
 let held = null;
 let justHeld = false;
+let rawInputs = {
+  left: false,
+  right: false,
+  softDrop: false,
+};
+let effectiveInputs = {
+  left: false,
+  right: false,
+};
+let arrTimer = 0;
 
 $(function () {
   canvas = $("#game").get(0);
@@ -91,7 +103,8 @@ $(function () {
 
   console.log(ctx);
   resetGame();
-  addEventListener("keydown", handleInputs);
+  addEventListener("keydown", keyDown);
+  addEventListener("keyup", keyUp);
   requestAnimationFrame(process);
 });
 
@@ -108,13 +121,15 @@ function process(currentFrame) {
   heldCanvas.width = heldCanvas.clientWidth;
   heldCanvas.height = heldCanvas.width / 2.0;
 
-  gravityTimer += delta;
+  gravityTimer += rawInputs.softDrop ? delta * 4 : delta;
   if (gravityTimer > GRAVITY_TIME) {
     if (!tryMove([0, 1])) {
       placePiece();
     }
     gravityTimer = 0;
   }
+
+  updateArr(delta);
 
   drawBoard();
   drawGhost();
@@ -123,6 +138,21 @@ function process(currentFrame) {
   drawHeld();
 
   requestAnimationFrame(process);
+}
+
+function updateArr(delta) {
+  if (effectiveInputs.left || effectiveInputs.right) {
+    arrTimer += delta;
+  }
+  if (arrTimer > DAS + ARR) {
+    if (effectiveInputs.left) {
+      tryMove([-1, 0]);
+      arrTimer = DAS;
+    } else {
+      tryMove([1, 0]);
+      arrTimer = DAS;
+    }
+  }
 }
 
 function updateKeybindText() {
@@ -219,22 +249,31 @@ function drawHeld() {
   }
 }
 
-function handleInputs(event) {
-  // if (event.repeat) return;
+function keyDown(event) {
+  if (event.repeat) return;
 
-  console.log(event.code, activeKeybinds.harddrop);
+  console.log(event.code);
   switch (event.code) {
     case activeKeybinds.left:
       event.preventDefault();
       tryMove([-1, 0]);
+      arrTimer = 0;
+      rawInputs.left = true;
+      effectiveInputs.left = true;
+      effectiveInputs.right = false;
       break;
     case activeKeybinds.right:
       event.preventDefault();
       tryMove([1, 0]);
+      arrTimer = 0;
+      rawInputs.right = true;
+      effectiveInputs.right = true;
+      effectiveInputs.left = false;
       break;
     case activeKeybinds.softdrop:
       event.preventDefault();
       tryMove([0, 1]);
+      rawInputs.softDrop = true;
       break;
     case activeKeybinds.harddrop:
       event.preventDefault();
@@ -252,6 +291,27 @@ function handleInputs(event) {
     case activeKeybinds.hold:
       event.preventDefault();
       hold();
+      break;
+  }
+}
+
+function keyUp() {
+  switch (event.code) {
+    case activeKeybinds.left:
+      event.preventDefault();
+      rawInputs.left = false;
+      effectiveInputs.left = false;
+      if (rawInputs.right) effectiveInputs.right = true;
+      break;
+    case activeKeybinds.right:
+      event.preventDefault();
+      rawInputs.right = false;
+      effectiveInputs.right = false;
+      if (rawInputs.left) effectiveInputs.left = true;
+      break;
+    case activeKeybinds.softdrop:
+      event.preventDefault();
+      rawInputs.softDrop = false;
       break;
   }
 }
@@ -361,8 +421,8 @@ function resetGame() {
   );
   bag = [];
   next = [];
-  // justHeld = false;
-  // held = null;
+  justHeld = false;
+  held = null;
   for (let i = 0; i < NEXT_PIECES; i++) {
     next.push(nextBagIndex());
   }
