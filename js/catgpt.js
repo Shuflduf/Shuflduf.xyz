@@ -1,11 +1,72 @@
+const WAIT_MESSAGES = [
+  "not thinkging....",
+  "sleepign....",
+  "hunwrgy....",
+  "thinkging.... (of food)",
+];
+
+let responding = false;
+let mouthOpen = false;
+
 $(function () {
   $("#chat-input").on("submit", (e) => {
     e.preventDefault();
+    if (responding) return;
+
+    responding = true;
 
     const $input = $("#chat-input input");
     const value = $input.val();
     $input.val("");
     console.log(value);
     $(".message.user p").text(value);
+
+    const $catResp = $(".message.cat p");
+    $catResp
+      .text(WAIT_MESSAGES[Math.floor(Math.random() * WAIT_MESSAGES.length)])
+      .addClass("thinking");
+
+    setTimeout(
+      () => {
+        $catResp.text("").removeClass("thinking");
+        streamResponse($catResp);
+      },
+      // 500-1500
+      Math.random() * 1000 + 500,
+    );
   });
 });
+
+function streamResponse($catResp) {
+  // 10-30
+  $catResp.append("meow");
+  const count = Math.floor(Math.random() * 20) + 10;
+  sendNextToken($catResp, count);
+}
+
+function toggleCat(mouthOpen) {
+  $(".message.cat img").attr(
+    "src",
+    mouthOpen ? "/assets/catgpt-open.png" : "/assets/catgpt-closed.png",
+  );
+}
+
+function sendNextToken($catResp, remaining) {
+  if (remaining <= 0) {
+    responding = false;
+    toggleCat(false);
+    return;
+  }
+  if (Math.random() < 0.2) {
+    $catResp.append("<br>");
+    toggleCat(false);
+  } else {
+    $catResp.append(" meow");
+    toggleCat(true);
+  }
+  setTimeout(
+    () => sendNextToken($catResp, remaining - 1),
+    // 100-200
+    Math.random() * 100 + 100,
+  );
+}

@@ -18,9 +18,15 @@
   flex-direction: row;
 }
 
-.cat span {
+.cat p {
   font-weight: bold;
   text-align: left;
+  word-break: break-all;
+}
+
+.cat p.thinking {
+  font-style: italic;
+  color: #576d89;
 }
 
 .cat img {
