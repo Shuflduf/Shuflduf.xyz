@@ -1,0 +1,50 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message {
+  width: 90%;
+  font-family: "Comic Relief";
+}
+
+.message h2 {
+  font-family: "Coiny";
+}
+
+.cat {
+  display: flex;
+  flex-direction: row;
+}
+
+.cat span {
+  font-weight: bold;
+  text-align: left;
+}
+
+.cat img {
+  height: 128px;
+  min-width: 128px;
+}
+
+.user {
+  justify-content: end;
+  margin-left: auto;
+  color: var(--text-mid);
+  text-align: right;
+}
+
+
+.user p {
+  font-weight: normal;
+  margin: 0;
+}
+
+#chat-input input {
+  margin-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  padding: 8px;
+}
