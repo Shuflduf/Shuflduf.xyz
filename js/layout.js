@@ -4,6 +4,9 @@ $(function () {
     .prepend(`<img src="/assets/listbullet.gif">`);
   $("#navbar-include").load("/components/navbar.html");
   $("#navlinks-include").load("/components/navlinks.html", function () {
-    $(".navlinks a").prepend('<img src="/assets/chevron.gif">');
+    $(".navlinks a")
+      .wrapInner("<span></span>")
+      .prepend('<img src="/assets/chevron.gif">');
+    if (_finishedLoadingNavlinks) _finishedLoadingNavlinks();
   });
 });

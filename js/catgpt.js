@@ -7,8 +7,17 @@ const WAIT_MESSAGES = [
 
 let responding = false;
 let mouthOpen = false;
+let eggMode = false;
+
+function _finishedLoadingNavlinks() {
+  $(".navlinks a[href='/projects/tetr-lang.html'] span").text("tetris");
+}
 
 $(function () {
+  // setTimeout(() => {
+  //   $(".navlinks a[href='/projects/tetr-lang.html'] span").text("tetris");
+  // }, 50);
+
   $("#chat-input").on("submit", (e) => {
     e.preventDefault();
     if (responding) return;
@@ -18,12 +27,22 @@ $(function () {
     const $input = $("#chat-input input");
     const value = $input.val();
     $input.val("");
-    console.log(value);
+    console.log(value, value == "egg");
+    eggMode = value.includes("egg");
+    if (eggMode) {
+      $(".navlinks a[href*='tetr']").attr("href", "/assets/tree.html");
+    } else {
+      $(".navlinks a[href*='tetr']").attr("href", "/projects/tetr-lang.html");
+    }
     $(".message.user p").text(value);
 
     const $catResp = $(".message.cat p");
     $catResp
-      .text(WAIT_MESSAGES[Math.floor(Math.random() * WAIT_MESSAGES.length)])
+      .text(
+        eggMode
+          ? "There is a page between..."
+          : WAIT_MESSAGES[Math.floor(Math.random() * WAIT_MESSAGES.length)],
+      )
       .addClass("thinking");
 
     setTimeout(
