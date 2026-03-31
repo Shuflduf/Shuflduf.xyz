@@ -14,10 +14,6 @@ function _finishedLoadingNavlinks() {
 }
 
 $(function () {
-  // setTimeout(() => {
-  //   $(".navlinks a[href='/projects/tetr-lang.html'] span").text("tetris");
-  // }, 50);
-
   $("#chat-input").on("submit", (e) => {
     e.preventDefault();
     if (responding) return;
@@ -32,7 +28,7 @@ $(function () {
     if (eggMode) {
       $(".navlinks a[href*='tetr']").attr("href", "/assets/tree.html");
     } else {
-      $(".navlinks a[href*='tetr']").attr("href", "/projects/tetr-lang.html");
+      $(".navlinks a[href*='tree']").attr("href", "/projects/tetr-lang.html");
     }
     $(".message.user p").text(value);
 
