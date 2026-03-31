@@ -1,4 +1,3 @@
-const BOARD_SIZE = [10, 20];
 const BOARD_COLOUR = "#666";
 const COLOURS = [
   "#fa3434",
@@ -49,6 +48,7 @@ const KEY_NAMES = {
   Space: "Space",
 };
 
+let boardSize = [10, 20];
 let activeKeybinds = KEYBINDS.WASD;
 let canvas = null;
 let ctx = null;
@@ -62,9 +62,7 @@ let tileSize = 0;
 
 let score = 0;
 let highScore = 0;
-let board = Array.from(Array(BOARD_SIZE[0]), () =>
-  new Array(BOARD_SIZE[1]).fill(null),
-);
+let board = reconstructBoard();
 let bag = [];
 let next = [];
 let activePiece = null;
@@ -102,6 +100,14 @@ $(function () {
       updateKeybindText();
       $(this).blur();
     });
+  $("#width")
+    .val(10)
+    .on("change", () => {
+      const width = parseInt($("#width").val());
+      if (width < 4 || width > 20) return;
+      boardSize[0] = width;
+      resetGame();
+    });
 
   resetGame();
   addEventListener("keydown", keyDown);
@@ -109,14 +115,20 @@ $(function () {
   requestAnimationFrame(process);
 });
 
+function reconstructBoard() {
+  return Array.from(Array(boardSize[0]), () =>
+    new Array(boardSize[1]).fill(null),
+  );
+}
+
 let lastFrame = 0;
 function process(currentFrame) {
   const delta = currentFrame - lastFrame;
   lastFrame = currentFrame;
 
-  tileSize = Math.ceil(canvas.clientWidth / (BOARD_SIZE[0] + 2));
-  canvas.width = tileSize * (BOARD_SIZE[0] + 2);
-  canvas.height = tileSize * (BOARD_SIZE[1] + 1);
+  tileSize = Math.ceil(canvas.clientWidth / (boardSize[0] + 2));
+  canvas.width = tileSize * (boardSize[0] + 2);
+  canvas.height = tileSize * (boardSize[1] + 1);
   nextCanvas.width = nextCanvas.clientWidth;
   nextCanvas.height = nextCanvas.width / 2.0;
   heldCanvas.width = heldCanvas.clientWidth;
@@ -187,16 +199,16 @@ function drawTile([x, y]) {
 
 function drawBoard() {
   ctx.fillStyle = BOARD_COLOUR;
-  for (let y = 0; y < BOARD_SIZE[1] + 1; y++) {
+  for (let y = 0; y < boardSize[1] + 1; y++) {
     drawTile([-1, y]);
-    drawTile([BOARD_SIZE[0], y]);
+    drawTile([boardSize[0], y]);
   }
-  for (let x = 0; x < BOARD_SIZE[0]; x++) {
-    drawTile([x, BOARD_SIZE[1]]);
+  for (let x = 0; x < boardSize[0]; x++) {
+    drawTile([x, boardSize[1]]);
   }
 
-  for (let x = 0; x < BOARD_SIZE[0]; x++) {
-    for (let y = 0; y < BOARD_SIZE[1]; y++) {
+  for (let x = 0; x < boardSize[0]; x++) {
+    for (let y = 0; y < boardSize[1]; y++) {
       const blockIndex = board[x][y];
       if (blockIndex == null) continue;
 
@@ -216,7 +228,7 @@ function drawActivePiece() {
 
 function drawGhost() {
   let depth = 0;
-  outer: for (let i = 0; i < BOARD_SIZE[1]; i++) {
+  outer: for (let i = 0; i < boardSize[1]; i++) {
     for (const pos of SRS.pieces[activePiece.index][activePiece.rot]) {
       const testPos = [
         activePiece.pos[0] + pos[0],
@@ -350,7 +362,7 @@ function clearLines() {
   let removed = 0;
   for (const line of linesToClear) {
     for (let y = line; y >= 0; y--) {
-      for (let x = 0; x < BOARD_SIZE[0]; x++) {
+      for (let x = 0; x < boardSize[0]; x++) {
         board[x][y + removed] = board[x][y - 1 + removed];
       }
     }
@@ -359,8 +371,8 @@ function clearLines() {
 
 function fullLines() {
   let full = [];
-  outer: for (let y = 0; y < BOARD_SIZE[1]; y++) {
-    for (let x = 0; x < BOARD_SIZE[0]; x++) {
+  outer: for (let y = 0; y < boardSize[1]; y++) {
+    for (let x = 0; x < boardSize[0]; x++) {
       if (board[x][y] == null) continue outer;
     }
     full.push(y);
@@ -426,9 +438,7 @@ function tryRotate(newRot) {
 }
 
 function resetGame() {
-  board = Array.from(Array(BOARD_SIZE[0]), () =>
-    new Array(BOARD_SIZE[1]).fill(null),
-  );
+  board = reconstructBoard();
   bag = [];
   next = [];
   justHeld = false;
@@ -449,7 +459,7 @@ function nextPiece() {
   next.push(nextBagIndex());
   return {
     index: next.shift(),
-    pos: [3, 0],
+    pos: spawnPos(),
     rot: 0,
   };
 }
@@ -468,7 +478,7 @@ function hold() {
     let t = activePiece.index;
     activePiece = {
       index: held,
-      pos: [3, 0],
+      pos: spawnPos(),
       rot: 0,
     };
     held = t;
@@ -493,8 +503,8 @@ function grounded() {
 }
 
 function safePlace([x, y]) {
-  if (x < 0 || x >= BOARD_SIZE[0]) return false;
-  if (y >= BOARD_SIZE[1]) return false;
+  if (x < 0 || x >= boardSize[0]) return false;
+  if (y >= boardSize[1]) return false;
   if (board[x][y] != null) return false;
 
   return true;
@@ -523,4 +533,8 @@ function getKickIndex(before, after) {
   } else {
     return (before * 2 + 7) % 8;
   }
+}
+
+function spawnPos() {
+  return [Math.floor(boardSize[0] / 2) - 2, 0];
 }
