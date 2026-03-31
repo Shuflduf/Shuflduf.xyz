@@ -1,8 +1,13 @@
-const GRAVITY = [0, 980];
+const GRAVITY = [0, 490];
 
 let canvas = null;
 let ctx = null;
 let mousePos = [0, 0];
+let mouseDown = false;
+
+let stiffness = 80;
+let length = 400;
+let resolution = 15;
 
 class RopeNode {
   position = [0, 0];
@@ -31,23 +36,20 @@ class RopeNode {
   }
 }
 
-const ITERATIONS = 80;
-const NODE_DISTANCE = 15;
-
 class Rope {
   position = [0, 0];
   nodes = [];
 
   constructor(pos, length) {
     this.position = pos;
-    for (let i = 0; i < Math.ceil(length / NODE_DISTANCE); i++) {
-      this.nodes.push(new RopeNode(pos));
+    for (let i = 0; i < Math.ceil(length / resolution); i++) {
+      this.nodes.push(new RopeNode([pos[0] + i * 10, pos[1] - i * 10]));
     }
   }
 
   update(delta) {
     this.simulate(delta);
-    for (let i = 0; i < ITERATIONS; i++) {
+    for (let i = 0; i < stiffness; i++) {
       this.applyConstraints();
     }
   }
@@ -65,7 +67,7 @@ class Rope {
 
       if (i == 0) {
         current.position = this.position;
-      } else if (i == this.nodes.length - 2) {
+      } else if (i == this.nodes.length - 2 && mouseDown) {
         next.position = mousePos;
       }
 
@@ -73,8 +75,8 @@ class Rope {
         current.position[0] - next.position[0],
         current.position[1] - next.position[1],
       ];
-      const dist = length(posDifference);
-      const difference = dist != 0 ? (NODE_DISTANCE - dist) / dist : 0;
+      const dist = vecLength(posDifference);
+      const difference = dist != 0 ? (resolution - dist) / dist : 0;
       const fixOffset = [
         posDifference[0] * difference * 0.5,
         posDifference[1] * difference * 0.5,
@@ -92,7 +94,7 @@ class Rope {
 
   draw() {
     ctx.lineWidth = 8;
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = "#4EC79E";
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.beginPath();
@@ -104,24 +106,60 @@ class Rope {
   }
 }
 
-function length([x, y]) {
+function vecLength([x, y]) {
   return Math.sqrt(x * x + y * y);
 }
 
 $(function () {
   $canv = $("#rope");
-  $canv.mousemove((e) => {
-    console.log(e);
-    mousePos = [e.originalEvent.offsetX, e.originalEvent.offsetY];
+  $canv.mousemove(
+    (e) => (mousePos = [e.originalEvent.offsetX, e.originalEvent.offsetY]),
+  );
+  $canv.mousedown((e) => {
+    $canv.css("cursor", "grabbing");
+    mouseDown = true;
+  });
+  $canv.mouseup((e) => {
+    $canv.css("cursor", "grab");
+    mouseDown = false;
+  });
+  $("#length").on("change", () => {
+    length = $("#length").val();
+    buildRope();
+  });
+  $("#resolution").on("change", () => {
+    resolution = $("#resolution").val();
+    buildRope();
+  });
+  $("#stiffness").on("change", () => {
+    stiffness = $("#stiffness").val();
+    buildRope();
+  });
+  $("#reset").click(() => {
+    reset();
   });
   canvas = $canv.get(0);
   ctx = canvas.getContext("2d");
 
-  ropes.push(new Rope([30, 30], 200));
-  // ropes[0].update(4);
-  // ropes[0].draw(4);
+  reset();
   requestAnimationFrame(process);
 });
+
+function reset() {
+  length = 400;
+  resolution = 15;
+  stiffness = 80;
+
+  $("#length").val(length);
+  $("#resolution").val(resolution);
+  $("#stiffness").val(stiffness);
+  buildRope();
+}
+
+function buildRope() {
+  ropes = [];
+  ropes.push(new Rope([canvas.clientWidth / 2, 0], length));
+}
 
 let ropes = [];
 let lastFrame = 0;
@@ -132,7 +170,8 @@ function process(currentFrame) {
   canvas.width = canvas.clientWidth;
 
   for (const rope of ropes) {
-    rope.update(0.01);
+    rope.position[0] = canvas.clientWidth / 2;
+    rope.update(delta / 1000);
     rope.draw();
   }
 
