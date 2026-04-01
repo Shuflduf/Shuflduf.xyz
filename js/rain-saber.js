@@ -81,15 +81,32 @@ class Note {
     }
 
     const indicatorLength = 40;
-    ctx.lineWidth = lerp(8, 0, completion * completion);
+    // ctx.lineWidth = lerp(8, 0, Math.abs(completion));
+    // ctx.beginPath();
+    // ctx.moveTo(
+    //   this.position[0] + Math.cos(degToRad(this.sliceAngle)) * indicatorLength,
+    //   this.position[1] + Math.sin(degToRad(this.sliceAngle)) * indicatorLength,
+    // );
+    // ctx.lineTo(
+    //   this.position[0] - Math.cos(degToRad(this.sliceAngle)) * indicatorLength,
+    //   this.position[1] - Math.sin(degToRad(this.sliceAngle)) * indicatorLength,
+    // );
+    // ctx.stroke();
+
+    ctx.lineWidth = lerp(6, 1, Math.abs(completion));
     ctx.beginPath();
     ctx.moveTo(
-      this.position[0] + Math.cos(degToRad(this.sliceAngle)) * indicatorLength,
-      this.position[1] + Math.sin(degToRad(this.sliceAngle)) * indicatorLength,
+      this.position[0] +
+        Math.cos(degToRad(this.sliceAngle) + 45) * indicatorLength * 0.5,
+      this.position[1] +
+        Math.sin(degToRad(this.sliceAngle) + 45) * indicatorLength * 0.5,
     );
+    ctx.lineTo(this.position[0], this.position[1]);
     ctx.lineTo(
-      this.position[0] - Math.cos(degToRad(this.sliceAngle)) * indicatorLength,
-      this.position[1] - Math.sin(degToRad(this.sliceAngle)) * indicatorLength,
+      this.position[0] +
+        Math.cos(degToRad(this.sliceAngle) - 45) * indicatorLength * 0.5,
+      this.position[1] +
+        Math.sin(degToRad(this.sliceAngle) - 45) * indicatorLength * 0.5,
     );
     ctx.stroke();
   }
@@ -113,17 +130,38 @@ $(function () {
   notes.push(
     new Note({
       fromPosition: [canvas.width, 1],
-      slicePosition: [200, 200],
+      slicePosition: [400, 300],
       sliceTime: 2000,
-      timeMargin: 500,
-      sliceAngle: 30,
+      timeMargin: 800,
+      sliceAngle: 300,
     }),
     new Note({
       fromPosition: [canvas.width / 2, canvas.height],
-      slicePosition: [200, 200],
-      sliceTime: 2000,
+      slicePosition: [200, 300],
+      sliceTime: 2300,
       timeMargin: 800,
       sliceAngle: 30,
+    }),
+    new Note({
+      fromPosition: [0, canvas.height / 2],
+      slicePosition: [200, 100],
+      sliceTime: 2700,
+      timeMargin: 800,
+      sliceAngle: 180 - 30,
+    }),
+    new Note({
+      fromPosition: [canvas.width, 20],
+      slicePosition: [150, 200],
+      sliceTime: 2900,
+      timeMargin: 900,
+      sliceAngle: -60,
+    }),
+    new Note({
+      fromPosition: [100, canvas.height],
+      slicePosition: [250, 300],
+      sliceTime: 3300,
+      timeMargin: 900,
+      sliceAngle: 90 + 30,
     }),
   );
 
@@ -143,7 +181,7 @@ function checkSliceCollisions(startPoint, endPoint) {
     if (!note.visible()) continue;
 
     const dist = pointToLineDistance(note.position, startPoint, endPoint);
-    const delta = [endPoint[0] - startPoint[0], endPoint[1], startPoint[1]];
+    const delta = [endPoint[0] - startPoint[0], endPoint[1] - startPoint[1]];
     const sliceAngle = radToDeg(Math.atan2(delta[1], delta[0]));
     const angleDiff = Math.abs(sliceAngle - note.sliceAngle);
     console.log(sliceAngle);
