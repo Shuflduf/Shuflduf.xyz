@@ -1,0 +1,15 @@
+{
+  "name": "unbound",
+  "musicOffset": -0.468,
+  "musicBPM": 114.883,
+  "musicURI": "/assets/rainsaber/unbound.mp3",
+  "notes": [
+    {
+      "fromPosition": [1.0, 0.1],
+      "slicePosition": [0.8, 0.6],
+      "sliceTime": 2000,
+      "timeMargin": 800,
+      "sliceAngle": 300
+    }
+  ]
+}

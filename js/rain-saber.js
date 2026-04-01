@@ -1,8 +1,15 @@
 let canvas = null;
 let ctx = null;
-let currentTime = 0;
-
 let mousePath = [];
+
+let currentTime = 0;
+let trackInfo = null;
+let playMode = false;
+
+let editMode = false;
+let audioContext = null;
+let analyzer = null;
+let dataArray = [];
 
 class Note {
   fromPosition = [0, 0];
@@ -58,11 +65,16 @@ class Note {
   draw() {
     if (!this.visible()) return;
 
+    const drawPosition = [
+      this.position[0] * canvas.width,
+      this.position[1] * canvas.height,
+    ];
+
     ctx.lineWidth = 8;
     ctx.strokeStyle = "#348569";
     ctx.fillStyle = "#4ec79e";
     ctx.beginPath();
-    ctx.arc(this.position[0], this.position[1], 30, 0, 2 * Math.PI);
+    ctx.arc(drawPosition[0], drawPosition[1], 30, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
 
@@ -71,8 +83,8 @@ class Note {
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.arc(
-        this.position[0],
-        this.position[1],
+        drawPosition[0],
+        drawPosition[1],
         30 + completion * -60,
         0,
         2 * Math.PI,
@@ -81,31 +93,20 @@ class Note {
     }
 
     const indicatorLength = 40;
-    // ctx.lineWidth = lerp(8, 0, Math.abs(completion));
-    // ctx.beginPath();
-    // ctx.moveTo(
-    //   this.position[0] + Math.cos(degToRad(this.sliceAngle)) * indicatorLength,
-    //   this.position[1] + Math.sin(degToRad(this.sliceAngle)) * indicatorLength,
-    // );
-    // ctx.lineTo(
-    //   this.position[0] - Math.cos(degToRad(this.sliceAngle)) * indicatorLength,
-    //   this.position[1] - Math.sin(degToRad(this.sliceAngle)) * indicatorLength,
-    // );
-    // ctx.stroke();
 
     ctx.lineWidth = lerp(6, 1, Math.abs(completion));
     ctx.beginPath();
     ctx.moveTo(
-      this.position[0] +
+      drawPosition[0] +
         Math.cos(degToRad(this.sliceAngle) + 45) * indicatorLength * 0.5,
-      this.position[1] +
+      drawPosition[1] +
         Math.sin(degToRad(this.sliceAngle) + 45) * indicatorLength * 0.5,
     );
-    ctx.lineTo(this.position[0], this.position[1]);
+    ctx.lineTo(drawPosition[0], drawPosition[1]);
     ctx.lineTo(
-      this.position[0] +
+      drawPosition[0] +
         Math.cos(degToRad(this.sliceAngle) - 45) * indicatorLength * 0.5,
-      this.position[1] +
+      drawPosition[1] +
         Math.sin(degToRad(this.sliceAngle) - 45) * indicatorLength * 0.5,
     );
     ctx.stroke();
@@ -119,7 +120,11 @@ class Note {
   }
 }
 
+// init
+
 $(function () {
+  $("#start-editor").on("click", startEditor);
+  $("#start-game").on("click", startGame);
   $canv = $("#game");
   $canv.mousemove((e) => mouseMove(e.originalEvent));
   canvas = $canv.get(0);
@@ -127,60 +132,22 @@ $(function () {
   canvas.width = canvas.clientWidth;
   ctx = canvas.getContext("2d");
 
-  notes.push(
-    new Note({
-      fromPosition: [canvas.width, 1],
-      slicePosition: [400, 300],
-      sliceTime: 2000,
-      timeMargin: 800,
-      sliceAngle: 300,
-    }),
-    new Note({
-      fromPosition: [canvas.width / 2, canvas.height],
-      slicePosition: [200, 300],
-      sliceTime: 2300,
-      timeMargin: 800,
-      sliceAngle: 30,
-    }),
-    new Note({
-      fromPosition: [0, canvas.height / 2],
-      slicePosition: [200, 100],
-      sliceTime: 2700,
-      timeMargin: 800,
-      sliceAngle: 180 - 30,
-    }),
-    new Note({
-      fromPosition: [canvas.width, 20],
-      slicePosition: [150, 200],
-      sliceTime: 2900,
-      timeMargin: 900,
-      sliceAngle: -60,
-    }),
-    new Note({
-      fromPosition: [100, canvas.height],
-      slicePosition: [250, 300],
-      sliceTime: 3300,
-      timeMargin: 900,
-      sliceAngle: 90 + 30,
-    }),
-    new Note({
-      fromPosition: [canvas.width, 100],
-      slicePosition: [300, 150],
-      sliceTime: 3600,
-      timeMargin: 700,
-      sliceAngle: 90,
-    }),
-    new Note({
-      fromPosition: [0, 100],
-      slicePosition: [200, 300],
-      sliceTime: 4000,
-      timeMargin: 700,
-      sliceAngle: -70,
-    }),
-  );
-
+  fetch("/assets/rainsaber/unbound.json")
+    .then((r) => r.json())
+    .then((r) => {
+      trackInfo = r;
+      notes = trackInfo.notes.map((note) => new Note({ ...note }));
+      $("#audio-player").attr("src", trackInfo.musicURI);
+    });
   requestAnimationFrame(process);
 });
+
+// game
+
+function startGame() {
+  playMode = true;
+  $("#audio-player").get(0).play();
+}
 
 function mouseMove(e) {
   if (mousePath.length >= 5) {
@@ -221,21 +188,76 @@ function drawMousePath() {
   ctx.stroke();
 }
 
-let lastFrame = 0;
+// editor
+
+function startEditor() {
+  editMode = true;
+  initAudio();
+}
+
+function drawEditor() {
+  if (!editMode) return;
+
+  ctx.fillStyle = "#bbb8";
+  ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+
+  if (analyzer) {
+    analyzer.getByteFrequencyData(dataArray);
+
+    const barWidth = canvas.width / dataArray.length;
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i < dataArray.length; i++) {
+      const barHeight = (dataArray[i] / 255) * 40;
+      const x = i * barWidth;
+      const y = canvas.height - 50 + (40 - barHeight) / 2;
+      if (i == 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+
+    ctx.stroke();
+  }
+}
+
+function initAudio() {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  analyzer = audioContext.createAnalyser();
+  analyzer.fftSize = 256;
+
+  const source = audioContext.createMediaElementSource(
+    $("#audio-player").get(0),
+  );
+  source.connect(analyzer);
+  analyzer.connect(audioContext.destination);
+  dataArray = new Uint8Array(analyzer.frequencyBinCount);
+  console.log(source);
+}
+
+// process
+
 let notes = [];
 function process(ct) {
   currentTime = ct;
   canvas.width = canvas.clientWidth;
 
-  for (const note of notes) {
-    note.step();
-    note.draw();
+  if (playMode) {
+    for (const note of notes) {
+      note.step();
+      note.draw();
+    }
   }
 
+  drawEditor();
   drawMousePath();
 
   requestAnimationFrame(process);
 }
+
+// lib functions
 
 function lerp(a, b, t) {
   return a + (b - a) * t;
