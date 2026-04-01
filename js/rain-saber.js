@@ -1,6 +1,6 @@
 let canvas = null;
 let ctx = null;
-let currentFrame = 0;
+let currentTime = 0;
 
 let mousePath = [];
 
@@ -27,8 +27,8 @@ class Note {
   }
 
   step() {
-    if (this.visible(currentFrame)) {
-      const completion = (currentFrame - this.sliceTime) / this.timeMargin;
+    if (this.visible(currentTime)) {
+      const completion = (currentTime - this.sliceTime) / this.timeMargin;
       const vertical =
         this.fromPosition[1] == canvas.height || this.fromPosition[1] == 0;
       const parabolaAxis = vertical ? 1 : 0;
@@ -66,7 +66,7 @@ class Note {
     ctx.stroke();
     ctx.fill();
 
-    const completion = (currentFrame - this.sliceTime) / this.timeMargin;
+    const completion = (currentTime - this.sliceTime) / this.timeMargin;
     if (completion < 0) {
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -113,8 +113,8 @@ class Note {
 
   visible() {
     return (
-      currentFrame > this.sliceTime - this.timeMargin &&
-      currentFrame < this.sliceTime + this.timeMargin
+      currentTime > this.sliceTime - this.timeMargin &&
+      currentTime < this.sliceTime + this.timeMargin
     );
   }
 }
@@ -163,6 +163,20 @@ $(function () {
       timeMargin: 900,
       sliceAngle: 90 + 30,
     }),
+    new Note({
+      fromPosition: [canvas.width, 100],
+      slicePosition: [300, 150],
+      sliceTime: 3600,
+      timeMargin: 700,
+      sliceAngle: 90,
+    }),
+    new Note({
+      fromPosition: [0, 100],
+      slicePosition: [200, 300],
+      sliceTime: 4000,
+      timeMargin: 700,
+      sliceAngle: -70,
+    }),
   );
 
   requestAnimationFrame(process);
@@ -187,7 +201,7 @@ function checkSliceCollisions(startPoint, endPoint) {
     console.log(sliceAngle);
     const angleValid = angleDiff < 30 || Math.abs(angleDiff - 360) < 30;
 
-    const completion = (currentFrame - note.sliceTime) / note.timeMargin;
+    const completion = (currentTime - note.sliceTime) / note.timeMargin;
     if (dist < 35 && Math.abs(completion) < 0.3 && angleValid) {
       console.log("slice");
       notes = notes.filter((n) => n != note);
@@ -209,8 +223,8 @@ function drawMousePath() {
 
 let lastFrame = 0;
 let notes = [];
-function process(cf) {
-  currentFrame = cf;
+function process(ct) {
+  currentTime = ct;
   canvas.width = canvas.clientWidth;
 
   for (const note of notes) {
