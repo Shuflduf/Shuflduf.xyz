@@ -1,5 +1,6 @@
 let canvas = null;
 let ctx = null;
+let currentFrame = 0;
 
 let mousePath = [];
 
@@ -25,9 +26,9 @@ class Note {
     this.sliceAngle = sliceAngle;
   }
 
-  step(currentTime) {
-    if (this.visible(currentTime)) {
-      const completion = (currentTime - this.sliceTime) / this.timeMargin;
+  step() {
+    if (this.visible(currentFrame)) {
+      const completion = (currentFrame - this.sliceTime) / this.timeMargin;
       const vertical =
         this.fromPosition[1] == canvas.height || this.fromPosition[1] == 0;
       const parabolaAxis = vertical ? 1 : 0;
@@ -54,8 +55,8 @@ class Note {
     }
   }
 
-  draw(currentTime) {
-    if (!this.visible(currentTime)) return;
+  draw() {
+    if (!this.visible()) return;
 
     ctx.lineWidth = 8;
     ctx.strokeStyle = "#348569";
@@ -65,7 +66,7 @@ class Note {
     ctx.stroke();
     ctx.fill();
 
-    const completion = (currentTime - this.sliceTime) / this.timeMargin;
+    const completion = (currentFrame - this.sliceTime) / this.timeMargin;
     if (completion < 0) {
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -93,10 +94,10 @@ class Note {
     ctx.stroke();
   }
 
-  visible(currentTime) {
+  visible() {
     return (
-      currentTime > this.sliceTime - this.timeMargin &&
-      currentTime < this.sliceTime + this.timeMargin
+      currentFrame > this.sliceTime - this.timeMargin &&
+      currentFrame < this.sliceTime + this.timeMargin
     );
   }
 }
@@ -134,7 +135,26 @@ function mouseMove(e) {
     mousePath.shift();
   }
   mousePath.push([e.offsetX, e.offsetY]);
-  console.log(mousePath);
+  checkSliceCollisions(mousePath.at(-1), mousePath[0]);
+}
+
+function checkSliceCollisions(startPoint, endPoint) {
+  for (const note of notes) {
+    if (!note.visible()) continue;
+
+    const dist = pointToLineDistance(note.position, startPoint, endPoint);
+    const delta = [endPoint[0] - startPoint[0], endPoint[1], startPoint[1]];
+    const sliceAngle = radToDeg(Math.atan2(delta[1], delta[0]));
+    const angleDiff = Math.abs(sliceAngle - note.sliceAngle);
+    console.log(sliceAngle);
+    const angleValid = angleDiff < 30 || Math.abs(angleDiff - 360) < 30;
+
+    const completion = (currentFrame - note.sliceTime) / note.timeMargin;
+    if (dist < 35 && Math.abs(completion) < 0.3 && angleValid) {
+      console.log("slice");
+      notes = notes.filter((n) => n != note);
+    }
+  }
 }
 
 function drawMousePath() {
@@ -151,15 +171,13 @@ function drawMousePath() {
 
 let lastFrame = 0;
 let notes = [];
-function process(currentFrame) {
-  const delta = currentFrame - lastFrame;
-  lastFrame = currentFrame;
-
+function process(cf) {
+  currentFrame = cf;
   canvas.width = canvas.clientWidth;
 
   for (const note of notes) {
-    note.step(currentFrame);
-    note.draw(currentFrame);
+    note.step();
+    note.draw();
   }
 
   drawMousePath();
@@ -173,4 +191,28 @@ function lerp(a, b, t) {
 
 function degToRad(degrees) {
   return degrees * (Math.PI / 180);
+}
+
+function radToDeg(radians) {
+  return radians * (180 / Math.PI);
+}
+
+function pointToLineDistance(point, line1, line2) {
+  const [px, py] = point;
+  const [x1, y1] = line1;
+  const [x2, y2] = line2;
+  const A = px - x1;
+  const B = py - y1;
+  const C = x2 - x1;
+  const D = y2 - y1;
+  const dot = A * C + B * D;
+  const lenSq = C * C + D * D;
+  let param = -1;
+  if (lenSq !== 0) param = dot / lenSq;
+
+  const closestX = x1 + param * C;
+  const closestY = y1 + param * D;
+  const dx = px - closestX;
+  const dy = py - closestY;
+  return Math.sqrt(dx * dx + dy * dy);
 }
