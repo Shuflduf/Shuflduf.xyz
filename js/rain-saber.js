@@ -15,7 +15,7 @@ let dataArray = [];
 class Note {
   fromPosition = [0, 0];
   slicePosition = [0, 0];
-  sliceTime = 0;
+  sliceBeat = 0;
   timeMargin = 0;
   sliceAngle = 0;
   position = [0, 0];
@@ -23,20 +23,21 @@ class Note {
   constructor({
     fromPosition,
     slicePosition,
-    sliceTime,
+    sliceBeat,
     timeMargin,
     sliceAngle,
   }) {
     this.fromPosition = fromPosition;
     this.slicePosition = slicePosition;
-    this.sliceTime = sliceTime;
+    this.sliceBeat = sliceBeat;
     this.timeMargin = timeMargin;
     this.sliceAngle = sliceAngle;
   }
 
   step() {
     if (this.visible(currentTime)) {
-      const completion = (currentTime - this.sliceTime) / this.timeMargin;
+      const completion =
+        (currentTime - beatToMS(this.sliceBeat)) / this.timeMargin;
       const vertical =
         this.fromPosition[1] == 1.0 || this.fromPosition[1] == 0.0;
       const parabolaAxis = vertical ? 1 : 0;
@@ -79,7 +80,8 @@ class Note {
     ctx.stroke();
     ctx.fill();
 
-    const completion = (currentTime - this.sliceTime) / this.timeMargin;
+    const completion =
+      (currentTime - beatToMS(this.sliceBeat)) / this.timeMargin;
     if (completion < 0) {
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -115,8 +117,8 @@ class Note {
 
   visible() {
     return (
-      currentTime > this.sliceTime - this.timeMargin &&
-      currentTime < this.sliceTime + this.timeMargin
+      currentTime > beatToMS(this.sliceBeat) - this.timeMargin &&
+      currentTime < beatToMS(this.sliceBeat) + this.timeMargin
     );
   }
 }
@@ -171,12 +173,11 @@ function checkSliceCollisions(startPoint, endPoint) {
     const delta = [endPoint[0] - startPoint[0], endPoint[1] - startPoint[1]];
     const sliceAngle = radToDeg(Math.atan2(delta[1], delta[0]));
     const angleDiff = Math.abs(sliceAngle - note.sliceAngle);
-    console.log(sliceAngle);
     const angleValid = angleDiff < 30 || Math.abs(angleDiff - 360) < 30;
 
-    const completion = (currentTime - note.sliceTime) / note.timeMargin;
+    const completion =
+      (currentTime - beatToMS(note.sliceBeat)) / note.timeMargin;
     if (dist < 35 && Math.abs(completion) < 0.3 && angleValid) {
-      console.log("slice");
       notes = notes.filter((n) => n != note);
     }
   }
@@ -240,7 +241,6 @@ function initAudio() {
   source.connect(analyzer);
   analyzer.connect(audioContext.destination);
   dataArray = new Uint8Array(analyzer.frequencyBinCount);
-  console.log(source);
 }
 
 // process
@@ -297,4 +297,8 @@ function pointToLineDistance(point, line1, line2) {
   const dx = px - closestX;
   const dy = py - closestY;
   return Math.sqrt(dx * dx + dy * dy);
+}
+
+function beatToMS(beat) {
+  return beat * (60000 / trackInfo.musicBPM) + trackInfo.musicOffset * 1000;
 }
