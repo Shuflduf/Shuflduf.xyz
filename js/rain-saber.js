@@ -4,7 +4,8 @@ let mousePath = [];
 
 let currentTime = 0;
 let trackInfo = null;
-let playMode = false;
+let playing = false;
+let notes = [];
 
 let editMode = false;
 let audioContext = null;
@@ -37,7 +38,7 @@ class Note {
     if (this.visible(currentTime)) {
       const completion = (currentTime - this.sliceTime) / this.timeMargin;
       const vertical =
-        this.fromPosition[1] == canvas.height || this.fromPosition[1] == 0;
+        this.fromPosition[1] == 1.0 || this.fromPosition[1] == 0.0;
       const parabolaAxis = vertical ? 1 : 0;
       const straightAxis = vertical ? 0 : 1;
 
@@ -136,7 +137,6 @@ $(function () {
     .then((r) => r.json())
     .then((r) => {
       trackInfo = r;
-      notes = trackInfo.notes.map((note) => new Note({ ...note }));
       $("#audio-player").attr("src", trackInfo.musicURI);
     });
   requestAnimationFrame(process);
@@ -145,7 +145,9 @@ $(function () {
 // game
 
 function startGame() {
-  playMode = true;
+  currentTime = 0;
+  playing = true;
+  notes = trackInfo.notes.map((note) => new Note({ ...note }));
   $("#audio-player").get(0).play();
 }
 
@@ -161,7 +163,11 @@ function checkSliceCollisions(startPoint, endPoint) {
   for (const note of notes) {
     if (!note.visible()) continue;
 
-    const dist = pointToLineDistance(note.position, startPoint, endPoint);
+    const visualPosition = [
+      note.position[0] * canvas.width,
+      note.position[1] * canvas.height,
+    ];
+    const dist = pointToLineDistance(visualPosition, startPoint, endPoint);
     const delta = [endPoint[0] - startPoint[0], endPoint[1] - startPoint[1]];
     const sliceAngle = radToDeg(Math.atan2(delta[1], delta[0]));
     const angleDiff = Math.abs(sliceAngle - note.sliceAngle);
@@ -239,12 +245,14 @@ function initAudio() {
 
 // process
 
-let notes = [];
-function process(ct) {
-  currentTime = ct;
+let lastFrame = 0;
+function process(currentFrame) {
+  const delta = currentFrame - lastFrame;
+  lastFrame = currentFrame;
   canvas.width = canvas.clientWidth;
 
-  if (playMode) {
+  if (playing) {
+    currentTime += delta;
     for (const note of notes) {
       note.step();
       note.draw();
