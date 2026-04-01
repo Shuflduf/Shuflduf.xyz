@@ -7,6 +7,7 @@ $(function () {
     $(".navlinks a")
       .wrapInner("<span></span>")
       .prepend('<img src="/assets/chevron.gif">');
-    if (_finishedLoadingNavlinks) _finishedLoadingNavlinks();
+    if (typeof _finishedLoadingNavlinks == "function")
+      _finishedLoadingNavlinks();
   });
 });
