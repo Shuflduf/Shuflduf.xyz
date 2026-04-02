@@ -128,7 +128,8 @@ class Note {
 
 $(function () {
   $("#start-editor").on("click", startEditor);
-  $("#start-game").on("click", startGame);
+  $("#start-game").on("click", startGame).prop("disabled", true);
+  $("#audio-player").on("canplaythrough", readyToStart);
   $canv = $("#game");
   $canv.mousemove((e) => mouseMove(e.originalEvent));
   canvas = $canv.get(0);
@@ -146,6 +147,10 @@ $(function () {
 });
 
 // game
+
+function readyToStart() {
+  $("#start-game").prop("disabled", false);
+}
 
 function startGame() {
   currentTime = 0;

@@ -5,18 +5,81 @@
   "musicURI": "/assets/rainsaber/unbound.mp3",
   "notes": [
     {
-      "sliceBeat": 4,
+      "sliceBeat": 12,
       "fromPosition": [1.0, 0.1],
       "slicePosition": [0.6, 0.6],
       "timeMargin": 800,
       "sliceAngle": 300
     },
     {
-      "sliceBeat": 5,
+      "sliceBeat": 13,
       "fromPosition": [0.2, 1.0],
       "slicePosition": [0.4, 0.7],
       "timeMargin": 800,
       "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 14,
+      "fromPosition": [0.2, 1.0],
+      "slicePosition": [0.4, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": 210
+    },
+    {
+      "sliceBeat": 16,
+      "fromPosition": [1.0, 0.1],
+      "slicePosition": [0.6, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": 120
+    },
+    {
+      "sliceBeat": 17,
+      "fromPosition": [0.4, 0.0],
+      "slicePosition": [0.5, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 17.25,
+      "fromPosition": [0.1, 0.0],
+      "slicePosition": [0.3, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": -10
+    },
+    {
+      "sliceBeat": 17.5,
+      "fromPosition": [0.0, 0.3],
+      "slicePosition": [0.1, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": -50
+    },
+    {
+      "sliceBeat": 20,
+      "fromPosition": [0.2, 1.0],
+      "slicePosition": [0.3, 0.8],
+      "timeMargin": 600,
+      "sliceAngle": 210
+    },
+    {
+      "sliceBeat": 20.5,
+      "fromPosition": [0.4, 1.0],
+      "slicePosition": [0.5, 0.8],
+      "timeMargin": 600,
+      "sliceAngle": 170
+    },
+    {
+      "sliceBeat": 21,
+      "fromPosition": [0.6, 1.0],
+      "slicePosition": [0.7, 0.8],
+      "timeMargin": 600,
+      "sliceAngle": 210
+    },
+    {
+      "sliceBeat": 21.5,
+      "fromPosition": [0.8, 1.0],
+      "slicePosition": [0.9, 0.7],
+      "timeMargin": 600,
+      "sliceAngle": 120
     }
   ]
 }
