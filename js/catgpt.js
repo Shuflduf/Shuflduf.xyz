@@ -62,7 +62,7 @@ function streamResponse($catResp) {
 function toggleCat(mouthOpen) {
   $(".message.cat img").attr(
     "src",
-    mouthOpen ? "/assets/catgpt-open.png" : "/assets/catgpt-closed.png",
+    mouthOpen ? "/assets/catgpt-open.webp" : "/assets/catgpt-closed.webp",
   );
 }
 
