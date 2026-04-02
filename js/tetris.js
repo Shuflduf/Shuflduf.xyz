@@ -82,6 +82,10 @@ let effectiveInputs = {
 let arrTimer = 0;
 
 $(function () {
+  const prevHighScore = getCookie("tetris-highscore");
+  if (prevHighScore != "") {
+    highScore = prevHighScore;
+  }
   canvas = $("#game").get(0);
   ctx = canvas.getContext("2d");
   nextCanvas = $("#next").get(0);
@@ -448,6 +452,7 @@ function resetGame() {
   }
   if (score > highScore) {
     highScore = score;
+    setCookie("tetris-highscore", highScore, 100);
   }
   score = 0;
   scoreLabel.text(`Score: ${score}`);
