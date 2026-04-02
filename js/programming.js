@@ -86,7 +86,7 @@ function createCircles() {
 }
 
 function process(currentFrame) {
-  let delta = currentFrame - previousFrame;
+  let delta = Math.min(currentFrame - previousFrame, 1000);
   previousFrame = currentFrame;
 
   canvas.width = canvas.clientWidth;

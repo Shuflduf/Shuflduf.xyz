@@ -256,7 +256,7 @@ function initAudio() {
 }
 
 function generateSpectrogram() {
-  const fftSize = 128;
+  const fftSize = 256;
   const targetFrames = 400;
 
   fetch($("#audio-player").get(0).src)
@@ -265,10 +265,7 @@ function generateSpectrogram() {
     .then((decodedAudio) => {
       spectrogram = [];
       const data = decodedAudio.getChannelData(0);
-      const step = Math.max(
-        fftSize,
-        Math.ceil(data.length / (targetFrames * fftSize)),
-      );
+      const step = Math.ceil(data.length / (targetFrames * fftSize));
 
       for (let i = 0; i < data.length; i += step * fftSize) {
         const chunk = data.slice(i, i + fftSize);
@@ -289,57 +286,6 @@ function generateSpectrogram() {
       }
 
       console.log("len", spectrogram.length);
-
-      // const offlineCtx = new OfflineAudioContext(
-      //   1,
-      //   decodedAudio.length,
-      //   decodedAudio.sampleRate,
-      // );
-      // const offlineAnalyzer = offlineCtx.createAnalyser();
-      // offlineAnalyzer.fftSize = fftSize;
-
-      // const source = offlineCtx.createBufferSource();
-      // source.buffer = decodedAudio;
-      // source.connect(offlineAnalyzer);
-      // offlineAnalyzer.connect(offlineCtx.destination);
-      // source.start(0);
-
-      // let processedSamples = 0;
-
-      // function processChunk() {
-      //   if (processedSamples < decodedAudio.length) {
-      //     const data = new Uint8Array(offlineAnalyzer.frequencyBinCount);
-      //     offlineAnalyzer.getByteFrequencyData(data);
-      //     spectrogram.push(Array.from(data).map((v) => v / 255));
-      //     processedSamples += chunkSize;
-      //     setTimeout(processChunk, 0);
-      //   }
-      // }
-
-      // offlineCtx.startRendering().then(() => {
-      //   const channelData = decodedAudio.getChannelData(0);
-      //   for (let i = 0; i < channelData.length; i += fftSize) {
-      //     const chunk = channelData.slice(i, i + fftSize);
-      //     const windowed = Array.from(chunk).map((v, idx) => {
-      //       const w = 0.5 * (1 - Math.cos((2 * Math.PI * idx) / (fftSize - 1)));
-      //       return v * w;
-      //     });
-
-      //     const magnitudes = new Array(fftSize / 2).fill(0);
-      //     for (let j = 0; j < fftSize / 2; j++) {
-      //       let real = 0;
-      //       let imag = 0;
-      //       for (let n = 0; n < fftSize; n++) {
-      //         const angle = (-2 * Math.PI * j * n) / fftSize;
-      //         real += windowed[n] * Math.cos(angle);
-      //         imag += windowed[n] * Math.sin(angle);
-      //       }
-      //       magnitudes[j] = Math.sqrt(real * real + imag * imag) / fftSize;
-      //     }
-
-      //     spectrogram.push(magnitudes.map((v) => Math.min(v * 3, 1)));
-      //   }
-      // });
     })
     .catch((err) => console.error(err));
 }
