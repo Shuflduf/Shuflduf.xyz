@@ -272,10 +272,20 @@ function generateSpectrogram() {
 
       for (let i = 0; i < data.length; i += step * fftSize) {
         const chunk = data.slice(i, i + fftSize);
-        const magnitude = Math.sqrt(
-          chunk.reduce((sum, v) => sum + v * v, 0) / fftSize,
-        );
-        spectrogram.push(new Array(32).fill(magnitude));
+        const binSize = Math.ceil(chunk.length / 32);
+        const frame = [];
+
+        for (let bin = 0; bin < 32; bin++) {
+          const binStart = bin * binSize;
+          const binEnd = Math.min(binStart + binSize, chunk.length);
+          const binChunk = chunk.slice(binStart, binEnd);
+
+          const magnitude = Math.sqrt(
+            binChunk.reduce((sum, v) => sum + v * v, 0) / fftSize,
+          );
+          frame.push(magnitude);
+        }
+        spectrogram.push(frame);
       }
 
       console.log("len", spectrogram.length);
