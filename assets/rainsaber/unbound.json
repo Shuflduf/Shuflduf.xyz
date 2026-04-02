@@ -5,16 +5,16 @@
   "musicURI": "/assets/rainsaber/unbound.mp3",
   "notes": [
     {
+      "sliceBeat": 4,
       "fromPosition": [1.0, 0.1],
       "slicePosition": [0.6, 0.6],
-      "sliceBeat": 4,
       "timeMargin": 800,
       "sliceAngle": 300
     },
     {
+      "sliceBeat": 5,
       "fromPosition": [0.2, 1.0],
       "slicePosition": [0.4, 0.7],
-      "sliceBeat": 5,
       "timeMargin": 800,
       "sliceAngle": 30
     }

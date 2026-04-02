@@ -11,6 +11,7 @@ let editMode = false;
 let audioContext = null;
 let analyzer = null;
 let dataArray = [];
+let spectrogram = [];
 
 class Note {
   fromPosition = [0, 0];
@@ -206,27 +207,36 @@ function drawEditor() {
   if (!editMode) return;
 
   ctx.fillStyle = "#bbb8";
-  ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+  ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
 
-  if (analyzer) {
-    analyzer.getByteFrequencyData(dataArray);
+  if (spectrogram.length > 0) {
+    const start = [10, canvas.height - 90];
+    const size = [canvas.width - 20, 80];
 
-    const barWidth = canvas.width / dataArray.length;
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    for (let i = 0; i < dataArray.length; i++) {
-      const barHeight = (dataArray[i] / 255) * 40;
-      const x = i * barWidth;
-      const y = canvas.height - 50 + (40 - barHeight) / 2;
-      if (i == 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
+    const timeFrames = spectrogram.length;
+    const freqBins = spectrogram[0].length;
+
+    for (let timeFrame = 0; timeFrame < timeFrames; timeFrame++) {
+      const frameData = spectrogram[timeFrame];
+      const x = start[0] + (timeFrame / timeFrames) * size[0];
+      const pixelWidth = size[0] / timeFrames + 1;
+
+      for (let bin = 0; bin < freqBins; bin++) {
+        let value = frameData[bin];
+        value = Math.pow(value, 0.5);
+        const hue = (1 - value) * 240;
+        const saturation = 100;
+        const lightness = 50 * value + 20;
+
+        ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        ctx.fillRect(
+          x,
+          start[1] + (bin / freqBins) * size[1],
+          pixelWidth,
+          size[1] / freqBins + 1,
+        );
       }
     }
-
-    ctx.stroke();
   }
 }
 
@@ -241,6 +251,87 @@ function initAudio() {
   source.connect(analyzer);
   analyzer.connect(audioContext.destination);
   dataArray = new Uint8Array(analyzer.frequencyBinCount);
+
+  generateSpectrogram();
+}
+
+function generateSpectrogram() {
+  const fftSize = 128;
+  const targetFrames = 400;
+
+  fetch($("#audio-player").get(0).src)
+    .then((r) => r.arrayBuffer())
+    .then((buffer) => audioContext.decodeAudioData(buffer))
+    .then((decodedAudio) => {
+      spectrogram = [];
+      const data = decodedAudio.getChannelData(0);
+      const step = Math.max(
+        fftSize,
+        Math.ceil(data.length / (targetFrames * fftSize)),
+      );
+
+      for (let i = 0; i < data.length; i += step * fftSize) {
+        const chunk = data.slice(i, i + fftSize);
+        const magnitude = Math.sqrt(
+          chunk.reduce((sum, v) => sum + v * v, 0) / fftSize,
+        );
+        spectrogram.push(new Array(32).fill(magnitude));
+      }
+
+      console.log("len", spectrogram.length);
+
+      // const offlineCtx = new OfflineAudioContext(
+      //   1,
+      //   decodedAudio.length,
+      //   decodedAudio.sampleRate,
+      // );
+      // const offlineAnalyzer = offlineCtx.createAnalyser();
+      // offlineAnalyzer.fftSize = fftSize;
+
+      // const source = offlineCtx.createBufferSource();
+      // source.buffer = decodedAudio;
+      // source.connect(offlineAnalyzer);
+      // offlineAnalyzer.connect(offlineCtx.destination);
+      // source.start(0);
+
+      // let processedSamples = 0;
+
+      // function processChunk() {
+      //   if (processedSamples < decodedAudio.length) {
+      //     const data = new Uint8Array(offlineAnalyzer.frequencyBinCount);
+      //     offlineAnalyzer.getByteFrequencyData(data);
+      //     spectrogram.push(Array.from(data).map((v) => v / 255));
+      //     processedSamples += chunkSize;
+      //     setTimeout(processChunk, 0);
+      //   }
+      // }
+
+      // offlineCtx.startRendering().then(() => {
+      //   const channelData = decodedAudio.getChannelData(0);
+      //   for (let i = 0; i < channelData.length; i += fftSize) {
+      //     const chunk = channelData.slice(i, i + fftSize);
+      //     const windowed = Array.from(chunk).map((v, idx) => {
+      //       const w = 0.5 * (1 - Math.cos((2 * Math.PI * idx) / (fftSize - 1)));
+      //       return v * w;
+      //     });
+
+      //     const magnitudes = new Array(fftSize / 2).fill(0);
+      //     for (let j = 0; j < fftSize / 2; j++) {
+      //       let real = 0;
+      //       let imag = 0;
+      //       for (let n = 0; n < fftSize; n++) {
+      //         const angle = (-2 * Math.PI * j * n) / fftSize;
+      //         real += windowed[n] * Math.cos(angle);
+      //         imag += windowed[n] * Math.sin(angle);
+      //       }
+      //       magnitudes[j] = Math.sqrt(real * real + imag * imag) / fftSize;
+      //     }
+
+      //     spectrogram.push(magnitudes.map((v) => Math.min(v * 3, 1)));
+      //   }
+      // });
+    })
+    .catch((err) => console.error(err));
 }
 
 // process
@@ -265,7 +356,7 @@ function process(currentFrame) {
   requestAnimationFrame(process);
 }
 
-// lib functions
+// helper functions
 
 function lerp(a, b, t) {
   return a + (b - a) * t;
