@@ -1,5 +1,7 @@
 let canvas = null;
 let ctx = null;
+let $audioPlayer = null;
+let audioPlayer = null;
 let mousePath = [];
 
 let currentTime = 0;
@@ -127,9 +129,13 @@ class Note {
 // init
 
 $(function () {
-  $("#start-editor").on("click", startEditor);
+  $("#toggle-edit-mode").on("click", toggleEditMode);
   $("#start-game").on("click", startGame).prop("disabled", true);
-  $("#audio-player").on("canplaythrough", readyToStart);
+
+  $audioPlayer = $("#audio-player");
+  $audioPlayer.on("canplaythrough", readyToStart);
+  audioPlayer = $audioPlayer.get(0);
+
   $canv = $("#game");
   $canv.mousemove((e) => mouseMove(e.originalEvent));
   canvas = $canv.get(0);
@@ -146,6 +152,8 @@ $(function () {
   requestAnimationFrame(process);
 });
 
+$(document).on("keydown", (e) => editModeKeydown(e.originalEvent));
+
 // game
 
 function readyToStart() {
@@ -155,10 +163,13 @@ function readyToStart() {
 function startGame() {
   currentTime = 0;
   playing = true;
+  buildNotes();
+  audioPlayer.currentTime = 0;
+  audioPlayer.play();
+}
+
+function buildNotes() {
   notes = trackInfo.notes.map((note) => new Note({ ...note }));
-  const audio = $("#audio-player").get(0);
-  audio.currentTime = 0;
-  audio.play();
 }
 
 function mouseMove(e) {
@@ -205,96 +216,29 @@ function drawMousePath() {
 
 // editor
 
-function startEditor() {
-  editMode = true;
-  initAudio();
+function toggleEditMode() {
+  editMode = !editMode;
+  $("#toggle-edit-mode").text(
+    editMode ? "Disable Edit Mode" : "Enable Edit Mode",
+  );
 }
 
-function drawEditor() {
+function editModeKeydown(e) {
   if (!editMode) return;
 
-  ctx.fillStyle = "#bbb8";
-  ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
-
-  if (spectrogram.length > 0) {
-    const start = [10, canvas.height - 90];
-    const size = [canvas.width - 20, 80];
-
-    const timeFrames = spectrogram.length;
-    const freqBins = spectrogram[0].length;
-
-    for (let timeFrame = 0; timeFrame < timeFrames; timeFrame++) {
-      const frameData = spectrogram[timeFrame];
-      const x = start[0] + (timeFrame / timeFrames) * size[0];
-      const pixelWidth = size[0] / timeFrames + 1;
-
-      for (let bin = 0; bin < freqBins; bin++) {
-        let value = frameData[bin];
-        value = Math.pow(value, 0.5);
-        const hue = (1 - value) * 240;
-        const saturation = 100;
-        const lightness = 50 * value + 20;
-
-        ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-        ctx.fillRect(
-          x,
-          start[1] + (bin / freqBins) * size[1],
-          pixelWidth,
-          size[1] / freqBins + 1,
-        );
-      }
-    }
+  switch (e.code) {
+    case "ArrowLeft":
+      currentTime = Math.max(0, currentTime - 2000);
+      audioPlayer.currentTime = currentTime / 1000;
+      buildNotes();
+      break;
+    case "ArrowRight":
+      currentTime = Math.max(0, currentTime + 2000);
+      audioPlayer.currentTime = currentTime / 1000;
+      buildNotes();
+      break;
   }
-}
-
-function initAudio() {
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  analyzer = audioContext.createAnalyser();
-  analyzer.fftSize = 256;
-
-  const source = audioContext.createMediaElementSource(
-    $("#audio-player").get(0),
-  );
-  source.connect(analyzer);
-  analyzer.connect(audioContext.destination);
-  dataArray = new Uint8Array(analyzer.frequencyBinCount);
-
-  generateSpectrogram();
-}
-
-function generateSpectrogram() {
-  const fftSize = 256;
-  const targetFrames = 400;
-
-  fetch($("#audio-player").get(0).src)
-    .then((r) => r.arrayBuffer())
-    .then((buffer) => audioContext.decodeAudioData(buffer))
-    .then((decodedAudio) => {
-      spectrogram = [];
-      const data = decodedAudio.getChannelData(0);
-      const step = Math.ceil(data.length / (targetFrames * fftSize));
-
-      for (let i = 0; i < data.length; i += step * fftSize) {
-        const chunk = data.slice(i, i + fftSize);
-        const binSize = Math.ceil(chunk.length / 32);
-        const frame = [];
-
-        for (let bin = 0; bin < 32; bin++) {
-          const binStart = bin * binSize;
-          const binEnd = Math.min(binStart + binSize, chunk.length);
-          const binChunk = chunk.slice(binStart, binEnd);
-
-          const magnitude = Math.sqrt(
-            binChunk.reduce((sum, v) => sum + v * v, 0) / fftSize,
-          );
-          frame.push(magnitude);
-        }
-        spectrogram.push(frame);
-      }
-
-      console.log("len", spectrogram.length);
-    })
-    .catch((err) => console.error(err));
+  console.log(e);
 }
 
 // process
@@ -313,7 +257,6 @@ function process(currentFrame) {
     }
   }
 
-  drawEditor();
   drawMousePath();
 
   requestAnimationFrame(process);
