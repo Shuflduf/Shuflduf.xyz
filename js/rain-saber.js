@@ -156,7 +156,9 @@ function startGame() {
   currentTime = 0;
   playing = true;
   notes = trackInfo.notes.map((note) => new Note({ ...note }));
-  $("#audio-player").get(0).play();
+  const audio = $("#audio-player").get(0);
+  audio.currentTime = 0;
+  audio.play();
 }
 
 function mouseMove(e) {

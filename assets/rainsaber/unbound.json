@@ -1,85 +1,92 @@
 {
   "name": "unbound",
-  "musicOffset": -0.468,
+  "musicOffset": -0.055,
   "musicBPM": 114.883,
-  "musicURI": "/assets/rainsaber/unbound.mp3",
+  "musicURI": "/assets/rainsaber/unbound.m4a",
   "notes": [
     {
-      "sliceBeat": 12,
+      "sliceBeat": 4,
       "fromPosition": [1.0, 0.1],
       "slicePosition": [0.6, 0.6],
       "timeMargin": 800,
       "sliceAngle": 300
     },
     {
-      "sliceBeat": 13,
+      "sliceBeat": 6,
       "fromPosition": [0.2, 1.0],
       "slicePosition": [0.4, 0.7],
       "timeMargin": 800,
       "sliceAngle": 30
     },
     {
-      "sliceBeat": 14,
+      "sliceBeat": 8,
       "fromPosition": [0.2, 1.0],
       "slicePosition": [0.4, 0.7],
       "timeMargin": 800,
       "sliceAngle": 210
     },
     {
-      "sliceBeat": 16,
+      "sliceBeat": 9,
       "fromPosition": [1.0, 0.1],
       "slicePosition": [0.6, 0.6],
       "timeMargin": 800,
       "sliceAngle": 120
     },
     {
-      "sliceBeat": 17,
+      "sliceBeat": 10,
       "fromPosition": [0.4, 0.0],
       "slicePosition": [0.5, 0.3],
       "timeMargin": 800,
       "sliceAngle": 30
     },
     {
-      "sliceBeat": 17.25,
+      "sliceBeat": 11,
       "fromPosition": [0.1, 0.0],
       "slicePosition": [0.3, 0.3],
-      "timeMargin": 800,
-      "sliceAngle": -10
-    },
-    {
-      "sliceBeat": 17.5,
-      "fromPosition": [0.0, 0.3],
-      "slicePosition": [0.1, 0.6],
-      "timeMargin": 800,
+      "timeMargin": 600,
       "sliceAngle": -50
     },
     {
-      "sliceBeat": 20,
+      "sliceBeat": 12,
+      "fromPosition": [0.1, 0.0],
+      "slicePosition": [0.3, 0.3],
+      "timeMargin": 900,
+      "sliceAngle": 120
+    },
+    {
+      "sliceBeat": 14,
+      "fromPosition": [0.0, 0.3],
+      "slicePosition": [0.1, 0.6],
+      "timeMargin": 1000,
+      "sliceAngle": -120
+    },
+    {
+      "sliceBeat": 16,
       "fromPosition": [0.2, 1.0],
       "slicePosition": [0.3, 0.8],
       "timeMargin": 600,
-      "sliceAngle": 210
+      "sliceAngle": 150
     },
     {
-      "sliceBeat": 20.5,
+      "sliceBeat": 18,
       "fromPosition": [0.4, 1.0],
       "slicePosition": [0.5, 0.8],
       "timeMargin": 600,
-      "sliceAngle": 170
-    },
-    {
-      "sliceBeat": 21,
-      "fromPosition": [0.6, 1.0],
-      "slicePosition": [0.7, 0.8],
-      "timeMargin": 600,
       "sliceAngle": 210
     },
     {
-      "sliceBeat": 21.5,
-      "fromPosition": [0.8, 1.0],
-      "slicePosition": [0.9, 0.7],
+      "sliceBeat": 19,
+      "fromPosition": [0.6, 1.0],
+      "slicePosition": [0.7, 0.8],
       "timeMargin": 600,
-      "sliceAngle": 120
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 20,
+      "fromPosition": [1.0, 0.5],
+      "slicePosition": [0.8, 0.5],
+      "timeMargin": 600,
+      "sliceAngle": 90
     }
   ]
 }
