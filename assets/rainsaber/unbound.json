@@ -87,6 +87,27 @@
       "slicePosition": [0.8, 0.5],
       "timeMargin": 600,
       "sliceAngle": 90
+    },
+    {
+      "sliceBeat": 22,
+      "fromPosition": [0.7, 0.0],
+      "slicePosition": [0.6, 0.2],
+      "timeMargin": 600,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 23,
+      "fromPosition": [0.5, 0.0],
+      "slicePosition": [0.4, 0.2],
+      "timeMargin": 600,
+      "sliceAngle": -30
+    },
+    {
+      "sliceBeat": 24,
+      "fromPosition": [0.0, 0.2],
+      "slicePosition": [0.2, 0.5],
+      "timeMargin": 600,
+      "sliceAngle": -90
     }
   ]
 }
