@@ -226,7 +226,7 @@ function toggleEditMode() {
 }
 
 function editModeKeydown(e) {
-  if (!editMode) return;
+  // if (!editMode) return;
 
   switch (e.code) {
     case "ArrowLeft":
@@ -236,6 +236,11 @@ function editModeKeydown(e) {
       break;
     case "ArrowRight":
       currentTime = Math.max(0, currentTime + 2000);
+      audioPlayer.currentTime = currentTime / 1000;
+      buildNotes();
+      break;
+    case "ArrowUp":
+      currentTime = beatToMS(trackInfo.notes.at(-5).sliceBeat);
       audioPlayer.currentTime = currentTime / 1000;
       buildNotes();
       break;
