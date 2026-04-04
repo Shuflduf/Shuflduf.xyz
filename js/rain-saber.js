@@ -143,6 +143,8 @@ $(function () {
   canvas.width = canvas.clientWidth;
   ctx = canvas.getContext("2d");
 
+  setInterval(() => mousePath.shift(), 100);
+
   fetch("/assets/rainsaber/unbound.json")
     .then((r) => r.json())
     .then((r) => {
@@ -298,4 +300,9 @@ function pointToLineDistance(point, line1, line2) {
 
 function beatToMS(beat) {
   return beat * (60000 / trackInfo.musicBPM) + trackInfo.musicOffset * 1000;
+}
+
+function distance([x1, y1], [x2, y2]) {
+  const delta = [x2 - x1, y2 - y1];
+  return Math.sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
 }
