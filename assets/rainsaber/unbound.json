@@ -327,6 +327,230 @@
       "sliceAngle": -150
     },
     {
+      "sliceBeat": 62,
+      "fromPosition": [0.0, 0.1],
+      "slicePosition": [0.5, 0.6],
+      "timeMargin": 1200,
+      "sliceAngle": -90
+    },
+    {
+      "sliceBeat": 63,
+      "fromPosition": [0.7, 1.0],
+      "slicePosition": [0.6, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 64,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.4, 0.4],
+      "timeMargin": 1200,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 65,
+      "fromPosition": [0.3, 0.0],
+      "slicePosition": [0.4, 0.4],
+      "timeMargin": 1600,
+      "sliceAngle": -150
+    },
+    {
+      "sliceBeat": 66,
+      "fromPosition": [0.7, 0.0],
+      "slicePosition": [0.6, 0.8],
+      "timeMargin": 1600,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 68,
+      "fromPosition": [1.0, 0.3],
+      "slicePosition": [0.6, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 68.5,
+      "fromPosition": [1.0, 0.6],
+      "slicePosition": [0.7, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": -150
+    },
+    {
+      "sliceBeat": 69.5,
+      "fromPosition": [0.0, 0.3],
+      "slicePosition": [0.4, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 70,
+      "fromPosition": [0.0, 0.4],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": -150
+    },
+    {
+      "sliceBeat": 71,
+      "fromPosition": [0.7, 0.0],
+      "slicePosition": [0.6, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 72,
+      "fromPosition": [0.6, 0.0],
+      "slicePosition": [0.5, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": -110
+    },
+    {
+      "sliceBeat": 72.5,
+      "fromPosition": [0.6, 0.0],
+      "slicePosition": [0.5, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 110
+    },
+    {
+      "sliceBeat": 73,
+      "fromPosition": [0.0, 0.3],
+      "slicePosition": [0.3, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": -60
+    },
+    {
+      "sliceBeat": 74,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.5, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 74.5,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.5, 0.7],
+      "timeMargin": 1000,
+      "sliceAngle": -30
+    },
+    {
+      "sliceBeat": 75,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.5, 0.7],
+      "timeMargin": 1200,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 76,
+      "fromPosition": [0.8, 1.0],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 77,
+      "fromPosition": [0.2, 0.0],
+      "slicePosition": [0.7, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 78,
+      "fromPosition": [0.0, 0.2],
+      "slicePosition": [0.3, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": -60
+    },
+    {
+      "sliceBeat": 79,
+      "fromPosition": [1.0, 0.8],
+      "slicePosition": [0.7, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 110
+    },
+    {
+      "sliceBeat": 80,
+      "fromPosition": [0.4, 0.0],
+      "slicePosition": [0.6, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 0
+    },
+    {
+      "sliceBeat": 80.5,
+      "fromPosition": [0.4, 0.0],
+      "slicePosition": [0.4, 0.4],
+      "timeMargin": 1000,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 81,
+      "fromPosition": [0.4, 0.0],
+      "slicePosition": [0.2, 0.6],
+      "timeMargin": 1200,
+      "sliceAngle": -60
+    },
+    {
+      "sliceBeat": 82,
+      "fromPosition": [0.4, 1.0],
+      "slicePosition": [0.4, 0.8],
+      "timeMargin": 800,
+      "sliceAngle": 180
+    },
+    {
+      "sliceBeat": 83,
+      "fromPosition": [1.0, 1.0],
+      "slicePosition": [0.7, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": 135
+    },
+    {
+      "sliceBeat": 84,
+      "fromPosition": [1.0, 0.3],
+      "slicePosition": [0.7, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 90
+    },
+    {
+      "sliceBeat": 85,
+      "fromPosition": [0.0, 0.3],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": 30
+    },
+    {
+      "sliceBeat": 85.5,
+      "fromPosition": [1.0, 0.7],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": -110
+    },
+    {
+      "sliceBeat": 86,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 1200,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 87,
+      "fromPosition": [0.7, 0.0],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 1600,
+      "sliceAngle": -90
+    },
+    {
+      "sliceBeat": 88,
+      "fromPosition": [0.5, 0.0],
+      "slicePosition": [0.5, 0.3],
+      "timeMargin": 600,
+      "sliceAngle": 90
+    },
+    {
+      "sliceBeat": 89,
+      "fromPosition": [0.0, 0.8],
+      "slicePosition": [0.5, 0.8],
+      "timeMargin": 800,
+      "sliceAngle": -90
+    },
+    {
       "sliceBeat": 999,
       "fromPosition": [0.2, 0.0],
       "slicePosition": [0.5, 0.3],

@@ -172,6 +172,7 @@ function startGame() {
 
 function buildNotes() {
   notes = trackInfo.notes.map((note) => new Note({ ...note }));
+  notes.reverse();
 }
 
 function mouseMove(e) {
