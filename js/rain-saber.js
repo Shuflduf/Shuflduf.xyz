@@ -198,7 +198,7 @@ function checkSliceCollisions(startPoint, endPoint) {
 
     const completion =
       (currentTime - beatToMS(note.sliceBeat)) / note.timeMargin;
-    if (dist < 35 && Math.abs(completion) < 0.3 && angleValid) {
+    if (dist < 20 && Math.abs(completion) < 0.3 && angleValid) {
       notes = notes.filter((n) => n != note);
     }
   }
