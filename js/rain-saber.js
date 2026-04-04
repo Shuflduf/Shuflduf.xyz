@@ -240,7 +240,7 @@ function editModeKeydown(e) {
       buildNotes();
       break;
     case "ArrowUp":
-      currentTime = beatToMS(trackInfo.notes.at(-5).sliceBeat);
+      currentTime = beatToMS(trackInfo.notes.at(-8).sliceBeat);
       audioPlayer.currentTime = currentTime / 1000;
       buildNotes();
       break;
