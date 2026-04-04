@@ -302,6 +302,10 @@ function beatToMS(beat) {
   return beat * (60000 / trackInfo.musicBPM) + trackInfo.musicOffset * 1000;
 }
 
+function msToBeat(ms) {
+  return (ms - trackInfo.musicOffset * 1000) * (trackInfo.musicBPM / 60000);
+}
+
 function distance([x1, y1], [x2, y2]) {
   const delta = [x2 - x1, y2 - y1];
   return Math.sqrt(delta[0] * delta[0] + delta[1] * delta[1]);
