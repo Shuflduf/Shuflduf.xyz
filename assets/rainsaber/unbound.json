@@ -642,11 +642,200 @@
       "sliceAngle": 30
     },
     {
+      "sliceBeat": 102,
+      "fromPosition": [0.3, 0.0],
+      "slicePosition": [0.4, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 103,
+      "fromPosition": [0.3, 0.0],
+      "slicePosition": [0.4, 0.6],
+      "timeMargin": 1600,
+      "sliceAngle": -30
+    },
+    {
+      "sliceBeat": 104,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.4, 0.6],
+      "timeMargin": 1200,
+      "sliceAngle": 110
+    },
+    {
+      "sliceBeat": 104.5,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.5, 0.4],
+      "timeMargin": 1000,
+      "sliceAngle": -180
+    },
+    {
+      "sliceBeat": 105,
+      "fromPosition": [0.3, 1.0],
+      "slicePosition": [0.6, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": -110
+    },
+    {
+      "sliceBeat": 106,
+      "fromPosition": [0.8, 1.0],
+      "slicePosition": [0.5, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": -30
+    },
+    {
+      "sliceBeat": 107,
+      "fromPosition": [1.0, 0.2],
+      "slicePosition": [0.6, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 108,
+      "fromPosition": [0.0, 0.8],
+      "slicePosition": [0.8, 0.5],
+      "timeMargin": 1200,
+      "sliceAngle": 150
+    },
+    {
+      "sliceBeat": 109,
+      "fromPosition": [1.0, 0.0],
+      "slicePosition": [0.3, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 0
+    },
+    {
+      "sliceBeat": 110,
+      "fromPosition": [0.0, 1.0],
+      "slicePosition": [0.3, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": 180
+    },
+    {
+      "sliceBeat": 111,
+      "fromPosition": [1.0, 0.0],
+      "slicePosition": [0.7, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 0
+    },
+    {
+      "sliceBeat": 112,
+      "fromPosition": [0.0, 1.0],
+      "slicePosition": [0.7, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": 180
+    },
+    {
+      "sliceBeat": 113,
+      "fromPosition": [0.2, 0.0],
+      "slicePosition": [0.2, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 114,
+      "fromPosition": [0.4, 1.0],
+      "slicePosition": [0.4, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": -60
+    },
+    {
+      "sliceBeat": 115,
+      "fromPosition": [1.0, 0.6],
+      "slicePosition": [0.7, 0.5],
+      "timeMargin": 800,
+      "sliceAngle": 180
+    },
+    {
+      "sliceBeat": 116,
+      "fromPosition": [0.4, 1.0],
+      "slicePosition": [0.4, 0.7],
+      "timeMargin": 800,
+      "sliceAngle": -60
+    },
+    {
+      "sliceBeat": 117,
+      "fromPosition": [0.6, 0.0],
+      "slicePosition": [0.6, 0.3],
+      "timeMargin": 800,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 118,
+      "fromPosition": [0.0, 0.6],
+      "slicePosition": [0.7, 0.5],
+      "timeMargin": 1200,
+      "sliceAngle": 0
+    },
+    {
+      "sliceBeat": 118.5,
+      "fromPosition": [0.0, 0.4],
+      "slicePosition": [0.6, 0.3],
+      "timeMargin": 1400,
+      "sliceAngle": 180
+    },
+    {
+      "sliceBeat": 119,
+      "fromPosition": [0.0, 0.6],
+      "slicePosition": [0.4, 0.5],
+      "timeMargin": 1600,
+      "sliceAngle": 0
+    },
+    {
+      "sliceBeat": 120,
+      "fromPosition": [0.0, 0.6],
+      "slicePosition": [0.4, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 45
+    },
+    {
+      "sliceBeat": 121,
+      "fromPosition": [0.0, 0.8],
+      "slicePosition": [0.8, 0.3],
+      "timeMargin": 1200,
+      "sliceAngle": -150
+    },
+    {
+      "sliceBeat": 122,
+      "fromPosition": [0.8, 0.0],
+      "slicePosition": [0.8, 0.7],
+      "timeMargin": 1200,
+      "sliceAngle": -60
+    },
+    {
+      "sliceBeat": 123,
+      "fromPosition": [0.2, 1.0],
+      "slicePosition": [0.2, 0.3],
+      "timeMargin": 1200,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 124,
+      "fromPosition": [0.8, 1.0],
+      "slicePosition": [0.4, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": -110
+    },
+    {
+      "sliceBeat": 124.5,
+      "fromPosition": [0.2, 1.0],
+      "slicePosition": [0.6, 0.4],
+      "timeMargin": 800,
+      "sliceAngle": 60
+    },
+    {
+      "sliceBeat": 125.5,
+      "fromPosition": [1.0, 0.1],
+      "slicePosition": [0.6, 0.6],
+      "timeMargin": 800,
+      "sliceAngle": 300
+    },
+    {
       "sliceBeat": 999,
       "fromPosition": [0.2, 0.0],
       "slicePosition": [0.5, 0.3],
       "timeMargin": 1200,
-      "sliceAngle": 0
+      "sliceAngle": 30
     }
   ]
 }
