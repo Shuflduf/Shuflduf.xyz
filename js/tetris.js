@@ -82,7 +82,7 @@ let effectiveInputs = {
 let arrTimer = 0;
 
 $(function () {
-  const prevHighScore = getCookie("tetris-highscore");
+  const prevHighScore = localStorage.getItem("tetris-high-score");
   if (prevHighScore != "") {
     highScore = prevHighScore;
   }
@@ -452,7 +452,7 @@ function resetGame() {
   }
   if (score > highScore) {
     highScore = score;
-    setCookie("tetris-highscore", highScore, 100);
+    localStorage.setItem("tetris-highscore", highScore);
   }
   score = 0;
   scoreLabel.text(`Score: ${score}`);
