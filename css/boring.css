@@ -191,9 +191,10 @@ html[dark-mode="false"] {
     background-color: var(--bg-secondary);
     position: fixed;
     top: 50%;
-    right: -200px;
+    right: -300px;
     padding: 16px;
-    min-width: 200px;
+    /* max-width: 300px; */
+    width: 300px;
     transform: translateY(-50%);
     border: 2px solid var(--bg-focus);
     border-right: none;

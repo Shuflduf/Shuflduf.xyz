@@ -1,5 +1,5 @@
 // TODO: make this localstorage
-let sidebarPinned = true;
+let sidebarPinned = false;
 
 $(function () {
   const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`;
@@ -73,6 +73,14 @@ $(function () {
     const icon = tools[$(this).text().trim()];
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
+
+  const $sidebar = $(".sidebar");
+  $sidebar.prepend(
+    `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
+  );
+  if (sidebarPinned) {
+    $sidebar.addClass("pinned");
+  }
 
   $(".pin").click(() => {
     sidebarPinned = !sidebarPinned;

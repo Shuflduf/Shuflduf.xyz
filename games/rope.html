@@ -3,12 +3,12 @@
 
 <head>
   <title>Shuflduf.xyz</title>
-  <link rel="icon" href="/assets/favicon.png">
-  <link rel="stylesheet" href="/css/fun.css">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="/js/layout.js"></script>
+  <script src="/js/init.js"></script>
   <script src="/js/rope.js"></script>
+
+  <link rel="icon" href="/assets/favicon.png">
+  <link rel="stylesheet" href="/css/global.css">
 </head>
 
 <body>
@@ -20,8 +20,9 @@
       <h1>Rope Physics</h1>
       <canvas id="rope" height=500></canvas>
     </div>
-    <div class="sidebar">
-      <div class="section top-right">
+    <aside class="sidebar">
+      <button class="pin"><img src="https://icons.hackclub.com/api/icons/0x978159/pin-fill" alt="pin"></button>
+      <div>
         <h1>Options</h1>
         <label for="length">Length</label>
         <input type="number" id="length" value=400>
@@ -41,7 +42,7 @@
 
         </ul>
       </div>
-    </div>
+    </aside>
   </div>
 </body>
 
