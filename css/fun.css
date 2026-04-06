@@ -1,26 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap');
+
+
+@keyframes bg-scroll {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 24px 0px;
+  }
+}
+
+html[dark-mode="true"] {
+  --bevel-light: #FFF5;
+  --bevel-dark: #0005;
+  --accent: #4EC79E;
+  --accent-light: #83D8BC;
+  --text-light: #CFCFCF;
+  --text-mid: #41536b;
+  --shadow: 0 5px 5px #0005;
+
+  background-color: #4e6680;
+  background-size: 24px;
+  background-image: url(/assets/background_tile.png);
+  image-rendering: pixelated;
+  animation: bg-scroll 1s linear infinite;
+  font-family: "Coiny";
+  color: var(--text-light);
+}
+
 [dark-mode="true"] {
-  @import url('https://fonts.googleapis.com/css2?family=Coiny&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap');
-
-  :root {
-    --bevel-light: #FFF5;
-    --bevel-dark: #0005;
-    --accent: #4EC79E;
-    --accent-light: #83D8BC;
-    --text-light: #CFCFCF;
-    --text-mid: #41536b;
-    --shadow: 0 5px 5px #0005;
-  }
-
-  @keyframes bg-scroll {
-    from {
-      background-position: 0 0;
-    }
-
-    to {
-      background-position: 24px 0px;
-    }
-  }
 
   img,
   video {
@@ -63,15 +73,6 @@
     margin-top: 4px;
   }
 
-  html {
-    background-color: #4e6680;
-    background-size: 24px;
-    background-image: url(/assets/background_tile.png);
-    image-rendering: pixelated;
-    animation: bg-scroll 1s linear infinite;
-    font-family: "Coiny";
-    color: var(--text-light);
-  }
 
   body {
     margin: 8px auto;
