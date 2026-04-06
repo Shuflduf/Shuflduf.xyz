@@ -231,6 +231,10 @@ html[dark-mode="true"] {
     font-size: 1.3rem;
   }
 
+  .sidebar .pin {
+    display: none;
+  }
+
   .main {
     text-align: center;
   }

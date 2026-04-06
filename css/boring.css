@@ -191,16 +191,46 @@ html[dark-mode="false"] {
     background-color: var(--bg-secondary);
     position: fixed;
     top: 50%;
-    right: 0;
+    right: -200px;
     padding: 16px;
     min-width: 200px;
     transform: translateY(-50%);
     border: 2px solid var(--bg-focus);
     border-right: none;
-    transition: 200ms border-color;
+    transition: border-color 200ms, right 300ms;
   }
 
   .sidebar:hover {
     border-color: var(--accent);
+    right: 0;
+  }
+
+  .sidebar.pinned {
+    right: 0;
+  }
+
+  .sidebar h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .sidebar div:not(:last-child) {
+    border-bottom: 2px solid var(--bg-focus);
+    margin-bottom: 16px;
+  }
+
+  .sidebar .pin {
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .sidebar img {
+    height: 100%;
+    width: 100%;
   }
 }

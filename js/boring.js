@@ -1,3 +1,6 @@
+// TODO: make this localstorage
+let sidebarPinned = true;
+
 $(function () {
   const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`;
 
@@ -66,8 +69,23 @@ $(function () {
     LUA: "devicon-lua-plain",
   };
 
-  $("ul.language-chips li").each(function () {
+  $("ul.language-chips li").each(() => {
     const icon = tools[$(this).text().trim()];
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
+
+  $(".pin").click(() => {
+    sidebarPinned = !sidebarPinned;
+    $(".pin img").attr("src", pinUrl(sidebarPinned, true));
+    if (sidebarPinned) {
+      $(".sidebar").addClass("pinned");
+    } else {
+      $(".sidebar").removeClass("pinned");
+    }
+  });
 });
+
+function pinUrl(fill, darkTheme) {
+  const colour = `0x${fill ? (darkTheme ? "978159" : "FF0000") : darkTheme ? "c0bcb5" : "00FF00"}`;
+  return `https://icons.hackclub.com/api/icons/${colour}/${fill ? "pin-fill" : "pin"}`;
+}
