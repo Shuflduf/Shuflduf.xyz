@@ -180,10 +180,11 @@ html[dark-mode="false"] {
     padding-left: 18px;
   }
 
-  img {
+  img,
+  video {
     display: block;
     margin: auto;
-    height: 300px;
+    max-height: 300px;
     /* max-width: 100%; */
   }
 
