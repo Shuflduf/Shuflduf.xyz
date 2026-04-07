@@ -1,4 +1,5 @@
 let sidebarPinned = localStorage.getItem("sidebar-pinned") == "true";
+let navlinksOpened = false;
 
 $(function () {
   const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`;
@@ -70,8 +71,24 @@ $(function () {
 
   $("ul.language-chips li").each(function () {
     const icon = tools[$(this).text().trim()];
-    console.log($(this).text());
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
+  });
+
+  $("#navlinks-include").load("/components/navlinks_boring.html", () => {
+    $(".open-menu img").attr("src", hackclubIcon("menu", navlinksOpened, true));
+    $(".navlinks .open-menu").on("mousedown", () => {
+      navlinksOpened = !navlinksOpened;
+      console.log(navlinksOpened);
+      $(".open-menu img").attr(
+        "src",
+        hackclubIcon("menu", navlinksOpened, true),
+      );
+      if (navlinksOpened) {
+        $(".navlinks").addClass("opened");
+      } else {
+        $(".navlinks").removeClass("opened");
+      }
+    });
   });
 
   console.log(sidebarPinned);
@@ -95,7 +112,11 @@ $(function () {
   });
 });
 
+function hackclubIcon(icon, active, darkTheme) {
+  const colour = `0x${active ? (darkTheme ? "978159" : "FF0000") : darkTheme ? "c0bcb5" : "00FF00"}`;
+  return `https://icons.hackclub.com/api/icons/${colour}/${icon}`;
+}
+
 function pinUrl(fill, darkTheme) {
-  const colour = `0x${fill ? (darkTheme ? "978159" : "FF0000") : darkTheme ? "c0bcb5" : "00FF00"}`;
-  return `https://icons.hackclub.com/api/icons/${colour}/${fill ? "pin-fill" : "pin"}`;
+  return hackclubIcon(fill ? "pin-fill" : "pin", fill, darkTheme);
 }

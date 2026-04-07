@@ -252,8 +252,6 @@ html[dark-mode="false"] {
 
   .sidebar .pin {
     position: absolute;
-    height: 32px;
-    width: 32px;
     padding: 0;
     background: none;
     border: none;
@@ -264,7 +262,13 @@ html[dark-mode="false"] {
     }
   }
 
-  .sidebar img {
+  .sidebar .pin {
+    height: 32px;
+    width: 32px;
+  }
+
+  .sidebar img,
+  .navlinks img {
     height: 100%;
     width: 100%;
   }
@@ -282,14 +286,17 @@ html[dark-mode="false"] {
     position: fixed;
     flex-direction: row;
     gap: 64px;
-    top: 0;
+    top: -150px;
     left: 0;
     width: 100%;
     padding: 16px;
     justify-content: center;
     border-bottom: 2px solid var(--bg-focus);
-    /* box-sizing: border-box; */
-    /* align-items: center; */
+    transition: border-color 200ms, top 300ms;
+  }
+
+  .navlinks.opened {
+    top: 0px
   }
 
   .navlinks:hover {
@@ -302,5 +309,21 @@ html[dark-mode="false"] {
 
   .navlinks a:not(:last-child) {
     margin-right: 8px;
+  }
+
+  .navlinks .open-menu {
+    height: 64px;
+    width: 64px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    img {
+      border: none;
+    }
   }
 }
