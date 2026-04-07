@@ -2,7 +2,6 @@
 // dark mode = dark world = fun mode
 
 const darkMode = localStorage.getItem("dark-mode") == "true" ?? false;
-console.log(darkMode);
 document.documentElement.setAttribute("dark-mode", darkMode);
 if (darkMode) {
   $("head").append('<script src="/js/fun.js"></script>');

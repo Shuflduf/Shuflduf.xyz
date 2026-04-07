@@ -1,5 +1,4 @@
-// TODO: make this localstorage
-let sidebarPinned = false;
+let sidebarPinned = localStorage.getItem("sidebar-pinned") == "true";
 
 $(function () {
   const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`;
@@ -69,11 +68,13 @@ $(function () {
     LUA: "devicon-lua-plain",
   };
 
-  $("ul.language-chips li").each(() => {
+  $("ul.language-chips li").each(function () {
     const icon = tools[$(this).text().trim()];
+    console.log($(this).text());
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
 
+  console.log(sidebarPinned);
   const $sidebar = $(".sidebar");
   $sidebar.prepend(
     `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
@@ -82,8 +83,9 @@ $(function () {
     $sidebar.addClass("pinned");
   }
 
-  $(".pin").click(() => {
+  $(".pin").on("mousedown", () => {
     sidebarPinned = !sidebarPinned;
+    localStorage.setItem("sidebar-pinned", sidebarPinned);
     $(".pin img").attr("src", pinUrl(sidebarPinned, true));
     if (sidebarPinned) {
       $(".sidebar").addClass("pinned");

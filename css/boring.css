@@ -185,11 +185,31 @@ html[dark-mode="false"] {
     display: block;
     margin: auto;
     max-height: 300px;
+    border: 2px solid var(--bg-focus);
+    transition: border-color 200ms;
+
     /* max-width: 100%; */
   }
 
+  img:hover,
+  video:hover {
+    border-color: var(--accent);
+  }
+
   canvas {
+    box-sizing: border-box;
     width: 100%;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--bg-focus);
+    transition: border-color 200ms;
+  }
+
+  canvas:hover {
+    border-color: var(--accent);
+  }
+
+  canvas#rope {
+    width: 700px;
   }
 
   .sidebar {
@@ -235,6 +255,10 @@ html[dark-mode="false"] {
     background: none;
     border: none;
     cursor: pointer;
+
+    img {
+      border: none;
+    }
   }
 
   .sidebar img {
@@ -246,5 +270,6 @@ html[dark-mode="false"] {
     width: 200px;
     margin: auto;
     display: block;
+    border: none;
   }
 }

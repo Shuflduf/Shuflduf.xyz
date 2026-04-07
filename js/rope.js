@@ -94,7 +94,7 @@ class Rope {
 
   draw() {
     ctx.lineWidth = 8;
-    ctx.strokeStyle = "#4EC79E";
+    ctx.strokeStyle = darkMode ? "#4EC79E" : "#978159";
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.beginPath();
@@ -164,7 +164,7 @@ function buildRope() {
 let ropes = [];
 let lastFrame = 0;
 function process(currentFrame) {
-  const delta = currentFrame - lastFrame;
+  const delta = Math.min(currentFrame - lastFrame, 50);
   lastFrame = currentFrame;
 
   canvas.width = canvas.clientWidth;
