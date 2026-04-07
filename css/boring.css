@@ -188,6 +188,7 @@ html[dark-mode="false"] {
     display: block;
     margin: auto;
     max-height: 300px;
+    max-width: 100%;
     border: 2px solid var(--bg-focus);
     transition: border-color 200ms;
 
