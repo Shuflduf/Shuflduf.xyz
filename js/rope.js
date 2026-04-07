@@ -123,6 +123,21 @@ $(function () {
     $canv.css("cursor", "grab");
     mouseDown = false;
   });
+  $canv.on("touchstart", (e) => {
+    $canv.css("cursor", "grabbing");
+    mouseDown = true;
+  });
+  $canv.on("touchend", (e) => {
+    $canv.css("cursor", "grab");
+    mouseDown = false;
+  });
+  $canv.on("touchmove", (e) => {
+    console.log(e.originalEvent.touches[0]);
+    mousePos = [
+      e.originalEvent.touches[0].pageX,
+      e.originalEvent.touches[0].pageY,
+    ];
+  });
   $("#length").on("change", () => {
     length = $("#length").val();
     buildRope();
