@@ -188,6 +188,10 @@ html[dark-mode="false"] {
     /* max-width: 100%; */
   }
 
+  canvas {
+    width: 100%;
+  }
+
   .sidebar {
     background-color: var(--bg-secondary);
     position: fixed;
@@ -200,6 +204,8 @@ html[dark-mode="false"] {
     border: 2px solid var(--bg-focus);
     border-right: none;
     transition: border-color 200ms, right 300ms;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
   }
 
   .sidebar:hover {
@@ -234,5 +240,11 @@ html[dark-mode="false"] {
   .sidebar img {
     height: 100%;
     width: 100%;
+  }
+
+  .sidebar canvas {
+    width: 200px;
+    margin: auto;
+    display: block;
   }
 }

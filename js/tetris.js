@@ -82,10 +82,10 @@ let effectiveInputs = {
 let arrTimer = 0;
 
 $(function () {
-  const prevHighScore = localStorage.getItem("tetris-high-score");
-  if (prevHighScore != "") {
-    highScore = prevHighScore;
-  }
+  const prevHighScore = localStorage.getItem("tetris-highscore") ?? 0;
+  // if (prevHighScore != "") {
+  highScore = prevHighScore;
+  // }
   canvas = $("#game").get(0);
   ctx = canvas.getContext("2d");
   nextCanvas = $("#next").get(0);
