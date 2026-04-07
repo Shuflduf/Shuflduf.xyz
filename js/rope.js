@@ -132,10 +132,10 @@ $(function () {
     mouseDown = false;
   });
   $canv.on("touchmove", (e) => {
-    console.log(e.originalEvent.touches[0]);
+    const canvPos = canvas.getBoundingClientRect();
     mousePos = [
-      e.originalEvent.touches[0].pageX,
-      e.originalEvent.touches[0].pageY,
+      e.originalEvent.touches[0].pageX - canvPos.top,
+      e.originalEvent.touches[0].pageY - canvPos.left,
     ];
   });
   $("#length").on("change", () => {
