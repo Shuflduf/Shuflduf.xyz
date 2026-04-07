@@ -258,6 +258,7 @@ html[dark-mode="false"] {
     cursor: pointer;
 
     img {
+      transition: transform 100ms;
       border: none;
     }
   }
@@ -267,8 +268,13 @@ html[dark-mode="false"] {
     width: 32px;
   }
 
+  .sidebar .pin:hover img {
+    transform: scale(1.2);
+  }
+
+
   .sidebar img,
-  .navlinks img {
+  .open-menu img {
     height: 100%;
     width: 100%;
   }
@@ -311,19 +317,26 @@ html[dark-mode="false"] {
     margin-right: 8px;
   }
 
-  .navlinks .open-menu {
+  .open-menu {
     height: 64px;
     width: 64px;
-    top: 0;
-    left: 0;
+    top: 16px;
+    left: 16px;
     position: fixed;
     padding: 0;
+    /* background: var(--bg-secondary); */
+    /* border: 2px solid var(--bg-focus); */
     background: none;
     border: none;
     cursor: pointer;
 
     img {
       border: none;
+      transition: transform 100ms;
     }
+  }
+
+  .open-menu:hover img {
+    transform: scale(1.1);
   }
 }

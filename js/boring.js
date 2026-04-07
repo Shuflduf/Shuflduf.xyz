@@ -76,7 +76,7 @@ $(function () {
 
   $("#navlinks-include").load("/components/navlinks_boring.html", () => {
     $(".open-menu img").attr("src", hackclubIcon("menu", navlinksOpened, true));
-    $(".navlinks .open-menu").on("mousedown", () => {
+    $(".open-menu").on("mousedown", () => {
       navlinksOpened = !navlinksOpened;
       console.log(navlinksOpened);
       $(".open-menu img").attr(
