@@ -222,6 +222,7 @@ html[dark-mode="false"] {
   .sidebar {
     background-color: var(--bg-secondary);
     position: fixed;
+    z-index: 4;
     top: 50%;
     right: -250px;
     padding: 16px;
@@ -255,6 +256,7 @@ html[dark-mode="false"] {
   }
 
   .sidebar .pin {
+    display: block;
     position: absolute;
     padding: 0;
     background: none;
@@ -276,11 +278,12 @@ html[dark-mode="false"] {
     transform: scale(1.2);
   }
 
-
   .sidebar img,
-  .open-menu img {
+  .open-menu img,
+  .open-sidebar img {
     height: 100%;
     width: 100%;
+    transition: transform 300ms;
   }
 
   .sidebar canvas {
@@ -321,15 +324,12 @@ html[dark-mode="false"] {
     margin-right: 8px;
   }
 
-  .open-menu {
+  .open-menu,
+  .open-sidebar {
     height: 64px;
     width: 64px;
-    top: 16px;
-    left: 16px;
     position: fixed;
     padding: 0;
-    /* background: var(--bg-secondary); */
-    /* border: 2px solid var(--bg-focus); */
     background: none;
     border: none;
     cursor: pointer;
@@ -340,7 +340,91 @@ html[dark-mode="false"] {
     }
   }
 
+  .open-menu {
+    top: 16px;
+    left: 16px;
+  }
+
   .open-menu:hover img {
     transform: scale(1.1);
+  }
+
+  .open-sidebar {
+    display: none;
+    top: 16px;
+    right: 16px;
+  }
+
+  .open-sidebar img.active {
+    /* rotate: 180deg; */
+    transform: rotate(-180deg);
+  }
+
+  @media (max-width: 768px) {
+    body {
+      margin: 0 12px;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p,
+    li {
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+
+    canvas#rope {
+      width: 100%;
+    }
+
+    .sidebar {
+
+      right: -100%;
+      width: 85%;
+      max-width: 300px;
+    }
+
+    .sidebar:hover {
+      right: -100%;
+    }
+
+    .sidebar.pinned {
+      right: 0;
+    }
+
+    .navlinks {
+      z-index: 5;
+      top: -300px;
+      flex-direction: column;
+      gap: 16px;
+      padding-left: 96px;
+      /* align-items: ; */
+      font-size: 0.9rem;
+    }
+
+    .navlinks a:not(:last-child) {
+      margin-right: 0;
+    }
+
+    img,
+    video {
+      max-height: 200px;
+    }
+
+    code {
+      font-size: 0.75rem;
+      padding: 6px;
+      overflow-x: auto;
+    }
+
+    .open-sidebar {
+      display: block;
+    }
+
+    .sidebar .pin {
+      display: none;
+    }
   }
 }

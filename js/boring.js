@@ -89,6 +89,25 @@ $(function () {
         $(".navlinks").removeClass("opened");
       }
     });
+
+    $(".open-sidebar img").attr(
+      "src",
+      hackclubIcon("right-caret", sidebarPinned, true),
+    );
+    $(".open-sidebar").on("mousedown", () => {
+      sidebarPinned = !sidebarPinned;
+      $(".open-sidebar img").attr(
+        "src",
+        hackclubIcon("right-caret", sidebarPinned, true),
+      );
+      if (sidebarPinned) {
+        $(".open-sidebar img").addClass("active");
+        $(".sidebar").addClass("pinned");
+      } else {
+        $(".open-sidebar img").removeClass("active");
+        $(".sidebar").removeClass("pinned");
+      }
+    });
   });
 
   console.log(sidebarPinned);
