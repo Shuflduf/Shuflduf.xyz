@@ -172,11 +172,14 @@ html[dark-mode="false"] {
   }
 
   code {
-    display: block;
     font-family: "JetBrains Mono";
     background-color: var(--bg-tertiary);
     font-size: 0.8rem;
     padding: 8px;
+  }
+
+  pre code {
+    display: block;
     padding-left: 18px;
   }
 
