@@ -2,14 +2,17 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  [dark-mode="false"] {
+    width: 700px;
+  }
 }
 
 .message {
   width: 90%;
-  font-family: "Comic Relief";
 }
 
-.message h2 {
+[dark-mode="true"] .message h2 {
   font-family: "Coiny";
 }
 

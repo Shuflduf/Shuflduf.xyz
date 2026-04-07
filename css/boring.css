@@ -196,7 +196,7 @@ html[dark-mode="false"] {
     background-color: var(--bg-secondary);
     position: fixed;
     top: 50%;
-    right: -300px;
+    right: -250px;
     padding: 16px;
     /* max-width: 300px; */
     width: 300px;
