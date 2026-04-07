@@ -10,4 +10,7 @@ $(function () {
     if (typeof _finishedLoadingNavlinks == "function")
       _finishedLoadingNavlinks();
   });
+  $("hr").replaceWith(
+    `<img class="seperator" src="assets/seperator.gif" alt="seperator">`,
+  );
 });

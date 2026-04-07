@@ -199,6 +199,10 @@ html[dark-mode="false"] {
     border-color: var(--accent);
   }
 
+  hr {
+    border: 2px solid var(--bg-focus);
+  }
+
   canvas {
     box-sizing: border-box;
     width: 100%;

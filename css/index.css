@@ -1,0 +1,53 @@
+.hero {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero .info {
+  list-style: none;
+  padding: 0;
+}
+
+.hero .info li {
+  font-size: 1.5rem;
+}
+
+.hero .info span {
+  font-style: italic;
+}
+
+.pfps {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border: 2px solid var(--bg-focus);
+  transition: border-color 200ms;
+}
+
+.pfps:hover {
+  border-color: var(--accent);
+}
+
+.pfps img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  box-sizing: border-box;
+  transition: width 200ms, transform 200ms;
+  border: none;
+}
+
+.pfp-primary {
+  width: 100%;
+}
+
+.pfp-secondary {
+  transform: translate(50%, 50%);
+  width: 60px;
+  z-index: 1;
+}
