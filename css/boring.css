@@ -275,4 +275,32 @@ html[dark-mode="false"] {
     display: block;
     border: none;
   }
+
+  .navlinks {
+    background-color: var(--bg-secondary);
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    gap: 64px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    justify-content: center;
+    border-bottom: 2px solid var(--bg-focus);
+    /* box-sizing: border-box; */
+    /* align-items: center; */
+  }
+
+  .navlinks:hover {
+    border-color: var(--accent);
+  }
+
+  .navlinks h2 {
+    margin-top: 0;
+  }
+
+  .navlinks a:not(:last-child) {
+    margin-right: 8px;
+  }
 }
