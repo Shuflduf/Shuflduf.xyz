@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
 
-  [dark-mode="false"] {
-    width: 700px;
-  }
+[dark-mode="false"] .chat {
+  width: min(700px, calc(100vw - 24px));
 }
 
 .message {
@@ -35,6 +35,7 @@
 .cat img {
   height: 128px;
   min-width: 128px;
+  border: none;
 }
 
 .user {
@@ -43,7 +44,6 @@
   color: var(--text-mid);
   text-align: right;
 }
-
 
 .user p {
   font-weight: normal;

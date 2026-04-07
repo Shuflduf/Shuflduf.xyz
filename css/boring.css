@@ -204,6 +204,10 @@ html[dark-mode="false"] {
     border: 2px solid var(--bg-focus);
   }
 
+  input {
+    font-family: "CMU Typewriter";
+  }
+
   canvas {
     box-sizing: border-box;
     width: 100%;

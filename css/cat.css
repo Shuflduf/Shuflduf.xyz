@@ -4,6 +4,11 @@
   margin-top: 8px;
 }
 
+[dark-mode="false"] .main img {
+  /* height: revert; */
+  max-height: initial;
+}
+
 .main img,
 .pfp {
   break-inside: avoid;
