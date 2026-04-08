@@ -1,5 +1,7 @@
 let sidebarPinned = localStorage.getItem("sidebar-pinned") == "true";
 let navlinksOpened = false;
+let sidebarDragging = false;
+let dragStartX = 0;
 
 $(function () {
   const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`;
@@ -74,6 +76,11 @@ $(function () {
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
 
+  initializeNavlinks();
+  initializeSidebar();
+});
+
+function initializeNavlinks() {
   $("#navlinks-include").load("/components/navlinks_boring.html", () => {
     if (typeof _finishedLoadingNavlinks == "function")
       _finishedLoadingNavlinks();
@@ -111,11 +118,17 @@ $(function () {
       }
     });
   });
+}
 
+function initializeSidebar() {
   const $sidebar = $(".sidebar");
-  $sidebar.prepend(
-    `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
-  );
+  $sidebar
+    .prepend(
+      `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
+    )
+    .append(
+      `<div class="drawer"><button class="portal">Dark World</button></div>`,
+    );
   if (sidebarPinned) {
     $sidebar.addClass("pinned");
   }
@@ -130,7 +143,55 @@ $(function () {
       $(".sidebar").removeClass("pinned");
     }
   });
-});
+
+  let sidebarBaseWidth = 300;
+  let drawerThreshold = 30;
+  let drawerMaxOffset = 80;
+  let currentSidebarWidth = sidebarBaseWidth;
+
+  $sidebar.on("mousedown", function (e) {
+    if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
+    sidebarDragging = true;
+    dragStartX = e.clientX;
+    currentSidebarWidth = $sidebar.width();
+  });
+
+  $(document)
+    .on("mousemove", function (e) {
+      if (!sidebarDragging) return;
+
+      let dragOffset = -e.clientX + dragStartX;
+      let newWidth = currentSidebarWidth + dragOffset;
+
+      if (newWidth < sidebarBaseWidth - 10) {
+        newWidth = sidebarBaseWidth - 10;
+      } else if (newWidth > sidebarBaseWidth + drawerMaxOffset) {
+        newWidth = sidebarBaseWidth + drawerMaxOffset;
+      }
+
+      let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth - drawerThreshold);
+      $sidebar.find(".drawer").css("right", -80 + drawerOffset);
+
+      dragStartX = e.clientX;
+      currentSidebarWidth = newWidth;
+      $sidebar.width(newWidth);
+    })
+    .on("mouseup", function () {
+      if (sidebarDragging) {
+        sidebarDragging = false;
+        let currentWidth = $sidebar.width();
+        if (currentWidth < sidebarBaseWidth + drawerThreshold) {
+          $sidebar.width(sidebarBaseWidth);
+          $sidebar.find(".drawer").css("right", -80);
+        }
+      }
+    });
+
+  $(".portal").on("click", function () {
+    localStorage.setItem("dark-mode", "true");
+    location.reload();
+  });
+}
 
 function hackclubIcon(icon, active, darkTheme) {
   const colour = `0x${active ? (darkTheme ? "978159" : "FF0000") : darkTheme ? "c0bcb5" : "00FF00"}`;

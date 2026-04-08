@@ -22,6 +22,9 @@
 }
 
 html[dark-mode="false"] {
+  --bevel-light: #FFF5;
+  --bevel-dark: #0005;
+
   --bg-primary: light-dark(#fff3e6, #1d1d1d);
   --bg-secondary: light-dark(#fae6d1, #202020);
   --bg-focus: light-dark(#e8d7c3, #2d2d2d);
@@ -229,9 +232,9 @@ html[dark-mode="false"] {
     position: fixed;
     z-index: 4;
     top: 50%;
+
     right: -250px;
     padding: 16px;
-    /* max-width: 300px; */
     width: 300px;
     transform: translateY(-50%);
     border: 2px solid var(--bg-focus);
@@ -239,6 +242,7 @@ html[dark-mode="false"] {
     transition: border-color 200ms, right 300ms;
     max-height: calc(100vh - 80px);
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .sidebar:hover {
@@ -296,6 +300,32 @@ html[dark-mode="false"] {
     margin: auto;
     display: block;
     border: none;
+  }
+
+  .sidebar .drawer {
+    position: absolute;
+    right: -200px;
+    width: 80px;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .sidebar .portal {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-70deg);
+    background-color: #4EC79E;
+    font-family: "Coiny";
+    border-left: 4px solid var(--bevel-light);
+    border-top: 4px solid var(--bevel-light);
+    border-right: 4px solid var(--bevel-dark);
+    border-bottom: 4px solid var(--bevel-dark);
+    font-size: 1.5rem;
+    width: max-content;
+    padding: 4px 12px;
+    cursor: pointer;
   }
 
   .navlinks {
