@@ -21,6 +21,7 @@ html[dark-mode="true"] {
   --text-mid: #41536b;
   --shadow: 0 5px 5px #0005;
 
+  color-scheme: light dark;
   background-color: #4e6680;
   background-size: 24px;
   background-image: url(/assets/background_tile.png);
@@ -131,6 +132,14 @@ html[dark-mode="true"] {
     gap: 8px;
   }
 
+  .navlinks {
+    position: relative;
+  }
+
+  .navlinks .grabbable {
+    cursor: grab;
+  }
+
   .navlinks h2 {
     box-shadow: var(--shadow);
     background-color: var(--accent);
@@ -185,6 +194,28 @@ html[dark-mode="true"] {
     display: block;
     margin-top: 16px;
     background-color: var(--accent);
+  }
+
+  .portal {
+    position: absolute;
+    background-color: #202020;
+    color: light-dark(#cf8a3a, #9e9184);
+    font-family: "CMU Typewriter";
+    font-size: 1.5rem;
+    padding: 4px 12px;
+    border: 2px solid light-dark(#e8d7c3, #2d2d2d);
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    margin: auto;
+    display: block;
+    cursor: pointer;
+    transition: border-color 200ms;
+  }
+
+  .portal:hover {
+    border-color: light-dark(#d73c3c, #978159);
   }
 
   .top-right,

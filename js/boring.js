@@ -132,7 +132,7 @@ function initializeSidebar() {
       `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
     )
     .append(
-      `<div class="drawer"><button class="portal">Dark World</button></div>`,
+      `<div class="drawer"><button class="portal">Abscond</button></div>`,
     );
   sidebarBaseWidth = $sidebar.width();
   if (sidebarPinned) {
@@ -196,7 +196,7 @@ function initializeSidebar() {
 }
 
 function startDrag(e) {
-  if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
+  // if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
   e.preventDefault();
 
   sidebarDragging = true;
