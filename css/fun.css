@@ -336,4 +336,8 @@ html[dark-mode="true"] {
   a:visited {
     color: #36AB84;
   }
+
+  .light-world {
+    display: none;
+  }
 }

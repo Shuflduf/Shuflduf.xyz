@@ -467,4 +467,8 @@ html[dark-mode="false"] {
       display: none;
     }
   }
+
+  .dark-world {
+    display: none;
+  }
 }

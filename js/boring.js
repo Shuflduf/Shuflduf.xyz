@@ -150,41 +150,6 @@ function initializeSidebar() {
     }
   });
 
-  // $sidebar.on("mousedown", function (e) {
-  // if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
-  // sidebarDragging = true;
-  // dragStartX = e.clientX;
-  // currentSidebarWidth = $sidebar.width();
-  // $sidebar.css("cursor", "grabbing");
-  // });
-
-  // $(document)
-  //   .on("mousemove", function (e) {
-  //     if (!sidebarDragging) return;
-
-  //     let dragOffset = dragStartX - e.clientX;
-  //     let newWidth = currentSidebarWidth + dragOffset;
-
-  //     if (newWidth < sidebarBaseWidth) {
-  //       newWidth = sidebarBaseWidth;
-  //     } else if (newWidth > sidebarBaseWidth + drawerMaxOffset) {
-  //       newWidth = sidebarBaseWidth + drawerMaxOffset;
-  //     }
-
-  //     let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
-  //     $sidebar.find(".drawer").css("right", -200 + drawerOffset);
-
-  //     dragStartX = e.clientX;
-  //     currentSidebarWidth = newWidth;
-  //     $sidebar.width(newWidth);
-  //   })
-  //   .on("mouseup", function () {
-  //     if (sidebarDragging) {
-  //       sidebarDragging = false;
-  //       $sidebar.css("cursor", "");
-  //     }
-  //   });
-
   $sidebar.on("mousedown touchstart", startDrag);
   $(document).on("mousemove touchmove", doDrag);
   $(document).on("mouseup touchend touchcancel", endDrag);
@@ -196,7 +161,6 @@ function initializeSidebar() {
 }
 
 function startDrag(e) {
-  // if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
   e.preventDefault();
 
   sidebarDragging = true;

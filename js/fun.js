@@ -28,7 +28,7 @@ $(function () {
 function initializeDragging() {
   const $navlinks = $(".navlinks");
   console.log($navlinks.find(".grabbable"));
-  $navlinks.find(".grabbable").on("mousedown", function (e) {
+  $navlinks.find(".grabbable").on("mousedown touchstart", function (e) {
     e.preventDefault();
 
     currentSidebarPos = parseInt($navlinks.css("top")) || 0;
@@ -37,7 +37,7 @@ function initializeDragging() {
     $navlinks.css("cursor", "grabbing");
   });
   $(document)
-    .on("mousemove", function (e) {
+    .on("mousemove touchmove", function (e) {
       if (!navlinksDragging) return;
       e.preventDefault();
 
@@ -49,15 +49,8 @@ function initializeDragging() {
         newOffset = navlinksMaxOffset;
       }
       $navlinks.css("top", newOffset);
-      // currentSidebarPos = newOffset;
-      // let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
-      // $sidebar.find(".drawer").css("right", -200 + drawerOffset);
-      // dragStartX = getClientX(e);
-      // currentSidebarWidth = newWidth;
-      // $sidebar.width(newWidth);
-      // dragStartY = -getClientY(e);
     })
-    .on("mouseup", function (e) {
+    .on("mouseup touchend touchcancel", function (e) {
       if (!navlinksDragging) return;
       e.preventDefault();
 
