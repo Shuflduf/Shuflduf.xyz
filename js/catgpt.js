@@ -10,7 +10,7 @@ let mouthOpen = false;
 let eggMode = false;
 
 function _finishedLoadingNavlinks() {
-  $(".navlinks a[href='/projects/tetr-lang.html'] span").text("tetris");
+  $(".navlinks a[href='/projects/tetr-lang.html']").text("tetris");
 }
 
 $(function () {
@@ -23,7 +23,6 @@ $(function () {
     const $input = $("#chat-input input");
     const value = $input.val();
     $input.val("");
-    console.log(value, value == "egg");
     eggMode = value.includes("egg");
     if (eggMode) {
       $(".navlinks a[href*='tetr']").attr("href", "/assets/tree.html");

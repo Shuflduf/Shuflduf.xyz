@@ -75,10 +75,12 @@ $(function () {
   });
 
   $("#navlinks-include").load("/components/navlinks_boring.html", () => {
+    if (typeof _finishedLoadingNavlinks == "function")
+      _finishedLoadingNavlinks();
+
     $(".open-menu img").attr("src", hackclubIcon("menu", navlinksOpened, true));
     $(".open-menu").on("mousedown", () => {
       navlinksOpened = !navlinksOpened;
-      console.log(navlinksOpened);
       $(".open-menu img").attr(
         "src",
         hackclubIcon("menu", navlinksOpened, true),
@@ -110,7 +112,6 @@ $(function () {
     });
   });
 
-  console.log(sidebarPinned);
   const $sidebar = $(".sidebar");
   $sidebar.prepend(
     `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,

@@ -246,7 +246,6 @@ function editModeKeydown(e) {
       buildNotes();
       break;
   }
-  console.log(e);
 }
 
 // process
