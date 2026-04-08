@@ -123,6 +123,7 @@ function initializeNavlinks() {
 function initializeSidebar() {
   const $sidebar = $(".sidebar");
   $sidebar
+    .wrapInner(`<div class="sidebar-content"></div>`)
     .prepend(
       `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
     )
@@ -144,9 +145,8 @@ function initializeSidebar() {
     }
   });
 
-  let sidebarBaseWidth = 300;
-  let drawerThreshold = 30;
-  let drawerMaxOffset = 80;
+  let sidebarBaseWidth = $sidebar.get(0).getBoundingClientRect().width;
+  let drawerMaxOffset = 200;
   let currentSidebarWidth = sidebarBaseWidth;
 
   $sidebar.on("mousedown", function (e) {
@@ -154,6 +154,7 @@ function initializeSidebar() {
     sidebarDragging = true;
     dragStartX = e.clientX;
     currentSidebarWidth = $sidebar.width();
+    $sidebar.css("cursor", "grabbing");
   });
 
   $(document)
@@ -169,8 +170,8 @@ function initializeSidebar() {
         newWidth = sidebarBaseWidth + drawerMaxOffset;
       }
 
-      let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth - drawerThreshold);
-      $sidebar.find(".drawer").css("right", -80 + drawerOffset);
+      let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
+      $sidebar.find(".drawer").css("right", -200 + drawerOffset);
 
       dragStartX = e.clientX;
       currentSidebarWidth = newWidth;
@@ -179,10 +180,10 @@ function initializeSidebar() {
     .on("mouseup", function () {
       if (sidebarDragging) {
         sidebarDragging = false;
+        $sidebar.css("cursor", "");
         let currentWidth = $sidebar.width();
-        if (currentWidth < sidebarBaseWidth + drawerThreshold) {
-          $sidebar.width(sidebarBaseWidth);
-          $sidebar.find(".drawer").css("right", -80);
+        if (currentWidth < sidebarBaseWidth) {
+          $sidebar.css("width", "");
         }
       }
     });

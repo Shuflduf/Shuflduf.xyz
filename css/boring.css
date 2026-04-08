@@ -235,7 +235,6 @@ html[dark-mode="false"] {
 
     right: -250px;
     padding: 16px;
-    width: 300px;
     transform: translateY(-50%);
     border: 2px solid var(--bg-focus);
     border-right: none;
@@ -243,7 +242,9 @@ html[dark-mode="false"] {
     max-height: calc(100vh - 80px);
     overflow-y: auto;
     overflow-x: hidden;
+    cursor: grab;
   }
+
 
   .sidebar:hover {
     border-color: var(--accent);
@@ -254,12 +255,17 @@ html[dark-mode="false"] {
     right: 0;
   }
 
+  .sidebar-content {
+    width: 300px;
+
+  }
+
   .sidebar h1 {
     font-size: 2rem;
     margin: 0;
   }
 
-  .sidebar div:not(:last-child) {
+  .sidebar .section:not(:last-child) {
     border-bottom: 2px solid var(--bg-focus);
     margin-bottom: 16px;
   }
@@ -315,7 +321,8 @@ html[dark-mode="false"] {
     position: absolute;
     right: 15px;
     top: 50%;
-    transform: translateY(-50%) rotate(-70deg);
+    transform: translateY(-50%) rotate(70deg);
+    pointer-events: auto;
     background-color: #4EC79E;
     font-family: "Coiny";
     border-left: 4px solid var(--bevel-light);
