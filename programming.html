@@ -11,6 +11,7 @@
 	<link rel="icon" href="/assets/favicon.png">
 	<link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/programming.css">
+	<link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -22,9 +23,95 @@
 		<div id="navlinks-include"></div>
 		<div class="main">
 			<h1>Programming</h1>
-			<h3>The languages and tools and stuff I know, scaled by how much I like them</h3>
-			<button id="reset">Reset</button>
-			<canvas id="ballpit"></canvas>
+			<div class="light-world">
+				<i>Each category is ranked from Favourite to Least Favourite</i>
+				<h2>Backend</h2>
+				<ul class="language-chips">
+					<li>RUST</li>
+					<li>GO</li>
+					<li>ZIG</li>
+					<li>C</li>
+					<li>RUBY</li>
+					<li>KOTLIN</li>
+					<li>PYTHON</li>
+					<li>PHP</li>
+					<li>JAVA</li>
+					<li>C#</li>
+				</ul>
+				<h2>Frontend</h2>
+				<ul class="language-chips">
+					<li>HTML</li>
+					<li>CSS</li>
+					<li>JQUERY</li>
+					<li>TAILWIND</li>
+					<li>JAVASCRIPT</li>
+				</ul>
+				<h2>Full Stack</h2>
+				<ul class="language-chips">
+					<li>SVELTEKIT</li>
+					<li>TYPESCRIPT</li>
+					<li>RAILS</li>
+					<li>LARAVEL</li>
+					<li>ASTRO</li>
+				</ul>
+				<h2>Databases</h2>
+				<ul class="language-chips">
+					<li>SQLITE</li>
+					<li>POSTGRES</li>
+					<li>MARIADB</li>
+					<li>MYSQL</li>
+					<li>MONGODB</li>
+				</ul>
+				<h2>Game Development</h2>
+				<ul class="language-chips">
+					<li>GODOT</li>
+					<li>BEVY</li>
+					<li>BLENDER</li>
+					<li>GAMEMAKER</li>
+					<li>UNITY</li>
+				</ul>
+				<h2>Shells</h2>
+				<ul class="language-chips">
+					<li>FISH</li>
+					<li>NUSHELL</li>
+					<li>ZSH</li>
+					<li>BASH</li>
+					<li>POWERSHELL</li>
+				</ul>
+				<h2>Operating Systems</h2>
+				<ul class="language-chips">
+					<li>ARCH</li>
+					<li>UBUNTU</li>
+					<li>MINT</li>
+					<li>DEBIAN</li>
+					<li>ANDROID</li>
+					<li>WINDOWS</li>
+					<li>OSX</li>
+				</ul>
+				<h2>Editors</h2>
+				<ul class="language-chips">
+					<li>HELIX</li>
+					<li>NEOVIM</li>
+					<li>VIM</li>
+					<li>VSCODE</li>
+					<li>ANDROID STUDIO</li>
+					<li>JETBRAINS</li>
+				</ul>
+				<h2>Other</h2>
+				<ul class="language-chips">
+					<li>TAURI</li>
+					<li>WASM</li>
+					<li>APPWRITE</li>
+					<li>FLUTTER</li>
+					<li>LUA</li>
+				</ul>
+			</div>
+			<div class="dark-world">
+				<h3>The languages and tools and stuff I know, scaled by how much I like them</h3>
+				<button id="reset">Reset</button>
+				<canvas id="ballpit"></canvas>
+				<audio src="/assets/snd_egg.wav" id="egg"></audio>
+			</div>
 		</div>
 		<aside class="sidebar">
 			<div class="section top-right loves">

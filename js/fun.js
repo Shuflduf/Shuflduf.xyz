@@ -14,6 +14,7 @@ $(function () {
       .prepend('<img src="/assets/chevron.gif">');
     initializeDragging();
     $(".portal").on("click", function () {
+      localStorage.setItem("navigated", "true");
       localStorage.setItem("dark-mode", "false");
       location.reload();
     });

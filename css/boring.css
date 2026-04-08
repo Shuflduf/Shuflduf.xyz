@@ -65,8 +65,11 @@ html[dark-mode="false"] {
   }
 
   body {
-    max-width: 700px;
+    width: min(700px, calc(100vw - 24px));
+    /* width: ; */
+    /* max-width: 700px; */
     margin: 0 24px;
+    margin-bottom: 24px;
   }
 
   ul.language-chips {

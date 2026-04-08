@@ -1,4 +1,7 @@
 $(function () {
+  if (localStorage.getItem("navigated")) {
+    $(".initial").text("Now explore!");
+  }
   if (darkMode) {
     swap();
   }

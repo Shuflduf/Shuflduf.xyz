@@ -37,6 +37,16 @@ $(function () {
     }
   });
 
+  canvas.addEventListener("mousedown", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const ball = getBallAt(e.clientX - rect.left, e.clientY - rect.top);
+    if (ball && ball.name == "Egg") {
+      activeCircles = activeCircles.filter((b) => b.name != "Egg");
+      localStorage.setItem("egg-2", true);
+      $("#egg").get(0).play();
+    }
+  });
+
   canvas.addEventListener("mouseleave", () => tooltip.hide());
 
   // canvas.addEventListener("click", (e) => {
@@ -83,10 +93,25 @@ function createCircles() {
     }
     activeCircles.push(circ);
   });
+  if (!localStorage.getItem("egg-2")) {
+    let egg = {
+      pos: [
+        Math.random() * canvas.clientWidth,
+        Math.random() * -canvas.clientHeight,
+      ],
+      vel: [Math.random() - 0.5, Math.random() - 0.5],
+      radius: 20,
+      bg: "#000000",
+      name: "Egg",
+    };
+    egg.img = new Image();
+    egg.img.src = "/assets/egg.png";
+    activeCircles.push(egg);
+  }
 }
 
 function process(currentFrame) {
-  let delta = Math.min(currentFrame - previousFrame, 1000);
+  let delta = Math.min(currentFrame - previousFrame, 50);
   previousFrame = currentFrame;
 
   canvas.width = canvas.clientWidth;
@@ -117,7 +142,7 @@ function process(currentFrame) {
     ctx.fill();
     if (circ.img) {
       // ctx.fillStyle = "black";
-      ctx.filter = "invert(1)";
+      // ctx.filter = "invert(1)";
       ctx.drawImage(
         circ.img,
         circ.pos[0] - circ.radius / 2.0,

@@ -75,7 +75,9 @@ $(function () {
     LUA: "devicon-lua-plain",
   };
 
+  // console.log($("ul.language-chips li"));
   $("ul.language-chips li").each(function () {
+    console.log($(this).text());
     const icon = tools[$(this).text().trim()];
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
