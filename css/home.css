@@ -1,0 +1,7 @@
+.sidebar img {
+  max-width: 88px;
+  max-height: 31px;
+  margin: 0;
+  display: inline;
+  image-rendering: pixelated;
+}

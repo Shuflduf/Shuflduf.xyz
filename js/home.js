@@ -11,9 +11,15 @@ $(function () {
         const href = String(c.html_url);
         const label = `${d}.${m}.${y}`;
         const msg = c.commit.message.split("\n")[0];
-        $list.append(
-          `<li><img src="assets/listbullet.gif">${msg}<sub><a href="${href}"">(${label})</a></sub></li>`,
-        );
+        if (darkMode) {
+          $list.append(
+            `<li><img src="assets/listbullet.gif">${msg}<sub><a href="${href}"">(${label})</a></sub></li>`,
+          );
+        } else {
+          $list.append(
+            `<li>${msg}<sub><a href="${href}"">(${label})</a></sub></li>`,
+          );
+        }
       });
     },
   );
