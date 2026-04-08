@@ -5,7 +5,6 @@
 }
 
 [dark-mode="false"] .main img {
-  /* height: revert; */
   max-height: initial;
 }
 

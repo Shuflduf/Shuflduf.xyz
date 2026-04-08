@@ -1,11 +1,42 @@
-<head>
+<!DOCTYPE html>
+<html>
 
-  <title>Tree</title>
-  <link rel="icon" href="/">
+<head>
+  <title>AWAITING MOUSE OR KEYBOARD INTERACTION</title>
+  <link id="icon" rel="icon" href="/assets/void.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(function () {
+      if (!localStorage.getItem("egg-1")) {
+        $("#icon").attr("href", "/assets/egg.png")
+      }
+    })
+    $(document).one('mousedown keypress touchstart', function () {
+      if (localStorage.getItem("egg-1")) {
+        $("title").text("(It is a tree.)")
+        $("#tree").attr("alt", "(Well, there is not a man here.)")
+      } else {
+        $("title").text("(He is behind the tree.)")
+      }
+      $('#music').get(0).play();
+      $("#tree").show().one("click", () => {
+        if (!localStorage.getItem("egg-1")) {
+          $("#egg").get(0).play()
+          $("title").text("(It is a tree.)")
+          $("#icon").attr("href", "/assets/void.png")
+          $("#tree").attr("alt", "(Well, there is not a man here.)")
+          localStorage.setItem("egg-1", true)
+        }
+      });
+    })
+  </script>
 </head>
 
 <body
   style="margin: 0; background-color: black; display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh;">
-
-  <img src="/assets/tree.gif" alt="There is a man behind the tree.">
+  <img src="/assets/tree.gif" alt="(Well, there is a man here.)" id="tree" style="display: none; cursor: pointer;">
+  <audio src="/assets/man.ogg.m4a" id="music" loop></audio>
+  <audio src="/assets/snd_egg.wav" id="egg"></audio>
 </body>
+
+</html>
