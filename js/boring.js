@@ -1,7 +1,11 @@
+let $sidebar = null;
 let sidebarPinned = localStorage.getItem("sidebar-pinned") == "true";
 let navlinksOpened = false;
 let sidebarDragging = false;
 let dragStartX = 0;
+const drawerMaxOffset = 200;
+let sidebarBaseWidth = 0;
+let currentSidebarWidth = sidebarBaseWidth;
 
 $(function () {
   const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>`;
@@ -121,7 +125,7 @@ function initializeNavlinks() {
 }
 
 function initializeSidebar() {
-  const $sidebar = $(".sidebar");
+  $sidebar = $(".sidebar");
   $sidebar
     .wrapInner(`<div class="sidebar-content"></div>`)
     .prepend(
@@ -130,6 +134,7 @@ function initializeSidebar() {
     .append(
       `<div class="drawer"><button class="portal">Dark World</button></div>`,
     );
+  sidebarBaseWidth = $sidebar.width();
   if (sidebarPinned) {
     $sidebar.addClass("pinned");
   }
@@ -145,53 +150,92 @@ function initializeSidebar() {
     }
   });
 
-  let sidebarBaseWidth = $sidebar.get(0).getBoundingClientRect().width;
-  let drawerMaxOffset = 200;
-  let currentSidebarWidth = sidebarBaseWidth;
+  // $sidebar.on("mousedown", function (e) {
+  // if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
+  // sidebarDragging = true;
+  // dragStartX = e.clientX;
+  // currentSidebarWidth = $sidebar.width();
+  // $sidebar.css("cursor", "grabbing");
+  // });
 
-  $sidebar.on("mousedown", function (e) {
-    if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
-    sidebarDragging = true;
-    dragStartX = e.clientX;
-    currentSidebarWidth = $sidebar.width();
-    $sidebar.css("cursor", "grabbing");
-  });
+  // $(document)
+  //   .on("mousemove", function (e) {
+  //     if (!sidebarDragging) return;
 
-  $(document)
-    .on("mousemove", function (e) {
-      if (!sidebarDragging) return;
+  //     let dragOffset = dragStartX - e.clientX;
+  //     let newWidth = currentSidebarWidth + dragOffset;
 
-      let dragOffset = -e.clientX + dragStartX;
-      let newWidth = currentSidebarWidth + dragOffset;
+  //     if (newWidth < sidebarBaseWidth) {
+  //       newWidth = sidebarBaseWidth;
+  //     } else if (newWidth > sidebarBaseWidth + drawerMaxOffset) {
+  //       newWidth = sidebarBaseWidth + drawerMaxOffset;
+  //     }
 
-      if (newWidth < sidebarBaseWidth - 10) {
-        newWidth = sidebarBaseWidth - 10;
-      } else if (newWidth > sidebarBaseWidth + drawerMaxOffset) {
-        newWidth = sidebarBaseWidth + drawerMaxOffset;
-      }
+  //     let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
+  //     $sidebar.find(".drawer").css("right", -200 + drawerOffset);
 
-      let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
-      $sidebar.find(".drawer").css("right", -200 + drawerOffset);
+  //     dragStartX = e.clientX;
+  //     currentSidebarWidth = newWidth;
+  //     $sidebar.width(newWidth);
+  //   })
+  //   .on("mouseup", function () {
+  //     if (sidebarDragging) {
+  //       sidebarDragging = false;
+  //       $sidebar.css("cursor", "");
+  //     }
+  //   });
 
-      dragStartX = e.clientX;
-      currentSidebarWidth = newWidth;
-      $sidebar.width(newWidth);
-    })
-    .on("mouseup", function () {
-      if (sidebarDragging) {
-        sidebarDragging = false;
-        $sidebar.css("cursor", "");
-        let currentWidth = $sidebar.width();
-        if (currentWidth < sidebarBaseWidth) {
-          $sidebar.css("width", "");
-        }
-      }
-    });
+  $sidebar.on("mousedown touchstart", startDrag);
+  $(document).on("mousemove touchmove", doDrag);
+  $(document).on("mouseup touchend touchcancel", endDrag);
 
   $(".portal").on("click", function () {
     localStorage.setItem("dark-mode", "true");
     location.reload();
   });
+}
+
+function startDrag(e) {
+  if ($(e.target).closest(".pin, .portal, .open-sidebar").length) return;
+  e.preventDefault();
+
+  sidebarDragging = true;
+  dragStartX = getClientX(e);
+  currentSidebarWidth = $sidebar.width();
+  $sidebar.css("cursor", "grabbing");
+}
+
+function doDrag(e) {
+  if (!sidebarDragging) return;
+  e.preventDefault();
+
+  let dragOffset = dragStartX - getClientX(e);
+  let newWidth = currentSidebarWidth + dragOffset;
+  if (newWidth < sidebarBaseWidth) {
+    newWidth = sidebarBaseWidth;
+  } else if (newWidth > sidebarBaseWidth + drawerMaxOffset) {
+    newWidth = sidebarBaseWidth + drawerMaxOffset;
+  }
+  let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
+  $sidebar.find(".drawer").css("right", -200 + drawerOffset);
+  dragStartX = getClientX(e);
+  currentSidebarWidth = newWidth;
+  $sidebar.width(newWidth);
+}
+
+function endDrag(e) {
+  if (!sidebarDragging) return;
+  e.preventDefault();
+
+  sidebarDragging = false;
+  $sidebar.css("cursor", "");
+}
+
+function getClientX(e) {
+  if (e.originalEvent.touches) {
+    return e.originalEvent.touches[0].clientX;
+  }
+  return e.clientX;
 }
 
 function hackclubIcon(icon, active, darkTheme) {
