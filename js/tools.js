@@ -65,7 +65,7 @@ const tools = [
     name: "HTML",
     url: "/assets/icons/html.svg",
     radius: 40,
-    bg: "#ffffff",
+    bg: "#e7632b",
   },
   {
     name: "CSS",
@@ -122,7 +122,7 @@ const tools = [
     name: "SQLite",
     url: "/assets/icons/sqlite.svg",
     radius: 45,
-    bg: "#ffffff",
+    bg: "#93d1ee",
   },
   {
     name: "Postgres",

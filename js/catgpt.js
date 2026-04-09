@@ -10,7 +10,11 @@ let mouthOpen = false;
 let eggMode = false;
 
 function _finishedLoadingNavlinks() {
-  $(".navlinks a[href='/projects/tetr-lang.html']").text("tetris");
+  if (darkMode) {
+    $(".navlinks a[href='/projects/tetr-lang.html'] span").text("tetris");
+  } else {
+    $(".navlinks a[href='/projects/tetr-lang.html']").text("tetris");
+  }
 }
 
 $(function () {
