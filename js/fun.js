@@ -20,6 +20,7 @@ $(function () {
       if (!localStorage.getItem("egg-4")) {
         console.log("lkdsjf");
         $(".navlinks").append(`<img src="/assets/egg.png" id="egg">`);
+        $("#egg").hide();
         $("#egg").on("mousedown", function () {
           $(this).remove();
           localStorage.setItem("egg-4", "true");
@@ -72,6 +73,13 @@ function doDrag(e) {
       : newOffset > navlinksMaxOffset
   ) {
     newOffset = navlinksMaxOffset;
+  }
+  if (!localStorage.getItem("egg-4")) {
+    if (newOffset > 300) {
+      $("#egg").show();
+    } else {
+      $("#egg").hide();
+    }
   }
   $navlinks.css("top", newOffset);
 }
