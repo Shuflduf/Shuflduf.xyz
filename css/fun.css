@@ -340,4 +340,24 @@ html[dark-mode="true"] {
   .light-world {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main {
+      order: 1;
+    }
+
+    .sidebar {
+      order: 2;
+
+    }
+
+    .navlinks {
+      order: 3;
+    }
+  }
 }

@@ -8,19 +8,23 @@ $(function () {
     .wrapInner("<span></span>")
     .prepend(`<img src="/assets/listbullet.gif">`);
   $("#navbar-include").load("/components/navbar.html");
-  $("#navlinks-include").load("/components/navlinks.html", function () {
-    $(".navlinks a")
-      .wrapInner("<span></span>")
-      .prepend('<img src="/assets/chevron.gif">');
-    initializeDragging();
-    $(".portal").on("click", function () {
-      localStorage.setItem("navigated", "true");
-      localStorage.setItem("dark-mode", "false");
-      location.reload();
+  $.get("/components/navlinks.html")
+    .done(function (html) {
+      $("#navlinks-include").replaceWith(html);
+    })
+    .done(function () {
+      $(".navlinks a")
+        .wrapInner("<span></span>")
+        .prepend('<img src="/assets/chevron.gif">');
+      initializeDragging();
+      $(".portal").on("click", function () {
+        localStorage.setItem("navigated", "true");
+        localStorage.setItem("dark-mode", "false");
+        location.reload();
+      });
+      if (typeof _finishedLoadingNavlinks == "function")
+        _finishedLoadingNavlinks();
     });
-    if (typeof _finishedLoadingNavlinks == "function")
-      _finishedLoadingNavlinks();
-  });
   $("hr").replaceWith(
     `<img class="seperator" src="assets/seperator.gif" alt="seperator">`,
   );
