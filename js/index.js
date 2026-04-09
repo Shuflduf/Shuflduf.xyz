@@ -37,7 +37,7 @@ $(function () {
       $("#egg-audio").get(0).play();
       localStorage.setItem("egg-5", true);
     });
-  } else if ("navigated" in localStorage) {
+  } else if ("navigated" in localStorage && !darkMode) {
     $(".initial").html(
       "Welcome back! It seems you're lost. You can <i>find yourself</i> by pulling the sidebar out.",
     );
