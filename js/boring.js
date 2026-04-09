@@ -91,12 +91,15 @@ function initializeNavlinks() {
     if (typeof _finishedLoadingNavlinks == "function")
       _finishedLoadingNavlinks();
 
-    $(".open-menu img").attr("src", hackclubIcon("menu", navlinksOpened, true));
+    $(".open-menu img").attr(
+      "src",
+      hackclubIcon("menu", navlinksOpened, !lightScheme),
+    );
     $(".open-menu").on("mousedown", () => {
       navlinksOpened = !navlinksOpened;
       $(".open-menu img").attr(
         "src",
-        hackclubIcon("menu", navlinksOpened, true),
+        hackclubIcon("menu", navlinksOpened, !lightScheme),
       );
       if (navlinksOpened) {
         $(".navlinks").addClass("opened");
@@ -107,13 +110,13 @@ function initializeNavlinks() {
 
     $(".open-sidebar img").attr(
       "src",
-      hackclubIcon("right-caret", sidebarPinned, true),
+      hackclubIcon("right-caret", sidebarPinned, !lightScheme),
     );
     $(".open-sidebar").on("mousedown", () => {
       sidebarPinned = !sidebarPinned;
       $(".open-sidebar img").attr(
         "src",
-        hackclubIcon("right-caret", sidebarPinned, true),
+        hackclubIcon("right-caret", sidebarPinned, !lightScheme),
       );
       if (sidebarPinned) {
         $(".open-sidebar img").addClass("active");
@@ -131,7 +134,7 @@ function initializeSidebar() {
   $sidebar
     .wrapInner(`<div class="sidebar-content"></div>`)
     .prepend(
-      `<button class="pin"><img src="${pinUrl(sidebarPinned, true)}" alt="pin"></button>`,
+      `<button class="pin"><img src="${pinUrl(sidebarPinned, !lightScheme)}" alt="pin"></button>`,
     )
     .append(
       `<div class="drawer"><button class="portal">Abscond</button></div>`,
@@ -143,7 +146,7 @@ function initializeSidebar() {
   $(".pin").on("mousedown", () => {
     sidebarPinned = !sidebarPinned;
     localStorage.setItem("sidebar-pinned", sidebarPinned);
-    $(".pin img").attr("src", pinUrl(sidebarPinned, true));
+    $(".pin img").attr("src", pinUrl(sidebarPinned, !lightScheme));
     if (sidebarPinned) {
       $(".sidebar").addClass("pinned");
     } else {
@@ -223,7 +226,7 @@ function getClientX(e) {
 }
 
 function hackclubIcon(icon, active, darkTheme) {
-  const colour = `0x${active ? (darkTheme ? "978159" : "FF0000") : darkTheme ? "c0bcb5" : "00FF00"}`;
+  const colour = `0x${active ? (darkTheme ? "978159" : "d73c3c") : darkTheme ? "c0bcb5" : "97653c"}`;
   return `https://icons.hackclub.com/api/icons/${colour}/${icon}`;
 }
 

@@ -199,7 +199,8 @@ html[dark-mode="true"] {
 
   .portal {
     position: absolute;
-    background-color: #202020;
+    box-shadow: none;
+    background-color: light-dark(#fae6d1, #202020);
     color: light-dark(#cf8a3a, #9e9184);
     font-family: "CMU Typewriter";
     font-size: 1.5rem;
@@ -377,6 +378,10 @@ html[dark-mode="true"] {
 
     .navlinks {
       order: 3;
+    }
+
+    .main .part1 {
+      flex-direction: column;
     }
   }
 }

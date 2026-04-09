@@ -336,12 +336,14 @@ html[dark-mode="false"] {
     width: max-content;
     padding: 4px 12px;
     cursor: pointer;
+    color: white;
   }
 
   .navlinks {
     background-color: var(--bg-secondary);
     display: flex;
     position: fixed;
+    z-index: 20;
     flex-direction: row;
     gap: 64px;
     top: -150px;

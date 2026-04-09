@@ -94,7 +94,11 @@ class Rope {
 
   draw() {
     ctx.lineWidth = 8;
-    ctx.strokeStyle = darkMode ? "#4EC79E" : "#978159";
+    ctx.strokeStyle = darkMode
+      ? "#4EC79E"
+      : lightScheme
+        ? "#d73c3c"
+        : "#978159";
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.beginPath();
