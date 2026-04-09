@@ -17,6 +17,15 @@ $(function () {
       $(".navlinks a")
         .wrapInner("<span></span>")
         .prepend('<img src="/assets/chevron.gif">');
+      if (!localStorage.getItem("egg-4")) {
+        console.log("lkdsjf");
+        $(".navlinks").append(`<img src="/assets/egg.png" id="egg">`);
+        $("#egg").on("mousedown", function () {
+          $(this).remove();
+          localStorage.setItem("egg-4", "true");
+          $("#egg-audio").get(0).play();
+        });
+      }
       initializeDragging();
       $(".portal").on("click", function () {
         localStorage.setItem("navigated", "true");
@@ -57,7 +66,11 @@ function doDrag(e) {
   let newOffset = currentSidebarPos - dragOffset;
   if (newOffset < 0) {
     newOffset = 0;
-  } else if (newOffset > navlinksMaxOffset) {
+  } else if (
+    !localStorage.getItem("egg-4")
+      ? newOffset > navlinksMaxOffset && newOffset < 300
+      : newOffset > navlinksMaxOffset
+  ) {
     newOffset = navlinksMaxOffset;
   }
   $navlinks.css("top", newOffset);

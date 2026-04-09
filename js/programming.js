@@ -41,9 +41,9 @@ $(function () {
     const rect = canvas.getBoundingClientRect();
     const ball = getBallAt(e.clientX - rect.left, e.clientY - rect.top);
     if (ball && ball.name == "Egg") {
+      $("#egg-audio").get(0).play();
       activeCircles = activeCircles.filter((b) => b.name != "Egg");
       localStorage.setItem("egg-2", true);
-      $("#egg").get(0).play();
     }
   });
 

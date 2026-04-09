@@ -135,6 +135,7 @@ html[dark-mode="true"] {
 
   .navlinks {
     position: relative;
+    transition: top 50ms;
   }
 
   .navlinks .grabbable {
@@ -218,6 +219,16 @@ html[dark-mode="true"] {
 
   .portal:hover {
     border-color: light-dark(#d73c3c, #978159);
+  }
+
+  .navlinks #egg {
+    position: absolute;
+    top: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: auto;
+    display: block;
+    cursor: pointer;
   }
 
   .top-right,
