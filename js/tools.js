@@ -13,6 +13,12 @@ const tools = [
     bg: "#003F50",
   },
   {
+    name: "PHP",
+    url: "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg",
+    radius: 55,
+    bg: "#272940",
+  },
+  {
     name: "Zig",
     url: "https://upload.wikimedia.org/wikipedia/commons/8/83/Zig-logomark-2024.svg",
     radius: 50,
@@ -41,12 +47,6 @@ const tools = [
     url: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
     radius: 25,
     bg: "#142840",
-  },
-  {
-    name: "PHP",
-    url: "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg",
-    radius: 35,
-    bg: "#272940",
   },
   {
     name: "Java",

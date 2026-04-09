@@ -4,7 +4,7 @@ let navlinksOpened = false;
 let sidebarDragging = false;
 let dragStartX = 0;
 const drawerMaxOffset = 200;
-let sidebarBaseWidth = 0;
+const sidebarBaseWidth = 300;
 let currentSidebarWidth = sidebarBaseWidth;
 
 $(function () {
@@ -136,7 +136,6 @@ function initializeSidebar() {
     .append(
       `<div class="drawer"><button class="portal">Abscond</button></div>`,
     );
-  sidebarBaseWidth = $sidebar.width();
   if (sidebarPinned) {
     $sidebar.addClass("pinned");
   }
@@ -165,6 +164,7 @@ function initializeSidebar() {
 function startDrag(e) {
   e.preventDefault();
 
+  if (sidebarDragging) return;
   sidebarDragging = true;
   dragStartX = getClientX(e);
   currentSidebarWidth = $sidebar.width();
@@ -182,6 +182,15 @@ function doDrag(e) {
   } else if (newWidth > sidebarBaseWidth + drawerMaxOffset) {
     newWidth = sidebarBaseWidth + drawerMaxOffset;
   }
+
+  console.log("drag", {
+    sidebarBaseWidth,
+    dragOffset,
+    newWidth,
+    currentSidebarWidth,
+    viewport: window.innerWidth,
+    sidebar: $sidebar[0].getBoundingClientRect(),
+  });
   let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
   $sidebar.find(".drawer").css("right", -200 + drawerOffset);
   dragStartX = getClientX(e);
