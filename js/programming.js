@@ -81,16 +81,9 @@ function createCircles() {
       radius: tool.radius,
       bg: tool.bg,
       name: tool.name,
+      img: new Image(),
     };
-    if (tool.icon) {
-      circ.img = new Image();
-      circ.img.src = `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tool.icon}/${tool.icon}-${tool.variant}.svg`;
-    } else if (tool.url) {
-      circ.img = new Image();
-      circ.img.src = tool.url;
-    } else {
-      circ.emoji = tool.emoji;
-    }
+    circ.img.src = tool.url;
     activeCircles.push(circ);
   });
   if (!localStorage.getItem("egg-2")) {
@@ -136,26 +129,18 @@ function process(currentFrame) {
       activeCircles[i].pos[0] = canvas.width - circ.radius;
     }
 
+    const imgSize = circ.radius * 1.2;
     ctx.fillStyle = circ.bg;
     ctx.beginPath();
     ctx.arc(circ.pos[0], circ.pos[1], circ.radius, 0, 2 * Math.PI);
     ctx.fill();
-    if (circ.img) {
-      const imgSize = circ.radius * 1.2;
-      console.log(circ.img.src);
-      ctx.drawImage(
-        circ.img,
-        circ.pos[0] - imgSize / 2.0,
-        circ.pos[1] - imgSize / 2.0,
-        imgSize,
-        imgSize,
-      );
-    } else {
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = `${circ.radius}px Serif`;
-      ctx.fillText(circ.emoji, circ.pos[0], circ.pos[1]);
-    }
+    ctx.drawImage(
+      circ.img,
+      circ.pos[0] - imgSize / 2.0,
+      circ.pos[1] - imgSize / 2.0,
+      imgSize,
+      imgSize,
+    );
   });
 
   resolveCollisions();

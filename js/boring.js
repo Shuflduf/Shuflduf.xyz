@@ -75,9 +75,7 @@ $(function () {
     LUA: "devicon-lua-plain",
   };
 
-  // console.log($("ul.language-chips li"));
   $("ul.language-chips li").each(function () {
-    console.log($(this).text());
     const icon = tools[$(this).text().trim()];
     if (icon) $(this).prepend(`<span class="${icon}"></span>`);
   });
@@ -155,7 +153,6 @@ function initializeSidebar() {
   });
 
   $sidebar.on("mouseleave", function (e) {
-    // console.log("shit");
     sidebarDragging = false;
     currentSidebarWidth = sidebarBaseWidth;
     $sidebar.css("cursor", "");
@@ -195,14 +192,6 @@ function doDrag(e) {
     newWidth = sidebarBaseWidth + drawerMaxOffset;
   }
 
-  console.log("drag", {
-    sidebarBaseWidth,
-    dragOffset,
-    newWidth,
-    currentSidebarWidth,
-    viewport: window.innerWidth,
-    sidebar: $sidebar[0].getBoundingClientRect(),
-  });
   let drawerOffset = Math.max(0, newWidth - sidebarBaseWidth);
   $sidebar.find(".drawer").css("right", -200 + drawerOffset);
   dragStartX = getClientX(e);

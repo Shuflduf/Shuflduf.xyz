@@ -33,7 +33,6 @@ $(function () {
 
 function initializeDragging() {
   $navlinks = $(".navlinks");
-  console.log($navlinks.find(".grabbable"));
   $navlinks.find(".grabbable").on("mousedown touchstart", startDrag);
   $(document)
     .on("mousemove", doDrag)
