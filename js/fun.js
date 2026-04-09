@@ -5,7 +5,7 @@ let currentSidebarPos = 0;
 const navlinksMaxOffset = 100;
 
 $(function () {
-  $("li")
+  $("ul li")
     .wrapInner("<span></span>")
     .prepend(`<img src="/assets/listbullet.gif">`);
   $("#navbar-include").load("/components/navbar.html");

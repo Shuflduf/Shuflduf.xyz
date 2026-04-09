@@ -141,16 +141,15 @@ function process(currentFrame) {
     ctx.arc(circ.pos[0], circ.pos[1], circ.radius, 0, 2 * Math.PI);
     ctx.fill();
     if (circ.img) {
-      // ctx.fillStyle = "black";
-      // ctx.filter = "invert(1)";
+      const imgSize = circ.radius * 1.2;
+      console.log(circ.img.src);
       ctx.drawImage(
         circ.img,
-        circ.pos[0] - circ.radius / 2.0,
-        circ.pos[1] - circ.radius / 2.0,
-        circ.radius,
-        circ.radius,
+        circ.pos[0] - imgSize / 2.0,
+        circ.pos[1] - imgSize / 2.0,
+        imgSize,
+        imgSize,
       );
-      ctx.filter = "none";
     } else {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
