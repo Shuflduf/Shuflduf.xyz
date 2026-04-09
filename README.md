@@ -19,16 +19,18 @@
 
 The latest of [my many Tetris clones](https://www.shuflduf.xyz/projects/tetr-lang.html), integrated perfectly into both sides of the website.
 
-![tetris-light](https://github.com/user-attachments/assets/65ad6eab-cc15-4df1-91e2-c6f045c491f2)
-![tetris-dark](https://github.com/user-attachments/assets/97545bc9-cf0e-4b06-8df6-dd25d0f97ef8)
-
+<img src="https://github.com/user-attachments/assets/a9485db4-77ed-4119-b23e-6610976f2390" height=300> <img src="https://github.com/user-attachments/assets/ec742a2f-b11f-43d8-bf08-2430a35843df" height=300>
 
 ### [CatGPT](https://www.shuflduf.xyz/games/catgpt.html)
 The most useful AI (actual idiot) ever. Featuring [my cat](https://www.shuflduf.xyz/cat.html).
 
+<img src="https://github.com/user-attachments/assets/01bb1712-fe8d-4d02-aae4-5db8d91792c2" height=200> <img src="https://github.com/user-attachments/assets/11d0d9ef-f5c3-40d0-8c36-70e656feb05a" height=200>
 
 ### [Rope Physics](https://www.shuflduf.xyz/games/rope.html)
 It's literally just a single rope but it's really really fun to just throw around and stuff.
+
+<img src="https://github.com/user-attachments/assets/865ee1e5-34ca-44ca-8e95-c66d9652e161" height=300> <img src="https://github.com/user-attachments/assets/de77d03e-11f3-4d9c-b433-56c076cfaa22" height=300>
+
 
 
 ### [Rain Saber](https://www.shuflduf.xyz/games/rain-saber.html)
