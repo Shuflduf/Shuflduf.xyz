@@ -241,7 +241,7 @@ html[dark-mode="false"] {
     transform: translateY(-50%);
     border: 2px solid var(--bg-focus);
     border-right: none;
-    transition: border-color 200ms, right 300ms;
+    transition: border-color 200ms, right 300ms, width 50ms;
     max-height: calc(100vh - 80px);
     overflow-y: auto;
     overflow-x: hidden;

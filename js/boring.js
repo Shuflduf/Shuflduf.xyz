@@ -151,6 +151,14 @@ function initializeSidebar() {
     }
   });
 
+  $sidebar.on("mouseleave", function (e) {
+    // console.log("shit");
+    sidebarDragging = false;
+    currentSidebarWidth = sidebarBaseWidth;
+    $sidebar.css("cursor", "");
+    $sidebar.width(sidebarBaseWidth);
+    $sidebar.find(".drawer").css("right", -200);
+  });
   $sidebar.on("mousedown touchstart", startDrag);
   $(document).on("mousemove touchmove", doDrag);
   $(document).on("mouseup touchend touchcancel", endDrag);
@@ -162,6 +170,7 @@ function initializeSidebar() {
 }
 
 function startDrag(e) {
+  if ($(e.target).closest(".portal").length) return;
   e.preventDefault();
 
   if (sidebarDragging) return;
