@@ -55,7 +55,7 @@ function startDrag(e) {
   currentSidebarPos = parseInt($navlinks.css("top")) || 0;
   navlinksDragging = true;
   dragStartY = getClientY(e);
-  $navlinks.css("cursor", "grabbing");
+  $navlinks.find(".grabbable").css("cursor", "grabbing");
 }
 
 function doDrag(e) {
@@ -81,7 +81,7 @@ function endDrag(e) {
   e.preventDefault();
 
   navlinksDragging = false;
-  $navlinks.css("cursor", "");
+  $navlinks.find(".grabbable").css("cursor", "");
 }
 
 function getClientY(e) {
