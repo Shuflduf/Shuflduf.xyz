@@ -1,4 +1,6 @@
-# My Personal Site
+# Shuflduf.xyz
+*my personal site*
+
 ![88x31](/assets/88x31.gif)
 
 # Features
@@ -16,6 +18,9 @@
 *Also known as tetr.shuf*
 
 The latest of [my many Tetris clones](https://www.shuflduf.xyz/projects/tetr-lang.html), integrated perfectly into both sides of the website.
+
+![tetris-light](https://github.com/user-attachments/assets/65ad6eab-cc15-4df1-91e2-c6f045c491f2)
+![tetris-dark](https://github.com/user-attachments/assets/97545bc9-cf0e-4b06-8df6-dd25d0f97ef8)
 
 
 ### [CatGPT](https://www.shuflduf.xyz/games/catgpt.html)
