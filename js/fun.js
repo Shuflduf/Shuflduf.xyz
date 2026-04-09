@@ -1,3 +1,4 @@
+let $navlinks = null;
 let navlinksDragging = false;
 let dragStartY = 0;
 let currentSidebarPos = 0;
@@ -31,42 +32,50 @@ $(function () {
 });
 
 function initializeDragging() {
-  const $navlinks = $(".navlinks");
+  $navlinks = $(".navlinks");
   console.log($navlinks.find(".grabbable"));
-  $navlinks.find(".grabbable").on("mousedown touchstart", function (e) {
-    e.preventDefault();
-
-    currentSidebarPos = parseInt($navlinks.css("top")) || 0;
-    navlinksDragging = true;
-    dragStartY = getClientY(e);
-    $navlinks.css("cursor", "grabbing");
-  });
+  $navlinks.find(".grabbable").on("mousedown touchstart", startDrag);
   $(document)
-    .on("mousemove touchmove", function (e) {
-      if (!navlinksDragging) return;
-      e.preventDefault();
+    .on("mousemove", doDrag)
+    .on("mouseup touchend touchcancel", endDrag);
+  document.addEventListener("touchmove", doDrag, { passive: true });
+}
 
-      let dragOffset = dragStartY - getClientY(e);
-      let newOffset = currentSidebarPos - dragOffset;
-      if (newOffset < 0) {
-        newOffset = 0;
-      } else if (newOffset > navlinksMaxOffset) {
-        newOffset = navlinksMaxOffset;
-      }
-      $navlinks.css("top", newOffset);
-    })
-    .on("mouseup touchend touchcancel", function (e) {
-      if (!navlinksDragging) return;
-      e.preventDefault();
+function startDrag(e) {
+  e.preventDefault();
 
-      navlinksDragging = false;
-      $navlinks.css("cursor", "");
-    });
+  currentSidebarPos = parseInt($navlinks.css("top")) || 0;
+  navlinksDragging = true;
+  dragStartY = getClientY(e);
+  $navlinks.css("cursor", "grabbing");
+}
+
+function doDrag(e) {
+  if (!navlinksDragging) return;
+  e.preventDefault();
+
+  let dragOffset = dragStartY - getClientY(e);
+  let newOffset = currentSidebarPos - dragOffset;
+  if (newOffset < 0) {
+    newOffset = 0;
+  } else if (newOffset > navlinksMaxOffset) {
+    newOffset = navlinksMaxOffset;
+  }
+  $navlinks.css("top", newOffset);
+}
+
+function endDrag(e) {
+  if (!navlinksDragging) return;
+  e.preventDefault();
+
+  navlinksDragging = false;
+  $navlinks.css("cursor", "");
 }
 
 function getClientY(e) {
-  if (e.originalEvent.touches) {
-    return e.originalEvent.touches[0].clientY;
+  const touches = e.touches || (e.originalEvent && e.originalEvent.touches);
+  if (touches) {
+    return touches[0].clientY;
   }
   return e.clientY;
 }
