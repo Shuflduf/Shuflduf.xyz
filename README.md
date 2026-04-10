@@ -3,7 +3,7 @@
 
 ![88x31](/assets/88x31.gif)
 
-![banner](/assets/banner.png)
+<img src="/assets/banner.png" height=300>
 
 # Features
 - TWO WORLDS, LIGHT AND DARK
@@ -38,8 +38,7 @@ A combination of osu! and Fruit Ninja as a rhythm game. It's very unfinished, bu
 
 Song is [unbound](https://www.youtube.com/watch?v=lMCy1eDiFDw) by [fireentity](https://www.youtube.com/@fireentity_music)!
 
-![rainsaber](https://github.com/user-attachments/assets/0696ec07-2d93-43ce-9c89-927b6b9de6b8)
-
+<img src="https://github.com/user-attachments/assets/0696ec07-2d93-43ce-9c89-927b6b9de6b8" height=300>
 
 ## Eggs
 There are 5 Eggs going from easy to hard. If you get stuck trying to find one, you can consult [The Guide](https://www.shuflduf.xyz/).
