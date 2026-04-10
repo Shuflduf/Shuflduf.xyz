@@ -1,9 +1,9 @@
 $(function () {
-  if (localStorage.getItem("navigated") != "true") {
-    $(".initial").html(
-      `If you've lost your way, consult <a href="/">The Guide</a>. If you've lost yourself, consult <a href="https://github.com/Shuflduf/Shuflduf.xyz?tab=readme-ov-file#stuck">The Spoilers</a>.`,
-    );
-  }
+  // if (localStorage.getItem("navigated") != "true") {
+  //   $(".initial").after(
+  //     `If you've lost your way, consult <a href="/">The Guide</a>. If you've lost yourself, consult <a href="https://github.com/Shuflduf/Shuflduf.xyz?tab=readme-ov-file#stuck">The Spoilers</a>.`,
+  //   );
+  // }
   $.getJSON(
     "https://api.github.com/repos/Shuflduf/Shuflduf.xyz/commits?per_page=5",
     function (commits) {

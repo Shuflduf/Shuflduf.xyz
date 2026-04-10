@@ -6,36 +6,12 @@ const hints = {
 };
 $(function () {
   if (localStorage.getItem("navigated") == "true") {
-    if (localStorage.getItem("egg-5")) {
-      let hint = "";
-      const collectedEggs = eggs.reduce((accum, current) => {
-        if (localStorage.getItem(current)) {
-          return accum + (localStorage.getItem(current) ? 1 : 0);
-        } else {
-          hint = hints[current];
-          return accum;
-        }
-      }, 0);
-      console.log(collectedEggs);
-      $(".initial").text(
-        `You have collected ${collectedEggs}/${eggs.length} eggs. ${hint}`,
-      );
-    } else {
-      $(".initial")
-        .text(
-          "Now explore and have fun! There are 5 easter eggs for you to find, and you have't truly explored this site until you found all of them. Here's what they look like:",
-        )
-        .last()
-        .after(() =>
-          localStorage.getItem("egg-5")
-            ? ""
-            : `<img src="/assets/egg.png" id="egg" style="cursor: pointer;">`,
-        );
-    }
+    updateGuide();
     $("#egg").on("mousedown", function () {
       $(this).remove();
       $("#egg-audio").get(0).play();
       localStorage.setItem("egg-5", true);
+      updateGuide();
     });
   } else if ("navigated" in localStorage && !darkMode) {
     $(".initial").html(
@@ -65,6 +41,7 @@ function swap() {
     $("#egg-audio").get(0).play();
     $pfpPrimary.attr("src", ogImg);
     foundEgg = false;
+    updateGuide();
   }
 
   $pfpPrimary.addClass("pfp-secondary").removeClass("pfp-primary");
@@ -74,5 +51,34 @@ function swap() {
     ogImg = $pfpSecondary.attr("src");
     $pfpSecondary.attr("src", "/assets/egg.png");
     foundEgg = true;
+  }
+}
+
+function updateGuide() {
+  if (localStorage.getItem("egg-5")) {
+    let hint = "";
+    const collectedEggs = eggs.reduce((accum, current) => {
+      if (localStorage.getItem(current)) {
+        return accum + (localStorage.getItem(current) ? 1 : 0);
+      } else {
+        hint = hints[current];
+        return accum;
+      }
+    }, 0);
+    console.log(collectedEggs);
+    $(".initial").text(
+      `You have collected ${collectedEggs}/${eggs.length} eggs. ${hint}`,
+    );
+  } else {
+    $(".initial")
+      .text(
+        "Now explore and have fun! There are 5 easter eggs for you to find, and you have't truly explored this site until you found all of them. Here's what they look like: (collect it by clicking on it)",
+      )
+      .last()
+      .after(() =>
+        localStorage.getItem("egg-5")
+          ? ""
+          : `<img src="/assets/egg.png" id="egg" style="cursor: pointer;">`,
+      );
   }
 }
