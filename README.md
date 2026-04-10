@@ -32,6 +32,9 @@
 - [Ukiyo](https://github.com/technerium/obsidian-ukiyo) theme for Light world
 - Indie Web styles for the Dark world (from [Neocities](https://neocities.org/))
 - Full mobile support (except for some games)
+- Ball pit of programming tools
+- Development processes for my favorite projects
+- Game recommendations that you should play
 
 ## Games
 ### [Tetris](https://www.shuflduf.xyz/games/tetris.html)
