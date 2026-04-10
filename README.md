@@ -1,9 +1,27 @@
-# Shuflduf.xyz
+# Shuflduf.xyz | ![88x31](/assets/88x31.gif)
 *my personal site*
 
-![88x31](/assets/88x31.gif)
+
 
 <img src="/assets/banner.png" height=300>
+
+## Stuck? 
+<details>
+
+<summary>Click to reveal spoilers and <i>Find Yourself</i> </summary>
+
+### Going to the Dark World
+- On desktop, use the mouse to pull the sidebar to the left, revealing a button to take you to the other side
+- On mobile, expand the sidebar by clicking the arrow at the top right of the screen, then pull the sidebar out to the left using your finger
+
+### Going to the Light World
+- On desktop, hover over the "Personal" text in the left sidebar, and use the mouse to pull it down
+- On mobile, pull the "Personal" text down with your finger
+
+### Eggs
+- [The Guide](https://www.shuflduf.xyz/) can be found on the root page ("/"), or at [index](https://www.shuflduf.xyz/). This page is only *accessible* from the Light World. (It can still be used in the Dark World)
+
+</details>
 
 # Features
 - TWO WORLDS, LIGHT AND DARK
@@ -37,6 +55,10 @@ It's literally just a single rope but it's really really fun to just throw aroun
 A combination of osu! and Fruit Ninja as a rhythm game. It's very unfinished, but if two people get to the end of what I mapped I'll finish it.
 
 Song is [unbound](https://www.youtube.com/watch?v=lMCy1eDiFDw) by [fireentity](https://www.youtube.com/@fireentity_music)!
+
+> [!NOTE]
+> Rain Saber is currently unfinished.
+> If enough people express interest in it I will continue it's development.
 
 <img src="https://github.com/user-attachments/assets/0696ec07-2d93-43ce-9c89-927b6b9de6b8" height=300>
 
