@@ -3,6 +3,8 @@
 
 ![88x31](/assets/88x31.gif)
 
+![banner](/assets/banner.png)
+
 # Features
 - TWO WORLDS, LIGHT AND DARK
   - (There are two ways to view this website)
@@ -31,16 +33,16 @@ It's literally just a single rope but it's really really fun to just throw aroun
 
 <img src="https://github.com/user-attachments/assets/865ee1e5-34ca-44ca-8e95-c66d9652e161" height=300> <img src="https://github.com/user-attachments/assets/de77d03e-11f3-4d9c-b433-56c076cfaa22" height=300>
 
-
-
 ### [Rain Saber](https://www.shuflduf.xyz/games/rain-saber.html)
 A combination of osu! and Fruit Ninja as a rhythm game. It's very unfinished, but if two people get to the end of what I mapped I'll finish it.
 
 Song is [unbound](https://www.youtube.com/watch?v=lMCy1eDiFDw) by [fireentity](https://www.youtube.com/@fireentity_music)!
 
+![rainsaber](https://github.com/user-attachments/assets/0696ec07-2d93-43ce-9c89-927b6b9de6b8)
 
-## Easter Eggs
-There are 5 easter eggs going from easy to hard. If you get stuck trying to find one, you can consult [The Guide](https://www.shuflduf.xyz/).
+
+## Eggs
+There are 5 Eggs going from easy to hard. If you get stuck trying to find one, you can consult [The Guide](https://www.shuflduf.xyz/).
 
 If you manage to find all 5, send me proof. I doubt you will find all of them though.
 
